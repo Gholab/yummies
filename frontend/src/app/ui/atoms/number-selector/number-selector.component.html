@@ -1,0 +1,34 @@
+<div
+  class="number-selector"
+  role="group"
+  [attr.aria-label]="ariaLabel"
+  tabindex="0">
+  <button
+    type="button"
+    class="btn minus"
+    (click)="decrement()"
+    [disabled]="!canDecrement"
+    aria-label="Diminuer">
+    −
+  </button>
+
+  <div
+    class="value"
+    role="spinbutton"
+    [attr.aria-valuemin]="min"
+    [attr.aria-valuemax]="max"
+    [attr.aria-valuenow]="current"
+    aria-live="polite"
+    aria-atomic="true">
+    {{ current }}
+  </div>
+
+  <button
+    type="button"
+    class="btn plus"
+    (click)="increment()"
+    [disabled]="!canIncrement"
+    aria-label="Augmenter">
+    +
+  </button>
+</div>
