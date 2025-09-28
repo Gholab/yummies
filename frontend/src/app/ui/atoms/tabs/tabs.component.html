@@ -1,0 +1,23 @@
+<div class="tabs-container">
+  <nav class="tabs-header" role="tablist" aria-label="Navigation d’onglets">
+    <button
+      *ngFor="let tab of tabs; let i = index"
+      class="tab-btn"
+      role="tab"
+      [attr.aria-selected]="isActive(i)"
+      [ngClass]="{ active: isActive(i), disabled: tab.disabled }"
+      [disabled]="tab.disabled"
+      type="button"
+      (click)="select(i)">
+      
+      {{ tab.title }}
+    </button>
+  </nav>
+
+  <section class="tabs-panel">
+    <ng-container *ngIf="activeTab() as t">
+      <ng-container *ngTemplateOutlet="t.template"></ng-container>
+    </ng-container>
+  </section>
+</div>
+
