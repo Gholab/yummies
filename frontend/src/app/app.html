@@ -5,3 +5,20 @@
 <app-button text="Secondary Button" size="s" color="secondary" icon="assets/icons/payments.svg"></app-button>
 
  <app-number-selector [current]="2" [min]="1" [max]="5"></app-number-selector>
+
+
+
+ <ng-template #tplA>
+  <p>Contenu de l’onglet A</p>
+  <app-button text="Action A" size="s"></app-button>
+</ng-template>
+
+<ng-template #tplB>
+  <p>Contenu de l’onglet B</p>
+</ng-template>
+
+<ng-template #tplC>
+  <p>Paramètres avancés…</p>
+</ng-template>
+
+<app-tabs [tabs]="tabItems"></app-tabs>

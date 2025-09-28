@@ -1,17 +1,18 @@
+@use '../../../../styles.scss' as *;
+
 .number-selector {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-
-  /* variables locales (tu peux les brancher sur tes variables globales) */
+  font-size: $paragraph-size-medium;
+  font-family: $text-font;
   --ns-height: 40px;
   --ns-width: 40px;
-  --ns-radius: 10px;
+  --ns-radius: 20px;
 
   outline: none;
 
   &:focus-visible {
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, .35);
     border-radius: var(--ns-radius);
   }
 
@@ -26,18 +27,10 @@
     align-items: center;
     justify-content: center;
 
-    background-color: var(--color-primary, #3b82f6);
+    background-color: $text-color-primary;
     color: #fff;
-    font: inherit;
     line-height: 1;
-
-    &:hover:enabled {
-      background-color: var(--color-secondary, #2563eb);
-    }
-
-    &:active:enabled {
-      transform: translateY(1px);
-    }
+    font-size: 30px;
 
     &:disabled {
       opacity: 0.5;
@@ -49,8 +42,6 @@
     min-width: 3ch;
     text-align: center;
     font-weight: 700;
-    font-family: var(--font-primary, system-ui, sans-serif);
-    font-size: var(--font-size-large, 1.25rem);
     user-select: none;
   }
 }
