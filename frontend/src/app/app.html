@@ -11,3 +11,21 @@ shortName: 'Iced Tea',
 image: 'https://cdn.pixabay.com/photo/2022/04/11/08/52/iced-tea-7125271_960_720.jpg',
 price: 5.20
 }"></card-item>
+
+
+
+
+ <ng-template #tplA>
+  <p>Contenu de l’onglet A</p>
+  <app-button text="Action A" size="s"></app-button>
+</ng-template>
+
+<ng-template #tplB>
+  <p>Contenu de l’onglet B</p>
+</ng-template>
+
+<ng-template #tplC>
+  <p>Paramètres avancés…</p>
+</ng-template>
+
+<app-tabs [tabs]="tabItems"></app-tabs>

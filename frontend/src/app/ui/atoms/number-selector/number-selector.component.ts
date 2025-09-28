@@ -35,11 +35,10 @@ export class NumberSelectorComponent implements OnChanges {
   }
 
   private clamp(value: number, min: number, max: number): number {
-    if (min > max) [min, max] = [max, min]; // sécurité
+    if (min > max) [min, max] = [max, min]; 
     return Math.min(Math.max(value, min), max);
   }
 
-  /** États des boutons */
   get canDecrement(): boolean {
     return this.current > this.min;
   }
@@ -48,7 +47,6 @@ export class NumberSelectorComponent implements OnChanges {
     return this.current < this.max;
   }
 
-  /** Attribut ARIA pour énoncer la plage */
   get ariaLabel(): string {
     return `Sélecteur numérique de ${this.min} à ${this.max}`;
   }
