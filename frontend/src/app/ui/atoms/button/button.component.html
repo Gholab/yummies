@@ -1,11 +1,12 @@
-<div class="button" [ngClass]="{ 
-    'large-button': size === 'l', 
-    'medium-button': size === 'm', 
+<div class="button" [ngClass]="{
+    'large-button': size === 'l',
+    'medium-button': size === 'm',
     'small-button': size === 's',
     'primary-button': color === 'primary',
     'secondary-button': color === 'secondary',
-    'with-icon': icon!== null
-}">
+    'with-icon': icon!== null,
+    'only-icon': icon!==null && text===''
+    }">
 @if (icon) {
     <img [src]="icon" class="btn-icon"/>
 }
