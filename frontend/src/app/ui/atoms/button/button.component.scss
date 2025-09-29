@@ -1,0 +1,71 @@
+@use '../../../../styles.scss' as *;
+
+
+.button{
+    font-family: $text-font;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    padding: 5px 10px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.with-icon{
+    display: grid;
+    grid-template-columns: 25% 75%;
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+}
+
+.large-button{
+    width: 250px;
+    height: 70px;
+    font-size: $paragraph-size-large;
+    img{
+        width: 50px;
+        height: 50px;
+    }
+}
+
+.medium-button{
+    width: 175px;
+    height: 50px;
+    font-size: $paragraph-size-medium;
+    img{
+        width: 30px;
+        height: 30px;
+    }
+}
+
+.small-button{
+    width: 125px;
+    height: 50px;
+    font-size: $paragraph-size-small;
+    img{
+        width: 20px;
+        height: 20px;
+    }
+}
+
+.primary-button{
+    background-color: $background-color-accent;
+    color: $text-color-accent;
+}
+
+.secondary-button{
+    background-color: $background-color-secondary;
+    color: $text-color-accent;
+}
+
+
+.only-icon{
+  grid-template-columns: 100% 0;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 50%;
+  padding: 5px;
+  margin: 0;
+}

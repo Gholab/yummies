@@ -1,0 +1,9 @@
+<h1 class="title" [ngClass]="{ 
+    'large-title': size === 'l', 
+    'medium-title': size === 'm', 
+    'small-title': size === 's',
+    'primary-title': color === 'primary',
+    'secondary-title': color === 'secondary'
+}">
+    {{ text }}
+  </h1>

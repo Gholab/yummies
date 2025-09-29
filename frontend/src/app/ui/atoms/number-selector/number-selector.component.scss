@@ -1,0 +1,47 @@
+@use '../../../../styles.scss' as *;
+
+.number-selector {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: $paragraph-size-medium;
+  font-family: $text-font;
+  --ns-height: 40px;
+  --ns-width: 40px;
+  --ns-radius: 20px;
+
+  outline: none;
+
+  &:focus-visible {
+    border-radius: var(--ns-radius);
+  }
+
+  .btn {
+    height: var(--ns-height);
+    width: var(--ns-width);
+    border: none;
+    border-radius: var(--ns-radius);
+    cursor: pointer;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: $text-color-primary;
+    color: #fff;
+    line-height: 1;
+    font-size: 30px;
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .value {
+    min-width: 3ch;
+    text-align: center;
+    font-weight: 700;
+    user-select: none;
+  }
+}
