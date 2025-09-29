@@ -10,7 +10,7 @@ import { NumpadComponent } from './ui/molecules/numpad/numpad.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, TitleComponent, ButtonComponent, NumberSelectorComponent, CardItemComponent, DigitButtonComponent, NumpadComponent, TabsComponent],
+  imports: [RouterOutlet,TitleComponent, ButtonComponent, NumberSelectorComponent, CardItemComponent, DigitButtonComponent, NumpadComponent, TabsComponent],
   templateUrl: './app.html',
 })
 export class App implements OnInit {
