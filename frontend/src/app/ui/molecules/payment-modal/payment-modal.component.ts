@@ -13,7 +13,7 @@ import {PaymentType} from '../../../models/payment-type.enum';
 export class PaymentModalComponent {
   @Input() public price = 9;
 
-  @Input() public paymentType: PaymentType = PaymentType.SPLIT_PAYMENT;
+  @Input() public paymentType: PaymentType = PaymentType.ONE_TIME;
 
   /**
    * currentPaymentStep = soit le numéro actuel du paiement ("paiement 1 sur 5"), soit le nombre de produits réglés du panier ("3 produits sur 9")
