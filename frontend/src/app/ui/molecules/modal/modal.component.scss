@@ -1,0 +1,39 @@
+@use "../../../../styles.scss" as *;
+
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 1000;
+}
+.modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+}
+.modal-content {
+  background-color: $background-color-secondary;
+  border-radius: 8px;
+  padding: 2rem;
+  min-width: 300px;
+  min-height: 100px;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: $text-color-primary;
+}
+
+.notDisplayed{
+  display: none;
+}
