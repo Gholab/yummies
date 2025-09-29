@@ -1,0 +1,22 @@
+<ul class="navbar">
+  @for (tabName of tabs; track tabName; let idx = $index) {
+    <li [class.active]="idx <= currentTabIndex" [class.lastActive]="idx === currentTabIndex">{{tabName}}</li>
+  }
+</ul>
+@switch (currentTabIndex) {
+  @case (0) {
+    <app-numpad></app-numpad>
+  }
+  @case (1) {
+    <!-- notre composant de l'onglet -->
+    <div style="background: green; width: 40px; height: 40px;"></div>
+  }
+  @case (2) {
+    <!-- notre composant de l'onglet -->
+    <div style="background: yellow; width: 40px; height: 40px;"></div>
+  }
+  @case(3) {
+    <!-- notre composant de l'onglet -->
+    <div style="background: blue; width: 40px; height: 40px;"></div>
+  }
+}
