@@ -1,0 +1,20 @@
+<div class="bipper-container">
+  <!-- Zone d'affichage -->
+  <div class="display">
+    {{ inputValue || 'XXX' }}
+  </div>
+
+  <!-- Grille des boutons -->
+  <div class="keypad-grid">
+    <app-digit-button
+      *ngFor="let key of keys"
+      [label]="key"
+      color="primary">
+    </app-digit-button>
+    <app-digit-button
+      [label]="'→'"
+      color="primary"
+      size="l">
+    </app-digit-button>
+  </div>
+</div>

@@ -5,10 +5,12 @@ import { ButtonComponent } from './ui/atoms/button/button.component';
 import { TitleComponent } from './ui/atoms/title/title.component';
 import { NumberSelectorComponent } from './ui/atoms/number-selector/number-selector.component';
 import {CardItemComponent} from './ui/molecules/cardItem/cardItem.component';
+import {DigitButtonComponent} from "./ui/atoms/digit-button/digit-button.component";
+import { BipperComponent } from './ui/molecules/bipper/bipper.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, TitleComponent, ButtonComponent, NumberSelectorComponent, CardItemComponent, TabsComponent],
+  imports: [RouterOutlet, TitleComponent, ButtonComponent, NumberSelectorComponent, CardItemComponent, DigitButtonComponent, BipperComponent, TabsComponent],
   templateUrl: './app.html',
 })
 export class App implements OnInit {
@@ -30,3 +32,4 @@ export class App implements OnInit {
     
   }
 }
+  

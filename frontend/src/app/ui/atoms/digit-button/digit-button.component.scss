@@ -1,0 +1,37 @@
+@use '../../../../styles.scss' as *;
+
+
+.digit-button {
+  font-family: $text-font;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 4px;
+  border: 1px solid #7b8b6f;
+  background-color: #dce6cc;
+  font-size: 1.5rem;
+
+  font-size: 1rem;
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
+}
+.primary-button {
+  background-color: #dce6cc;
+  color: #4c5843;
+}
+
+.small-size{
+  width: 50px;
+  height: 50px;
+}
+.large-size{
+  width: 120px;
+  height: 50px;
+}
+
