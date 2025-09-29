@@ -7,6 +7,12 @@ import { NumberSelectorComponent } from './ui/atoms/number-selector/number-selec
 import {CardItemComponent} from './ui/molecules/cardItem/cardItem.component';
 import {DigitButtonComponent} from "./ui/atoms/digit-button/digit-button.component";
 import { NumpadComponent } from './ui/molecules/numpad/numpad.component';
+import { BffOrderService } from './services/order/bff-order.service';
+import { PurefrontOrderService } from './services/order/purefront-order.service';
+import { PurefrontMenuService } from './services/menu/purefront-menu.service';
+import { of } from 'rxjs/internal/observable/of';
+import { Order } from './models/order.model';
+import { OrderItem } from './models/order-item.model';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +21,7 @@ import { NumpadComponent } from './ui/molecules/numpad/numpad.component';
 })
 export class App implements OnInit {
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef, private bffOrderService: BffOrderService, private purefrontOrderService: PurefrontOrderService, private purefrontMenuService: PurefrontMenuService) {}
 
   @ViewChild('tplA', { static: true }) tplA!: TemplateRef<unknown>;
   @ViewChild('tplB', { static: true }) tplB!: TemplateRef<unknown>;
@@ -30,6 +36,28 @@ export class App implements OnInit {
       { title: 'Paramètres', template: this.tplC, disabled: false },
     ];
     
+  }
+  testCreateOrder(): void {
+    this.purefrontOrderService.createOrder(5, 2); // table number 5, 2 customers
+  }
+  testAddItem() {
+    const item: OrderItem = {
+      menuItemId: 'pizza123',
+      menuItemShortName: {
+        name: 'Margherita',
+        modifications: {}
+      },
+      howMany: 1
+    };
+    this.purefrontOrderService.addMenuItem(item);
+  }
+
+  testRemoveItem() {
+    this.purefrontOrderService.removeMenuItem('pizza123');
+  }
+
+  testCompleteOrder() {
+    this.purefrontOrderService.completeOrder();
   }
 }
   

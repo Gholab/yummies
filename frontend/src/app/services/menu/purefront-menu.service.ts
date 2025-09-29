@@ -17,8 +17,11 @@
 
     getMenuItems(): Observable<MenuItem[]> {
       let unparsedMenuItems=this.http.get<UnparsedMenuItem[]>(`${this.baseUrl}/menus`);
+      console.log(unparsedMenuItems);
+      let parsedMenuItems = unparsedMenuItems.pipe(map(items=>items.map(item=>{console.log(item);  return this.parseMenuItem(item)})));
+      console.log("parsedMenuItems", parsedMenuItems);
 
-      return unparsedMenuItems.pipe(map(items=>items.map(item=>this.parseMenuItem(item))));
+      return parsedMenuItems;
     }
 
     getMenuItemById(id: string): Observable<MenuItem | undefined> {
