@@ -8,10 +8,11 @@ import {CardItemComponent} from './ui/molecules/cardItem/cardItem.component';
 import {DigitButtonComponent} from "./ui/atoms/digit-button/digit-button.component";
 import { NumpadComponent } from './ui/molecules/numpad/numpad.component';
 import {PaymentOptionComponent} from './ui/atoms/payment-option/payment-option.component';
+import {ChoosePaymentComponent} from './ui/molecules/choose-payment/choose-payment.component';
 
 @Component({
   selector: 'app-root',
-  imports: [PaymentOptionComponent, RouterOutlet,TitleComponent, ButtonComponent, NumberSelectorComponent, CardItemComponent, DigitButtonComponent, NumpadComponent, TabsComponent],
+  imports: [ChoosePaymentComponent, PaymentOptionComponent, RouterOutlet,TitleComponent, ButtonComponent, NumberSelectorComponent, CardItemComponent, DigitButtonComponent, NumpadComponent, TabsComponent],
   templateUrl: './app.html',
 })
 export class App implements OnInit {
