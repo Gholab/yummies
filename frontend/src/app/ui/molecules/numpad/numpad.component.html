@@ -9,11 +9,14 @@
     <app-digit-button
       *ngFor="let key of keys"
       [label]="key"
-      color="primary">
+      color="primary"
+      (click)="onKeyClick(key)"
+      size="s">
     </app-digit-button>
     <app-digit-button
       [label]="'→'"
       color="primary"
+      (click)="onKeyClick('→')"
       size="l">
     </app-digit-button>
   </div>
