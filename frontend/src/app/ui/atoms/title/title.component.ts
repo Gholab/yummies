@@ -9,8 +9,9 @@ import { NgClass } from '@angular/common';
   styleUrl: './title.component.scss'
 })
 export class TitleComponent {
-  @Input() text: string = '';      
+  @Input() text: string = '';
   @Input() size: 'l' | 'm' | 's' = 'l';
   @Input() color: 'primary' | 'secondary' = 'primary';
+  @Input() noMargin: boolean = false;
 
 }

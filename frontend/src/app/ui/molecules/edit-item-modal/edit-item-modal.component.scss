@@ -5,8 +5,8 @@
   flex-direction: column;
   align-items: center;
   font-family: $text-font;
-  height: 500px;
-  width: 500px;
+  height: 800px;
+  width: 700px;
 }
 
 .container-header{
@@ -22,6 +22,7 @@
 .img-container{
   height: 150px;
   max-width: 150px;
+  min-width: 100px;
   margin-right: 5%;
   img{
     width: 100%;
@@ -34,11 +35,12 @@
   display: flex;
   flex-direction: column;
   align-items: start;
+  height: 100%;
 }
 
 .tabs{
   width: 80%;
-  height: 40%;
+  height: 50%;
   padding: 5px;
   background-color: $background-color-neutral;
   border-radius: 15px;
@@ -47,17 +49,42 @@
 
 .allergene-tab{
   width: 100%;
-  height: 100%;
+  height: 98%;
+  margin-top: 2%;
+  font-size: x-large;
+  color: $text-color-accent;
   ul{
     margin: 0 0 0 4%;
     display: flex;
     flex-wrap: wrap;
     gap: 0 15px;
     align-content: flex-start;
-    max-height: 80px;
+    max-height: 150px;
     li{
       width: 44% ;
     }
   }
 
+}
+
+.ingredient-tab{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 100%;
+  margin-top: 2%;
+}
+
+.ingredient-selector{
+  margin-left: 6%;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.item-desc{
+  color: $text-color-accent;
+  font-size: x-large;
 }
