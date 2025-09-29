@@ -1,49 +1,53 @@
-<app-title text="Yummies" size="l" color="primary"></app-title>
+<router-outlet></router-outlet>
 
-<app-digit-button 
-  [label]="'5'" 
-  color="primary"
-  size="s">
-</app-digit-button>
-<app-digit-button 
-  [label]="'→'" 
-  color="primary"
-  size="l">
-</app-digit-button>
-<app-button text="Primary Button" size="l" color="primary"></app-button>
+<!--<app-title text="Yummies" size="l" color="primary"></app-title>-->
 
-<app-button
-  text="Secondary Button"
-  size="s"
-  color="secondary"
-  icon="assets/icons/payments.svg"
-></app-button>
+<!--<app-digit-button-->
+<!--  [label]="'5'"-->
+<!--  color="primary"-->
+<!--  size="s">-->
+<!--</app-digit-button>-->
+<!--<app-digit-button-->
+<!--  [label]="'→'"-->
+<!--  color="primary"-->
+<!--  size="l">-->
+<!--</app-digit-button>-->
+<!--<app-button text="Primary Button" size="l" color="primary"></app-button>-->
 
-<app-number-selector [current]="2" [min]="1" [max]="5"></app-number-selector>
+<!--<app-button-->
+<!--  text="Secondary Button"-->
+<!--  size="s"-->
+<!--  color="secondary"-->
+<!--  icon="assets/icons/payments.svg"-->
+<!--&gt;</app-button>-->
 
-<card-item [item]="{
-shortName: 'Iced Tea',
-image: 'https://cdn.pixabay.com/photo/2022/04/11/08/52/iced-tea-7125271_960_720.jpg',
-price: 5.20
-}"></card-item>
+<!--<app-number-selector [current]="2" [min]="1" [max]="5"></app-number-selector>-->
 
-
-
-
- <ng-template #tplA>
-  <p>Contenu de l’onglet A</p>
-  <app-button text="Action A" size="s"></app-button>
-</ng-template>
-
-<ng-template #tplB>
-  <p>Contenu de l’onglet B</p>
-</ng-template>
-
-<ng-template #tplC>
-  <p>Paramètres avancés…</p>
-</ng-template>
-
-<app-tabs [tabs]="tabItems"></app-tabs>
+<!--<card-item [item]="{-->
+<!--shortName: 'Iced Tea',-->
+<!--image: 'https://cdn.pixabay.com/photo/2022/04/11/08/52/iced-tea-7125271_960_720.jpg',-->
+<!--price: 5.20-->
+<!--}"></card-item>-->
 
 
-<app-bipper></app-bipper>
+
+
+<!-- <ng-template #tplA>-->
+<!--  <p>Contenu de l’onglet A</p>-->
+<!--  <app-button text="Action A" size="s"></app-button>-->
+<!--</ng-template>-->
+
+<!--<ng-template #tplB>-->
+<!--  <p>Contenu de l’onglet B</p>-->
+<!--</ng-template>-->
+
+<!--<ng-template #tplC>-->
+<!--  <p>Paramètres avancés…</p>-->
+<!--</ng-template>-->
+
+<!--<app-tabs [tabs]="tabItems"></app-tabs>-->
+
+
+<!--<app-bipper></app-bipper>-->
+
+<!--<app-menu></app-menu>-->

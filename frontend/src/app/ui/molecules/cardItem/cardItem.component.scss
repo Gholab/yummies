@@ -25,9 +25,10 @@
   align-items: center;
   background-color: $background-color-secondary;
   border-radius: 25px;
-  width: 250px;
-  height: 250px;
+  width: 300px;
+  height: 300px;
   font-family: $text-font;
+  font-size: $paragraph-size-medium;
 
   .image-container{
     margin-top: 10%;

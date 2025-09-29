@@ -1,0 +1,14 @@
+<div class="title-container">
+  <app-title text="Yummies" size="l" color="primary"></app-title>
+
+  @for (cat of menuMock; track cat.title) {
+    <ng-template #tabTpl>
+      <app-product-grid
+        [title]="cat.title"
+        [items]="cat.items">
+      </app-product-grid>
+    </ng-template>
+  }
+
+  <app-tabs *ngIf="tabItems.length" [tabs]="tabItems"></app-tabs>
+</div>

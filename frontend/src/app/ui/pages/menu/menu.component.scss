@@ -1,0 +1,16 @@
+@use '../../../../styles.scss' as *;
+
+
+.title-container{
+  background-color: $background-color-primary;
+  top: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.app-tabs{
+  margin-top : 2px;
+  margin-bottom: 0px;
+}

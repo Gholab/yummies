@@ -6,6 +6,7 @@ import {ButtonComponent} from '../../atoms/button/button.component';
   selector: 'card-item',
   imports: [NgClass, ButtonComponent],
   templateUrl: './cardItem.component.html',
+  standalone: true,
   styleUrl: './cardItem.component.scss'
 })
 
