@@ -17,16 +17,23 @@
   size="s"
   color="secondary"
   icon="assets/icons/payments.svg"
-  (click)="modalEnabler()"
 ></app-button>
 
 <app-number-selector [current]="2" [min]="1" [max]="5"></app-number-selector>
 
 <card-item [item]="{
-shortName: 'Iced Tea',
-image: 'https://cdn.pixabay.com/photo/2022/04/11/08/52/iced-tea-7125271_960_720.jpg',
-price: 5.20
-}"></card-item>
+        _id: '1',
+        shortName: 'test',
+        price: 20,
+        category: 'STARTER',
+        image: 'https://cdn.pixabay.com/photo/2022/04/11/08/52/iced-tea-7125271_960_720.jpg',
+        description: 'un bon test',
+        ingredients: [{
+        name: 'fomaj',
+        range: '0-1-2'
+        }],
+        allergenes: ['oeuf', 'lait', 'pipi', 'popo','prout']
+    }"></card-item>
 
 
 

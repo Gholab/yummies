@@ -1,8 +1,10 @@
-<div class="modal-backdrop"  (click)="close()"></div>
+<div class="modal-backdrop"></div>
 <div class="modal">
   <div class="modal-content">
     <ng-template #modalContent></ng-template>
-    <button class="close-btn" (click)="close()">×</button>
+    @if(closable){
+      <button class="close-btn" (click)="closeClick()">×</button>
+    }
   </div>
 </div>
 

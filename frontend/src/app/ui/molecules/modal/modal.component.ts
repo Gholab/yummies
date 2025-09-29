@@ -20,8 +20,9 @@ export class ModalComponent implements OnDestroy {
 
   private componentRef?: ComponentRef<any>;
   private onCloseCallback?: (result?: any) => void;
+  closable: boolean = true;
 
-  open<T>(component: Type<T>, inputs?: Partial<T>, onClose?: (result?: any) => void) {
+  open<T>(component: Type<T>, inputs?: Partial<T>, onClose?: (result?: any) => void, closable: boolean = true) {
     this.modalContent.clear();
     this.componentRef = this.modalContent.createComponent(component);
 
@@ -31,8 +32,14 @@ export class ModalComponent implements OnDestroy {
     }
 
     this.onCloseCallback = onClose;
+    this.closable = closable;
   }
 
+  closeClick(result?: any){
+    if(this.closable){
+      this.close(result);
+    }
+  }
   close(result?: any) {
     this.componentRef?.destroy();
     this.componentRef = undefined;

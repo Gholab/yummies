@@ -35,20 +35,4 @@ export class App implements OnInit {
 
   }
 
-  modalEnabler(){
-    this.modalService.open(EditItemModalComponent, {
-      menuItem: {
-        _id: "1",
-        shortName: "test",
-        price: 20,
-        category: "STARTER",
-        image: "https://cdn.pixabay.com/photo/2022/04/11/08/52/iced-tea-7125271_960_720.jpg",
-        description: "un bon test",
-        ingredients: [{
-          name: "fomaj",
-          range: "0-1-2"
-        }],
-        allergenes: ["oeuf"]
-      }})
-  }
 }

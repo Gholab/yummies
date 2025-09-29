@@ -8,7 +8,7 @@ export class ModalService {
 
   constructor(private appRef: ApplicationRef, private injector: Injector) {}
 
-  open<T>(component: Type<T>, inputs?: Partial<T>): Promise<any> {
+  open<T>(component: Type<T>, inputs?: Partial<T>, closable: boolean= true): Promise<any> {
     return new Promise(resolve => {
       if (!this.modalRef) {
         this.modalRef = createComponent(ModalComponent, { environmentInjector: this.appRef.injector });
@@ -19,7 +19,7 @@ export class ModalService {
       this.modalRef.instance.open(component, inputs, (result?: any) => {
         this.close();
         resolve(result);
-      });
+      }, closable);
     });
   }
 

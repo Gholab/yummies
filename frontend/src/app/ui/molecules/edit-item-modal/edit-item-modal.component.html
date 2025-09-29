@@ -1,1 +1,33 @@
-<p>{{menuItem.shortName}}</p>
+<div class="edit-item-container">
+  <div class="container-header">
+    <div class="img-container">
+      <img src="{{menuItem.image}}" alt="{{menuItem.shortName}}"/>
+    </div>
+    <div class="text-container">
+      <span class="item-title">{{ menuItem.shortName }}</span> <!--TODO: styliser le titre et la desc -->
+      <span class="item-desc">{{ menuItem.description }}</span>
+    </div>
+  </div>
+  <div class="tabs">
+    <ng-template #ingredients>
+      <!--TODO: ingredients component-->
+    </ng-template>
+
+    <ng-template #allergenes>
+      <div class="allergene-tab">
+
+        @if(menuItem.allergenes !== []){
+          <ul>
+            @for (allergene of menuItem.allergenes; track allergene) {
+              <li>{{ allergene }}</li>
+            }
+          </ul>
+        } @else {
+          <span>Aucun allergène.</span>
+        }
+      </div>
+    </ng-template>
+    <app-tabs [tabs]="tabItems"></app-tabs>
+  </div>
+  <app-button text="Ajouter au panier"></app-button>
+</div>
