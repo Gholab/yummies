@@ -7,10 +7,11 @@ import { NumberSelectorComponent } from './ui/atoms/number-selector/number-selec
 import {CardItemComponent} from './ui/molecules/cardItem/cardItem.component';
 import {DigitButtonComponent} from "./ui/atoms/digit-button/digit-button.component";
 import { NumpadComponent } from './ui/molecules/numpad/numpad.component';
+import {PaymentOptionComponent} from './ui/atoms/payment-option/payment-option.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,TitleComponent, ButtonComponent, NumberSelectorComponent, CardItemComponent, DigitButtonComponent, NumpadComponent, TabsComponent],
+  imports: [PaymentOptionComponent, RouterOutlet,TitleComponent, ButtonComponent, NumberSelectorComponent, CardItemComponent, DigitButtonComponent, NumpadComponent, TabsComponent],
   templateUrl: './app.html',
 })
 export class App implements OnInit {
@@ -29,7 +30,6 @@ export class App implements OnInit {
       { title: 'Détails',    template: this.tplB },
       { title: 'Paramètres', template: this.tplC, disabled: false },
     ];
-    
+
   }
 }
-  
