@@ -8,7 +8,7 @@ import {Component, Input} from '@angular/core';
 })
 export class PriceDisplayComponent {
   @Input() price: number = 0;
-  @Input() isSplitPayment: boolean=true;
-  @Input() currentPayment = 1;
-  @Input() totalPayments = 5;
+  @Input() isSplitPayment: boolean=false;
+  @Input() currentPayment = 1;//arbitrary values to fill
+  @Input() totalPayments = 5;//arbitrary values to fill
 }

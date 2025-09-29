@@ -1,5 +1,5 @@
 <div class="button" [ngClass]="{
-    'ultralarge-button': size === 'ultralarge',
+    'fullwidth-button': size === 'fullwidth',
     'large-button': size === 'l',
     'medium-button': size === 'm',
     'small-button': size === 's',
@@ -11,5 +11,5 @@
 @if (icon) {
     <img [src]="icon" class="btn-icon"/>
 }
-    {{ text }}
+    <span>{{ text }}</span>
 </div>
