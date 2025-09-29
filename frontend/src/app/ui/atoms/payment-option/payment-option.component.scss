@@ -1,0 +1,27 @@
+@use '../../../../styles.scss' as *;
+
+.paymentoption {
+  &-container {
+    width: 80%;
+    background-color: $background-color-secondary;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 25px;
+    min-height: 150px;
+  }
+
+  &-explanation {
+    font-size: $paragraph-size-large;
+    font-family: $text-font;
+    text-align: center;
+  }
+
+  &-icon {
+    aspect-ratio: 1 / 1;
+    width: 80px;
+    display: block;
+    margin: 10px;
+  }
+}
