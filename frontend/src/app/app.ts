@@ -29,7 +29,6 @@ export class App implements OnInit {
       { title: 'Détails',    template: this.tplB },
       { title: 'Paramètres', template: this.tplC, disabled: false },
     ];
-    
+
   }
 }
-  

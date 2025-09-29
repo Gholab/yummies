@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -15,5 +15,12 @@ export class DigitButtonComponent {
   @Input() color: 'primary' = 'primary';
   
   @Input() size: 's' | 'l' = 's';
+
+  @Output() clicked = new EventEmitter<string | number>();
+
+  onClick() {
+    console.log('DigitButton clicked:', this.label);
+    this.clicked.emit(this.label);
+  }
 
 }
