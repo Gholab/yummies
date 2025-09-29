@@ -1,0 +1,13 @@
+@use '../../../../styles.scss' as *;
+
+.price-display {
+  font-family: $text-font;
+  font-size: $title-size-small;
+  width: 300px;
+  text-align: center;
+  padding-top: $paragraph-size-small;
+  padding-bottom: $paragraph-size-small;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 25px;
+}
