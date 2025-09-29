@@ -98,6 +98,7 @@ import {
 } from '@angular/core';
 import { TitleComponent } from '../../atoms/title/title.component';
 import { TabItem, TabsComponent } from '../../atoms/tabs/tabs.component';
+import { CartComponent } from '../../molecules/cart/cart.component';
 import { ProductGridComponent } from '../../molecules/product-grid/product-grid.component';
 import {NgIf} from '@angular/common';
 
@@ -118,12 +119,11 @@ const IMG = 'https://cdn.pixabay.com/photo/2022/04/11/08/52/iced-tea-7125271_960
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [TitleComponent, TabsComponent, ProductGridComponent, NgIf],
+  imports: [TitleComponent, TabsComponent, ProductGridComponent, NgIf, CartComponent],
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements AfterViewInit {
-  // récupère tous les <ng-template #tabTpl> générés par @for
   @ViewChildren('tabTpl') tabTpls!: QueryList<TemplateRef<unknown>>;
 
   tabItems: TabItem[] = [];
