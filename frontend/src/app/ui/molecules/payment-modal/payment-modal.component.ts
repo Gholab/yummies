@@ -13,4 +13,7 @@ export class PaymentModalComponent {
   public price = 15.48;
   public title = "Diviser en parts égales";
   public escapeButtonText = "Modifier la sélection";
+
+  public articlesBeingPayed=3;
+  public allArticles=9;
 }
