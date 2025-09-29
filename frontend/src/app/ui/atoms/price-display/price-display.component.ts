@@ -8,4 +8,7 @@ import {Component, Input} from '@angular/core';
 })
 export class PriceDisplayComponent {
   @Input() price: number = 0;
+  @Input() isSplitPayment: boolean=true;
+  @Input() currentPayment = 1;
+  @Input() totalPayments = 5;
 }

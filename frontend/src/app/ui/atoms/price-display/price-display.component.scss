@@ -3,11 +3,17 @@
 .price-display {
   font-family: $text-font;
   font-size: $title-size-small;
-  width: 300px;
+  min-width: 300px;
+  display: inline-block;
+  margin: 10px auto;
   text-align: center;
-  padding-top: $paragraph-size-small;
-  padding-bottom: $paragraph-size-small;
+  padding: $paragraph-size-small;
   background-color: white;
   border: 1px solid black;
   border-radius: 25px;
+  text-wrap: nowrap;
+}
+
+.payment-steps {
+  color: $text-color-secondary;
 }
