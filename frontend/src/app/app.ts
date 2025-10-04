@@ -9,15 +9,28 @@ import {DigitButtonComponent} from "./ui/atoms/digit-button/digit-button.compone
 import { NumpadComponent } from './ui/molecules/numpad/numpad.component';
 import {PriceDisplayComponent} from './ui/atoms/price-display/price-display.component';
 import {PaymentModalComponent} from './ui/molecules/payment-modal/payment-modal.component';
+import {PaymentOptionComponent} from './ui/atoms/payment-option/payment-option.component';
+import {ChoosePaymentComponent} from './ui/molecules/choose-payment/choose-payment.component';
+import {PaymentStepsNavbarComponent} from './ui/molecules/payment-steps-navbar/payment-steps-navbar.component';
+import {ModalService} from './services/modal.service';
+import {EditItemModalComponent} from './ui/molecules/edit-item-modal/edit-item-modal.component';
+import {ModalComponent} from './ui/molecules/modal/modal.component';
 
 @Component({
   selector: 'app-root',
-  imports: [PaymentModalComponent, PriceDisplayComponent, RouterOutlet,TitleComponent, ButtonComponent, NumberSelectorComponent, CardItemComponent, DigitButtonComponent, NumpadComponent, TabsComponent],
+  imports: [RouterOutlet,TitleComponent, 
+            ButtonComponent, NumberSelectorComponent, 
+            CardItemComponent, DigitButtonComponent, 
+            NumpadComponent, TabsComponent, 
+            ModalComponent, EditItemModalComponent, 
+            PaymentStepsNavbarComponent, ChoosePaymentComponent, 
+            PaymentOptionComponent, PaymentModalComponent, 
+            PriceDisplayComponent,],
   templateUrl: './app.html',
 })
 export class App implements OnInit {
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef, private modalService: ModalService) {}
 
   @ViewChild('tplA', { static: true }) tplA!: TemplateRef<unknown>;
   @ViewChild('tplB', { static: true }) tplB!: TemplateRef<unknown>;
@@ -33,4 +46,5 @@ export class App implements OnInit {
     ];
 
   }
+
 }

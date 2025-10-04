@@ -1,0 +1,38 @@
+<div class="edit-item-container">
+  <div class="container-header">
+    <div class="img-container">
+      <img src="{{menuItem.image}}" alt="{{menuItem.shortName}}"/>
+    </div>
+    <div class="text-container">
+      <app-title text="{{menuItem.shortName}}" size="l" color="secondary" [noMargin]="true"></app-title>
+      <span class="item-desc">{{ menuItem.description }}</span>
+    </div>
+  </div>
+  <div class="tabs">
+    <ng-template #ingredients>
+      <div class="ingredient-tab">
+        @for (ingredient of Object.keys(ingredientStatus); track ingredient){
+          <div class="ingredient-selector">
+            <span style="font-size: x-large">{{ ingredient }}</span> <app-number-selector [min]="ingredientStatus[ingredient].min" [(current)]="ingredientStatus[ingredient].current" [max]="ingredientStatus[ingredient].max"></app-number-selector>
+          </div>
+        }
+      </div>
+    </ng-template>
+
+    <ng-template #allergenes>
+      <div class="allergene-tab">
+        @if(menuItem.allergenes !== []){
+          <ul>
+            @for (allergene of menuItem.allergenes; track allergene) {
+              <li>{{ allergene }}</li>
+            }
+          </ul>
+        } @else {
+          <span>Aucun allergène.</span>
+        }
+      </div>
+    </ng-template>
+    <app-tabs [tabs]="tabItems"></app-tabs>
+  </div>
+  <app-button text="Ajouter au panier" (click)="onAddToCart()"></app-button>
+</div>
