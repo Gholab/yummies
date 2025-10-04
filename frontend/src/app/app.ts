@@ -7,6 +7,8 @@ import { NumberSelectorComponent } from './ui/atoms/number-selector/number-selec
 import {CardItemComponent} from './ui/molecules/cardItem/cardItem.component';
 import {DigitButtonComponent} from "./ui/atoms/digit-button/digit-button.component";
 import { NumpadComponent } from './ui/molecules/numpad/numpad.component';
+import {PriceDisplayComponent} from './ui/atoms/price-display/price-display.component';
+import {PaymentModalComponent} from './ui/molecules/payment-modal/payment-modal.component';
 import {PaymentOptionComponent} from './ui/atoms/payment-option/payment-option.component';
 import {ChoosePaymentComponent} from './ui/molecules/choose-payment/choose-payment.component';
 import {PaymentStepsNavbarComponent} from './ui/molecules/payment-steps-navbar/payment-steps-navbar.component';
@@ -22,7 +24,8 @@ import {ModalComponent} from './ui/molecules/modal/modal.component';
             NumpadComponent, TabsComponent, 
             ModalComponent, EditItemModalComponent, 
             PaymentStepsNavbarComponent, ChoosePaymentComponent, 
-            PaymentOptionComponent],
+            PaymentOptionComponent, PaymentModalComponent, 
+            PriceDisplayComponent,],
   templateUrl: './app.html',
 })
 export class App implements OnInit {

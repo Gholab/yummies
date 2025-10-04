@@ -30,6 +30,25 @@
     }
 }
 
+.fullwidth-button {
+  width: 100%;
+  height: 100px;
+  font-size: $paragraph-size-large;
+  text-wrap: nowrap;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  img {
+    width: 50px;
+    height: 50px;
+    margin: 0;
+    padding: 0;
+  }
+  span {
+    margin: 10px;
+  }
+}
+
 .medium-button{
     width: 175px;
     height: 50px;

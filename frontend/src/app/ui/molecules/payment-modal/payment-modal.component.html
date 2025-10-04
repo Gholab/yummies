@@ -1,0 +1,10 @@
+<div class="paymentmodal">
+  <h5 class="paymentmodal-title">{{ getTitle() }}</h5>
+  @if(isCustomizedRepartition()) {
+    <p class="customized-repartition-advancement">Paiement de {{ currentPaymentStep }} sur {{ totalPaymentSteps }} restants</p>
+  }
+  <app-price-display [price]="price" [isSplitPayment]="isSplitPayment()" [currentPayment]="currentPaymentStep" [totalPayments]="totalPaymentSteps"></app-price-display>
+  <img src="assets/icons/pay-by-card.png" class="pay-by-card-icon"/>
+  <p class="please-consult-terminal">Veuillez consulter le terminal de paiement ci-dessous !</p>
+  <app-button icon="assets/icons/logout.png" [text]="getEscapeButtonText()" size="fullwidth"></app-button>
+</div>
