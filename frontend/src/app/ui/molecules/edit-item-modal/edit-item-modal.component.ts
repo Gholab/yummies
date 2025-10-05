@@ -46,19 +46,14 @@ export class EditItemModalComponent {
   }
 
   onAddToCart(){
-    let modifications: any = {};
+    let rest = this.howMany+".";
     for(let ingredient of Object.keys(this.ingredientStatus)){
-      let curr = this.ingredientStatus[ingredient].current;
-      let def = this.ingredientStatus[ingredient].default;
-      if( curr !== def ){
-        modifications[ingredient] =  curr-def;
-      }
+      rest = rest+this.ingredientStatus[ingredient].current;
     }
 
     let itemForCart: CartItem = {
       menuItem: this.menuItem,
-      howMany: this.howMany,
-      modifications: modifications
+      howMany: parseFloat(rest),
     };
 
     this.orderService.addMenuItem(itemForCart);

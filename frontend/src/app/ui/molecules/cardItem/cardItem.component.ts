@@ -39,9 +39,17 @@ export class CardItemComponent {
     }
     let cartItem: CartItem = {
       menuItem: this.item,
-      modifications: {},
-      howMany: 1
+      howMany: this.computeItemDefaultHowMany()
     };
     this.orderService.addMenuItem(cartItem);
+  }
+
+  private computeItemDefaultHowMany(){
+    let howMany = "1.";
+    for(let ingredient of this.item.ingredients){
+      let splittedRange = ingredient.range.split("-");
+      howMany = howMany+splittedRange[1];
+    }
+    return parseFloat(howMany);
   }
 }
