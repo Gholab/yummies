@@ -11,4 +11,5 @@ import {CartItem} from '../../../models/cart-item-model';
 })
 export class CartItemComponent {
   @Input() item! : CartItem;
+  protected readonly Math = Math;
 }
