@@ -76,6 +76,7 @@
 }
 
 .ingredient-selector{
+  margin-bottom: 10px;
   margin-left: 6%;
   width: 80%;
   display: flex;
@@ -87,4 +88,19 @@
 .item-desc{
   color: $text-color-accent;
   font-size: x-large;
+}
+
+.how-many{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  span{
+    color: $text-color-accent;
+    font-size: x-large;
+    margin-bottom: 6px;
+  }
+  app-number-selector{
+    margin-bottom: 4px;
+  }
 }
