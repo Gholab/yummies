@@ -1,10 +1,14 @@
-import {Component, Input, TemplateRef, ViewChild} from '@angular/core';
+import {Component, Inject, Input, TemplateRef, ViewChild} from '@angular/core';
 import {MenuItem} from '../../../models/menu-item.model';
 import {ButtonComponent} from '../../atoms/button/button.component';
 import {TabItem, TabsComponent} from '../../atoms/tabs/tabs.component';
 import {NumberSelectorComponent} from '../../atoms/number-selector/number-selector.component';
 import {ModalService} from '../../../services/modal.service';
 import {TitleComponent} from '../../atoms/title/title.component';
+import {OrderItem} from '../../../models/order-item.model';
+import {OrderService} from '../../../services/order/order.service';
+import {ORDER_SERVICE} from '../../../services/services.token';
+import {CartItem} from '../../../models/cart-item-model';
 
 @Component({
   selector: 'app-edit-item-modal',
@@ -19,7 +23,8 @@ export class EditItemModalComponent {
   tabItems: TabItem[] = [];
   ingredientStatus:any = {};
 
-  constructor(private modalService: ModalService) {
+  constructor(private modalService: ModalService,
+              @Inject(ORDER_SERVICE) private orderService: OrderService) {
   }
 
   ngOnInit(){
@@ -48,15 +53,14 @@ export class EditItemModalComponent {
         modifications[ingredient] =  curr-def;
       }
     }
-    let itemForCart: any= { //TODO: change any type to adapted Schema if there is
-      shortName: this.menuItem.shortName
-      //TODO: complete the item with whats needed
-    }
-    //s'il y a des modifs, on les ajoutes à l'item
-    if(Object.keys(modifications).length !== 0){
-      itemForCart["modifications"] = modifications;
-    }
-    //this.orderService.addItemToCart(itemForCart);
+
+    let itemForCart: CartItem = {
+      menuItem: this.menuItem,
+      howMany: 1,
+      modifications: modifications
+    };
+
+    this.orderService.addMenuItem(itemForCart);
     this.modalService.close(true);
   }
 
