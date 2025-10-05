@@ -21,6 +21,7 @@ export class EditItemModalComponent {
   @ViewChild("allergenes", { static: true }) allergeneTab!: TemplateRef<unknown>;
   tabItems: TabItem[] = [];
   ingredientStatus:any = {};
+  howMany: number = 1;
 
   constructor(private modalService: ModalService,
               @Inject(ORDER_SERVICE) private orderService: OrderService) {
@@ -55,7 +56,7 @@ export class EditItemModalComponent {
 
     let itemForCart: CartItem = {
       menuItem: this.menuItem,
-      howMany: 1,
+      howMany: this.howMany,
       modifications: modifications
     };
 

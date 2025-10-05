@@ -5,6 +5,7 @@ import {ModalService} from '../../../services/modal.service';
 import {ORDER_SERVICE} from '../../../services/services.token';
 import {OrderService} from '../../../services/order/order.service';
 import { PaymentType } from "../../../models/payment-type.enum";
+import {PaymentService} from '../../../services/payment.service';
 
 @Component({
   selector: 'app-choose-number-of-parts-equal-division',
@@ -17,7 +18,9 @@ export class ChooseNumberOfPartsEqualDivisionComponent {
   public singlePartPrice: number = 588.99;
   public numberOfParts: number = 1;
 
-  constructor(private modalService: ModalService, @Inject(ORDER_SERVICE) private orderService: OrderService) {
+  constructor(private modalService: ModalService,
+              @Inject(ORDER_SERVICE) private orderService: OrderService,
+              private paymentService: PaymentService) {
   }
 
   ngOnInit() {
@@ -40,11 +43,11 @@ export class ChooseNumberOfPartsEqualDivisionComponent {
   }
 
   public startPayment() {
-    this.orderService.setCurrentPaymentStep(1);
-    this.orderService.setTotalPaymentSteps(this.numberOfParts);
-    this.orderService.setPaymentType(PaymentType.SPLIT_PAYMENT);
+    this.paymentService.setCurrentPaymentStep(1);
+    this.paymentService.setTotalPaymentSteps(this.numberOfParts);
+    this.paymentService.setPaymentType(PaymentType.SPLIT_PAYMENT);
     this.modalService.close();
-    this.orderService.startPayment();
+    this.paymentService.startPayment();
   }
 
   public closeModal() {

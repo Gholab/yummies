@@ -23,7 +23,15 @@ export class PurefrontOrderService extends OrderService {
     return of();
   }
 
+
   addMenuItem(item: CartItem): Observable<void> {
+    for(let cartItem of this.cart){
+      if(cartItem.menuItem._id === item.menuItem._id && JSON.stringify(cartItem.modifications) === JSON.stringify(item.modifications)){
+        cartItem.howMany += item.howMany;
+        console.log("incremented already present item")
+        return of();
+      }
+    }
     this.cart.push(item);
     console.log('Menu item added locally:', item.menuItem._id, this.cart);
     return of();
