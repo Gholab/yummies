@@ -8,6 +8,7 @@ import {MenuItem} from '../../../models/menu-item.model';
 import {ORDER_SERVICE} from '../../../services/services.token';
 import {OrderService} from '../../../services/order/order.service';
 import {OrderItem} from '../../../models/order-item.model';
+import {CartItem} from '../../../models/cart-item-model';
 
 @Component({
   selector: 'card-item',
@@ -33,14 +34,12 @@ export class CardItemComponent {
   }
 
   addItemToCart() {
-    let orderItem: OrderItem = {
-      menuItemId: this.item._id,
-      menuItemShortName: {
-        name: this.item.shortName,
-        modifications: {}
-      },
+
+    let cartItem: CartItem = {
+      menuItem: this.item,
+      modifications: {},
       howMany: 1
-    }
-    this.orderService.addMenuItem(orderItem);
+    };
+    this.orderService.addMenuItem(cartItem);
   }
 }

@@ -1,8 +1,12 @@
-import {ChangeDetectionStrategy, Component, HostListener} from '@angular/core';
+import {ChangeDetectionStrategy, Component, HostListener, Inject} from '@angular/core';
 import {TitleComponent} from '../../atoms/title/title.component';
 import {ButtonComponent} from '../../atoms/button/button.component';
 import {CartItem} from '../../../models/cart-item-model';
 import {CartItemComponent} from '../cart-item/cart-item.component';
+import {MENU_SERVICE, ORDER_SERVICE} from '../../../services/services.token';
+import {OrderService} from '../../../services/order/order.service';
+import {MenuService} from '../../../services/menu/menu.service';
+import {MenuItem} from '../../../models/menu-item.model';
 
 const IMG = 'https://cdn.pixabay.com/photo/2022/04/11/08/52/iced-tea-7125271_960_720.jpg';
 
@@ -18,6 +22,8 @@ const IMG = 'https://cdn.pixabay.com/photo/2022/04/11/08/52/iced-tea-7125271_960
 export class CartComponent {
   open = false;
 
+  constructor(@Inject(ORDER_SERVICE) private orderService: OrderService) {}
+
   toggle(): void {
     this.open = !this.open;
   }
@@ -26,67 +32,12 @@ export class CartComponent {
     this.open = false;
   }
   trackById(index: number, item: CartItem) {
-    return item._id;
+    return item.menuItem._id;
   }
 
-  cartMock: ReadonlyArray<CartItem> = [
-    {
-      _id: '201',
-      shortName: 'Burger',
-      price: 9.9,
-      category: 'MAIN',
-      image: IMG,
-      description: "Un burger juteux avec pain brioché, steak haché et fromage fondant.",
-      ingredients: [
-        { name: 'boeuf', range: '2-3' },
-        { name: 'fromage', range: '1-2' },
-      ],
-      allergenes: ['gluten', 'lait', 'oeuf'],
-      quantity: 2,
-    },
-    {
-      _id: '301',
-      shortName: 'Donut',
-      price: 2.8,
-      category: 'DESSERT',
-      image: IMG,
-      description: "Donut moelleux glacé au sucre.",
-      ingredients: [
-        { name: 'farine', range: '2-3' },
-        { name: 'sucre', range: '1-2' },
-      ],
-      allergenes: ['gluten', 'oeuf', 'lait'],
-      quantity: 3,
-    },
-    {
-      _id: '403',
-      shortName: 'Jus',
-      price: 3.5,
-      category: 'BEVERAGE',
-      image: IMG,
-      description: "Jus de fruits 100% naturel, pressé à froid.",
-      ingredients: [
-        { name: 'pomme', range: '1-2' },
-        { name: 'orange', range: '1-2-3' },
-      ],
-      allergenes: ['aucun'],
-      quantity: 1,
-    },
-    {
-      _id: '102',
-      shortName: 'Lemonade',
-      price: 4.8,
-      category: 'STARTER',
-      image: IMG,
-      description: "Une limonade pétillante faite maison pour une mise en bouche désaltérante.",
-      ingredients: [
-        { name: 'citron', range: '1-2' },
-        { name: 'sucre', range: '0-1-2' },
-      ],
-      allergenes: ['aucun'],
-      quantity: 2,
-    },
-  ];
+  cartItems: CartItem[] = [];
 
+  ngOnInit() {
+    this.cartItems=this.orderService.getCart();
+  }
 }
-
