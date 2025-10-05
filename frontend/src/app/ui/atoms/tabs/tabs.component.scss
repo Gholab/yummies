@@ -1,16 +1,16 @@
 @use '../../../../styles.scss' as *;
 
 :host {
-  display: flex;               
+  display: flex;
   justify-content: center;
-  width: 100%;    
-  margin-top:10px;
-  margin-bottom: 10px;
+  width: 100%;
+  margin-top:5px;
+  margin-bottom: 5px;
 }
 
 .tabs-container {
   width: 100%;
-  max-width: 1200px;           
+  max-width: 1200px;
   display: flex;
   flex-direction: column;
 }
@@ -18,14 +18,14 @@
 .tabs-header {
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;        
+  justify-content: space-between;
   border-bottom: 1px solid var(--color-secondary, #e5e7eb);
   padding: 0.5rem 0;
   font-family: $text-font;
 }
 
 .tab-btn {
-  flex: 1;                      
+  flex: 1;
   text-align: center;
 
   position: relative;
@@ -35,7 +35,7 @@
   cursor: pointer;
 
   font: inherit;
-  font-size: $title-size-small;
+  font-size: $paragraph-size-large;
   color: var(--text-color, #111827);
   opacity: 0.85;
 
@@ -67,7 +67,7 @@
 .tabs-panel {
   padding: 1rem 0;
   display: flex;
-  
+  background: white;
   font-family: $text-font;
 }
 

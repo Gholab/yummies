@@ -1,0 +1,9 @@
+<div class="scroll" role="region" aria-label="Liste de produits">
+  <app-title size="s" [text]="title"></app-title>
+
+  <div class="grid">
+    @for (item of items; track item._id) {
+      <card-item [item]="item"></card-item>
+    }
+  </div>
+</div>

@@ -4,8 +4,8 @@ import { NgClass } from '@angular/common';
 @Component({
   selector: 'app-button',
   imports: [NgClass],
-  standalone: true,
   templateUrl: './button.component.html',
+  standalone: true,
   styleUrl: './button.component.scss'
 })
 export class ButtonComponent {

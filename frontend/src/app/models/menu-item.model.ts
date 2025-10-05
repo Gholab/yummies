@@ -11,3 +11,8 @@ export interface MenuItem {
   }[],
   allergenes: string[]
 }
+
+export type MenuCategory = {
+  title: string;
+  items: MenuItem[];
+};

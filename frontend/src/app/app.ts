@@ -15,17 +15,18 @@ import {PaymentStepsNavbarComponent} from './ui/molecules/payment-steps-navbar/p
 import {ModalService} from './services/modal.service';
 import {EditItemModalComponent} from './ui/molecules/edit-item-modal/edit-item-modal.component';
 import {ModalComponent} from './ui/molecules/modal/modal.component';
+import { BipperComponent } from './ui/molecules/bipper/bipper.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,TitleComponent, 
-            ButtonComponent, NumberSelectorComponent, 
-            CardItemComponent, DigitButtonComponent, 
-            NumpadComponent, TabsComponent, 
-            ModalComponent, EditItemModalComponent, 
-            PaymentStepsNavbarComponent, ChoosePaymentComponent, 
-            PaymentOptionComponent, PaymentModalComponent, 
-            PriceDisplayComponent,],
+  imports: [RouterOutlet,TitleComponent,
+            ButtonComponent, NumberSelectorComponent,
+            CardItemComponent, DigitButtonComponent,
+            NumpadComponent, TabsComponent,
+            ModalComponent, EditItemModalComponent,
+            PaymentStepsNavbarComponent, ChoosePaymentComponent,
+            PaymentOptionComponent, PaymentModalComponent,
+            PriceDisplayComponent,BipperComponent],
   templateUrl: './app.html',
 })
 export class App implements OnInit {
@@ -46,5 +47,4 @@ export class App implements OnInit {
     ];
 
   }
-
 }
