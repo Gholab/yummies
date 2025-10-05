@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class BffOrderService extends OrderService {
   private static orderCounter = 1; // pour générer des ids d'ordres uniques
-  private baseUrl = "http://localhost:9500/order"; 
+  private baseUrl = "http://localhost:9500/order";
 
 
   constructor(private http: HttpClient) {
@@ -27,8 +27,8 @@ export class BffOrderService extends OrderService {
   addMenuItem(item: OrderItem): Observable<Order> {
     return this.http.post<Order>(`${this.baseUrl}/${this.getOrderId()}/add-item`, item);
   }
-  removeMenuItem(menuItemId: string): Observable<Order> {
-    return this.http.delete<Order>(`${this.baseUrl}/${this.getOrderId()}/remove-item/${menuItemId}`);
+  removeMenuItem(index: number): Observable<Order> {
+    return this.http.delete<Order>(`${this.baseUrl}/${this.getOrderId()}/remove-item/${index}`);
   }
   completeOrder(): Observable<Order> {
     return this.http.get<Order>(`${this.baseUrl}/${this.getOrderId()}/complete`);

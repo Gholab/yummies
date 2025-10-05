@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {TitleComponent} from '../../atoms/title/title.component';
 import {Router} from '@angular/router';
+import {OrderService} from '../../../services/order/order.service';
+import {ORDER_SERVICE} from '../../../services/services.token';
 
 @Component({
   selector: 'app-landing-page-component',
@@ -10,10 +12,12 @@ import {Router} from '@angular/router';
 })
 export class LandingPageComponent {
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              @Inject(ORDER_SERVICE) private orderService: OrderService) {
   }
 
   onClick(){
+    this.orderService.createOrder(-1,1);
     this.router.navigate(["/menu"]);
   }
 

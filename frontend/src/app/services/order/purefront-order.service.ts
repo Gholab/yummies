@@ -19,7 +19,7 @@ export class PurefrontOrderService extends OrderService {
   private order?: Order; // l'ordre en cours
 
 
-  createOrder(): Observable<Order> {
+  createOrder(bipperNumber: number, customersCount: number): Observable<Order> {
     const id = `order-${PurefrontOrderService.orderCounter++}`;
     this.order = {
       _id: id,
@@ -49,7 +49,7 @@ export class PurefrontOrderService extends OrderService {
     const line = {
       item: {
         _id: item.menuItemId,
-        shortName: item.menuItemShortName.name // modifications are ignored here  
+        shortName: JSON.stringify(item.menuItemShortName)
       },
       howMany: item.howMany,
       sentForPreparation: false
@@ -58,21 +58,23 @@ export class PurefrontOrderService extends OrderService {
     console.log('Menu item added locally:', item.menuItemId, this.order);
     return of(this.order);
   }
-  removeMenuItem(id: string): Observable<Order> {
+
+  removeMenuItem(index: number): Observable<Order> {
     if (!this.order) {
       throw new Error('Order not created yet. Call createOrder() first.');
     }
-    this.order.lines = this.order.lines.filter(line => line.item._id !== id);
-    console.log('Menu item removed locally:', id, this.order);
+    this.order.lines = this.order.lines.splice(index, 1);
+    console.log('Menu item removed locally:', this.order);
     return of(this.order);
   }
+
   completeOrder(): Observable<Order> {
     if (!this.order) {
       throw new Error('Order not created yet. Call createOrder() first.');
     }
     console.log('Order completed locally:', this.order._id, this.order);
     return of(this.order);
-    
+
   }
   // sur cette fonction on dit aussi les personnalisations, par exemple la quantité
   // nom à changer, et modifications à ajouter
