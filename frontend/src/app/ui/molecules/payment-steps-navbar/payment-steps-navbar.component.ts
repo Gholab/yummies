@@ -28,5 +28,9 @@ export class PaymentStepsNavbarComponent {
   @Input() public currentTabIndex = 0;
   protected readonly print = print;
 
+  goToNextStep() {
+    this.currentTabIndex++;
+  }
+
 
 }

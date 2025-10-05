@@ -5,6 +5,8 @@ import {CartItem} from '../../../models/cart-item-model';
 import {CartItemComponent} from '../cart-item/cart-item.component';
 import {ORDER_SERVICE} from '../../../services/services.token';
 import {OrderService} from '../../../services/order/order.service';
+import {Router} from '@angular/router';
+
 
 const IMG = 'https://cdn.pixabay.com/photo/2022/04/11/08/52/iced-tea-7125271_960_720.jpg';
 
@@ -24,7 +26,7 @@ export class CartComponent {
   cartItems: CartItem[] = [];
 
 
-  constructor(@Inject(ORDER_SERVICE) private orderService: OrderService) {}
+  constructor(private router: Router, @Inject(ORDER_SERVICE) private orderService: OrderService) {}
   ngOnInit() {
     this.cartItems = this.orderService.getCart();
   }
@@ -41,6 +43,9 @@ export class CartComponent {
 
   trackById(index: number, item: CartItem) {
     return item.menuItem._id;
+  }
+  paymentStep(): void {
+    this.router.navigate(['/payment']);
   }
 
 

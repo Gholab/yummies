@@ -50,6 +50,7 @@ export class PurefrontOrderService extends OrderService {
 
   addBipperNumber(bipper: number): void {
     this.bipperNumber = bipper; 
+    console.log("Bipper number set locally to: ", this.bipperNumber);
   }
 
   completeOrder(): Observable<void> {
