@@ -1,8 +1,24 @@
 @use '../../../../styles.scss' as *;
 
+.title-section{
+  background-color: $background-color-primary;
+  height: 20vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.section-content{
+  height: 70vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .navbar {
   display: flex;
   justify-content: space-around;
+  margin-top: 0px;
   list-style-type: none;
   background-color: $background-color-secondary;
   padding: 0;
@@ -34,4 +50,8 @@
       );
     }
   }
+}
+
+app-choose-payment{
+  width: 80%;
 }

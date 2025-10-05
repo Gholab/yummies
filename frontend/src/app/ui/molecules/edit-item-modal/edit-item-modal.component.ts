@@ -5,7 +5,6 @@ import {TabItem, TabsComponent} from '../../atoms/tabs/tabs.component';
 import {NumberSelectorComponent} from '../../atoms/number-selector/number-selector.component';
 import {ModalService} from '../../../services/modal.service';
 import {TitleComponent} from '../../atoms/title/title.component';
-import {OrderItem} from '../../../models/order-item.model';
 import {OrderService} from '../../../services/order/order.service';
 import {ORDER_SERVICE} from '../../../services/services.token';
 import {CartItem} from '../../../models/cart-item-model';

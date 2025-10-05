@@ -1,0 +1,16 @@
+<app-title text="Sélectionnez les produits" color="primary" size="s"></app-title>
+<div class="list-payment-item-container">
+  <div class="list-payment-item">
+    @for(item of cartMock; track item; let idx = $index){
+      <app-payment-item [item]="item" [index]="idx" (selectionChange)="onSelectionChange($event)"></app-payment-item>
+    }
+  </div>
+</div>
+
+<div class="selection-total">
+  <p>Prix de la sélection: {{ total }} €</p>
+</div>
+<div class="button-container">
+  <app-button text="Payer la sélection" color="secondary" icon="assets/icons/pay-by-card" size="m"></app-button>
+  <app-button text="Changer de mode de paiement" color="primary" icon="assets/icons/pay-by-card" size="s"></app-button>
+</div>

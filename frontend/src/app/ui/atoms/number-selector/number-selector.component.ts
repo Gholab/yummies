@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from
 
 @Component({
   selector: 'app-number-selector',
+  standalone: true,
   imports: [],
   templateUrl: './number-selector.component.html',
   styleUrls: ['./number-selector.component.scss']
@@ -35,7 +36,7 @@ export class NumberSelectorComponent implements OnChanges {
   }
 
   private clamp(value: number, min: number, max: number): number {
-    if (min > max) [min, max] = [max, min]; 
+    if (min > max) [min, max] = [max, min];
     return Math.min(Math.max(value, min), max);
   }
 
