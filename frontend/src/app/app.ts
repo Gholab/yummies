@@ -10,8 +10,6 @@ import { NumpadComponent } from './ui/molecules/numpad/numpad.component';
 import { BffOrderService } from './services/order/bff-order.service';
 import { PurefrontOrderService } from './services/order/purefront-order.service';
 import { PurefrontMenuService } from './services/menu/purefront-menu.service';
-import { of } from 'rxjs/internal/observable/of';
-import { Order } from './models/order.model';
 import { OrderItem } from './models/order-item.model';
 
 @Component({
@@ -38,22 +36,25 @@ export class App implements OnInit {
     
   }
   testCreateOrder(): void {
-    this.purefrontOrderService.createOrder(5, 2); // table number 5, 2 customers
+    this.purefrontOrderService.createOrder(); 
   }
-  testAddItem() {
-    const item: OrderItem = {
-      menuItemId: 'pizza123',
-      menuItemShortName: {
-        name: 'Margherita',
-        modifications: {}
-      },
-      howMany: 1
-    };
-    this.purefrontOrderService.addMenuItem(item);
+  async testAddItem() {
+    this.purefrontMenuService.getMenuItemById('68db8a119bbb351a3d11d3bd')
+    .subscribe(menuItem => {
+      if (!menuItem) {
+        console.error('Menu item not found');
+        return;
+      }
+
+      console.log('Menu item fetched by ID:', menuItem);
+
+      let orderItem: OrderItem = this.purefrontOrderService.convertMenuItemToOrderItem(menuItem, 1);
+      this.purefrontOrderService.addMenuItem(orderItem);
+    });
   }
 
   testRemoveItem() {
-    this.purefrontOrderService.removeMenuItem('pizza123');
+    this.purefrontOrderService.removeMenuItem('68db8a119bbb351a3d11d3bd');
   }
 
   testCompleteOrder() {

@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { OrderItem } from '../../models/order-item.model';
 import { Order } from '../../models/order.model';
 import { Observable, of } from 'rxjs';
+import { MenuItem } from '../../models/menu-item.model';
 
 @Injectable({
   providedIn: "root"
@@ -18,12 +19,12 @@ export class PurefrontOrderService extends OrderService {
   private order?: Order; // l'ordre en cours
 
 
-  createOrder(tableNumber: number, customersCount: number): Observable<Order> {
+  createOrder(): Observable<Order> {
     const id = `order-${PurefrontOrderService.orderCounter++}`;
     this.order = {
       _id: id,
-      tableNumber,
-      customersCount,
+      tableNumber: 0,
+      customersCount: 1,
       opened: '',
       lines: [] as {
         item: { _id: '', shortName: '' },
@@ -72,6 +73,18 @@ export class PurefrontOrderService extends OrderService {
     console.log('Order completed locally:', this.order._id, this.order);
     return of(this.order);
     
+  }
+  // sur cette fonction on dit aussi les personnalisations, par exemple la quantité
+  // nom à changer, et modifications à ajouter
+  convertMenuItemToOrderItem(menuItem: MenuItem, howMany: number): OrderItem {
+    return {
+      menuItemId: menuItem._id,
+      menuItemShortName: {
+        name: menuItem.shortName,
+        modifications: {}
+      },
+      howMany: howMany
+    };
   }
 
 }
