@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component, HostListener} from '@angular/core';
 import {TitleComponent} from '../../atoms/title/title.component';
+import {ButtonComponent} from '../../atoms/button/button.component';
 
 
 @Component({
@@ -8,7 +9,7 @@ import {TitleComponent} from '../../atoms/title/title.component';
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TitleComponent]
+  imports: [TitleComponent, ButtonComponent]
 })
 
 export class CartComponent {
@@ -21,6 +22,8 @@ export class CartComponent {
   close(): void {
     this.open = false;
   }
+
+  
 
 }
 

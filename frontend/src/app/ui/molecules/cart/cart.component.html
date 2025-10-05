@@ -1,27 +1,23 @@
 <div class="cart-sheet" [class.open]="open" role="dialog" aria-label="Panier" aria-modal="false">
-
+  <div class="open-button" aria-hidden="true" (click)="toggle()">
+    ^
+  </div>
   <div class="sheet-header">
-    <div class="open-button" aria-hidden="true" (click)="toggle()">
-      ^
-    </div>
 
-    <app-title class="title" size="m" text="Votre panier" color="secondary" (click)="toggle()"></app-title>
+
+    <p class="title" (click)="toggle()">Votre panier</p>
 
     <img class="cart-logo" aria-hidden="true" src="assets/icons/cart.svg"  (click)="toggle()" />
   </div>
 
-
-  <!-- Corps du panier -->
   <div class="sheet-body" tabindex="-1">
-    <!-- Placeholder : remplace par le contenu réel plus tard -->
-    <div class="placeholder">
-      <h3>Contenu du panier</h3>
-      <p>Ajoute ici la liste des articles, le total, les actions…</p>
-      <div class="mock-block"></div>
-      <div class="mock-block"></div>
-      <div class="mock-block"></div>
-      <div class="mock-block"></div>
+    <div class="cart-product-container">
+      <div class="list-cart-product">
+
+      </div>
     </div>
+    <div class="cart-total">Total : 800 €</div>
+    <app-button icon="assets/icons/payments.svg" color="primary" size="l" text="Passer au paiement"></app-button>
   </div>
 </div>
 

@@ -8,11 +8,11 @@
   bottom: 0;
   display: block;
   z-index: 1000;
-  pointer-events: none; /* évite de bloquer les clics hors de la feuille */
+  pointer-events: none;
 }
 
 .cart-sheet {
-  --collapsed-h: 20vh;
+  --collapsed-h: 10vh;
   --expanded-h: 90vh;
   --bg: #ffffff;
   --border: #e9edf3;
@@ -22,7 +22,6 @@
   --shadow: 0 -20px 50px rgba(2, 6, 23, 0.15);
   --header-h: 56px;
 
-  /* Boîte */
   width: 100%;
   height: var(--collapsed-h);
   max-height: var(--expanded-h);
@@ -31,19 +30,17 @@
   color: var(--text);
   border-radius: 50px;
   box-shadow: var(--shadow);
-  border-top: 1px solid var(--border);
+  border-top: 2px solid var(--border);
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
 
-  /* Animations (slide-up via height + petit fade du body) */
   transition:
     height 280ms cubic-bezier(.2, .8, .2, 1),
     border-radius 280ms cubic-bezier(.2, .8, .2, 1),
     box-shadow 280ms cubic-bezier(.2, .8, .2, 1);
 
-  /* Réception des clics à l'intérieur uniquement */
   pointer-events: auto;
 }
 
@@ -51,33 +48,26 @@
   height: var(--expanded-h);
 }
 
-/* Header cliquable */
 .sheet-header {
   position: sticky;
-  top: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
   height: var(--header-h);
   padding: 10px 16px;
-  background: $background-color-primary;
-  border-bottom: 1px solid var(--border);
+  background: transparent;
   cursor: pointer;
   user-select: none;
   text-align: left;
   width: 100%;
   color: inherit;
-
-  /* Button reset */
-  border: 0;
-  outline: none;
 }
 
-/* Titre (caché quand fermé pour ne montrer que les icônes) */
 .title {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: $title-size-medium;
+  font-family: $text-font;
+  color: $text-color-secondary;
 }
 
 
@@ -91,24 +81,24 @@
 
 .cart-logo{
   position: absolute;
-  width: 50px;
-  height: 50px;
-  top: 15px;
-  right: 40px;
+  width: 70px;
+  height: 70px;
+  top: -30px;
+  right: 60px;
 }
 
 .open-button{
   display: block;
   font-size: 50px;
   font-family: $text-font;
-
 }
 
-/* Corps du panier */
 .sheet-body {
-  flex: 1 1 auto;
-  min-height: 0;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
   padding: 12px 16px 24px;
   opacity: 1;
   transition: opacity 180ms ease 80ms;
@@ -125,7 +115,7 @@
 
 .cart-sheet:not(.open) .sheet-body {
   opacity: 0;
-  pointer-events: none; /* pas d'interaction quand fermé */
+  pointer-events: none;
 }
 
 /* Placeholder de contenu (à remplacer) */
@@ -133,10 +123,19 @@
   color: var(--muted);
 }
 
-.mock-block {
-  height: 64px;
-  border-radius: 12px;
-  background: linear-gradient(180deg, #f6f8fb, #eef3f8);
-  border: 1px solid var(--border);
-  margin: 12px 0;
+.cart-product-container{
+  height: 70%;
+  width: 80%;
+  background-color: white;
+  border-radius: 40px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.cart-total{
+  margin-top: 50px;
+  font-family: $text-font;
+  font-size: $title-size-medium;
+  color: $text-color-accent;
+
 }

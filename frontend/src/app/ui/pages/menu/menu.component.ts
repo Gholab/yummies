@@ -139,6 +139,12 @@ export class MenuComponent implements AfterViewInit {
         { id: 104, shortName: 'Matcha', image: IMG, price: 5.9 },
         { id: 105, shortName: 'Smoothie', image: IMG, price: 6.5 },
         { id: 106, shortName: 'Milkshake', image: IMG, price: 5.7 },
+        { id: 101, shortName: 'Iced Tea', image: IMG, price: 5.2 },
+        { id: 102, shortName: 'Lemonade', image: IMG, price: 4.8 },
+        { id: 103, shortName: 'Cold Brew', image: IMG, price: 6.0 },
+        { id: 104, shortName: 'Matcha', image: IMG, price: 5.9 },
+        { id: 105, shortName: 'Smoothie', image: IMG, price: 6.5 },
+        { id: 106, shortName: 'Milkshake', image: IMG, price: 5.7 },
       ],
     },
     {
