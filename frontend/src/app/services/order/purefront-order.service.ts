@@ -43,9 +43,14 @@ export class PurefrontOrderService extends OrderService {
       console.error(`item with id ${menuItemId} not found in cart`);
       return of(undefined);
     }
-    const [removedItem] = this.cart.splice(index, 1);
-    console.log('Menu item removed locally:', menuItemId, this.cart);
-    return of(removedItem);
+    if(Math.trunc(this.cart[index].howMany) === 1){
+      const [removedItem] = this.cart.splice(index, 1);
+      console.log('Menu item removed locally:', menuItemId, this.cart);
+      return of(removedItem);
+    }else{
+      this.cart[index].howMany = this.subtractKeepingDecimals(this.cart[index].howMany, 1);
+      return of(undefined);
+    }
   }
 
   addBipperNumber(bipper: number): void {
