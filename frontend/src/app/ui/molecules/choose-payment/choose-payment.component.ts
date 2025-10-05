@@ -29,7 +29,9 @@ export class ChoosePaymentComponent {
 
   finishPayment() {
     console.log("Finish payment clicked");
-    this.router.navigate(['/endPage']);
+    this.orderService.completeOrder().subscribe(() => {
+      this.router.navigate(['/endPage']);
+    })
   }
 
   onePaymentOptionClick() {
