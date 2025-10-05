@@ -1,0 +1,19 @@
+@use '../../../../styles.scss' as *;
+
+.price-display {
+  font-family: $text-font;
+  font-size: $title-size-small;
+  min-width: 300px;
+  display: inline-block;
+  margin: 10px auto;
+  text-align: center;
+  padding: $paragraph-size-small;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 25px;
+  text-wrap: nowrap;
+}
+
+.payment-steps {
+  color: $text-color-secondary;
+}

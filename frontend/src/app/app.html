@@ -11,13 +11,13 @@
 <!-- Le reste de ton template -->
 <router-outlet></router-outlet>
 
-<app-digit-button 
-  [label]="'5'" 
+<app-digit-button
+  [label]="'5'"
   color="primary"
   size="s">
 </app-digit-button>
-<app-digit-button 
-  [label]="'→'" 
+<app-digit-button
+  [label]="'→'"
   color="primary"
   size="l">
 </app-digit-button>
@@ -33,10 +33,18 @@
 <app-number-selector [current]="2" [min]="1" [max]="5"></app-number-selector>
 
 <card-item [item]="{
-shortName: 'Iced Tea',
-image: 'https://cdn.pixabay.com/photo/2022/04/11/08/52/iced-tea-7125271_960_720.jpg',
-price: 5.20
-}"></card-item>
+        _id: '1',
+        shortName: 'test',
+        price: 20,
+        category: 'STARTER',
+        image: 'https://cdn.pixabay.com/photo/2022/04/11/08/52/iced-tea-7125271_960_720.jpg',
+        description: 'un bon test d\'une fraicheur sans pareil, un havre de paix condensé dans un test de toute beauté',
+        ingredients: [{
+        name: 'fomaj',
+        range: '0-1-2'
+        }],
+        allergenes: ['oeuf', 'lait', 'pipi', 'popo','prout']
+    }"></card-item>
 
 
 
@@ -58,3 +66,8 @@ price: 5.20
 
 
 <app-numpad></app-numpad>
+
+
+<app-price-display [price]="12.50"></app-price-display>
+<app-choose-payment></app-choose-payment>
+

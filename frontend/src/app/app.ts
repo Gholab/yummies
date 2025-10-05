@@ -7,19 +7,30 @@ import { NumberSelectorComponent } from './ui/atoms/number-selector/number-selec
 import {CardItemComponent} from './ui/molecules/cardItem/cardItem.component';
 import {DigitButtonComponent} from "./ui/atoms/digit-button/digit-button.component";
 import { NumpadComponent } from './ui/molecules/numpad/numpad.component';
-import { BffOrderService } from './services/order/bff-order.service';
-import { PurefrontOrderService } from './services/order/purefront-order.service';
-import { PurefrontMenuService } from './services/menu/purefront-menu.service';
-import { OrderItem } from './models/order-item.model';
+import {PriceDisplayComponent} from './ui/atoms/price-display/price-display.component';
+import {PaymentModalComponent} from './ui/molecules/payment-modal/payment-modal.component';
+import {PaymentOptionComponent} from './ui/atoms/payment-option/payment-option.component';
+import {ChoosePaymentComponent} from './ui/molecules/choose-payment/choose-payment.component';
+import {PaymentStepsNavbarComponent} from './ui/molecules/payment-steps-navbar/payment-steps-navbar.component';
+import {ModalService} from './services/modal.service';
+import {EditItemModalComponent} from './ui/molecules/edit-item-modal/edit-item-modal.component';
+import {ModalComponent} from './ui/molecules/modal/modal.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,TitleComponent, ButtonComponent, NumberSelectorComponent, CardItemComponent, DigitButtonComponent, NumpadComponent, TabsComponent],
+  imports: [RouterOutlet,TitleComponent, 
+            ButtonComponent, NumberSelectorComponent, 
+            CardItemComponent, DigitButtonComponent, 
+            NumpadComponent, TabsComponent, 
+            ModalComponent, EditItemModalComponent, 
+            PaymentStepsNavbarComponent, ChoosePaymentComponent, 
+            PaymentOptionComponent, PaymentModalComponent, 
+            PriceDisplayComponent,],
   templateUrl: './app.html',
 })
 export class App implements OnInit {
 
-  constructor(private cdr: ChangeDetectorRef, private bffOrderService: BffOrderService, private purefrontOrderService: PurefrontOrderService, private purefrontMenuService: PurefrontMenuService) {}
+  constructor(private cdr: ChangeDetectorRef, private modalService: ModalService) {}
 
   @ViewChild('tplA', { static: true }) tplA!: TemplateRef<unknown>;
   @ViewChild('tplB', { static: true }) tplB!: TemplateRef<unknown>;
@@ -33,32 +44,7 @@ export class App implements OnInit {
       { title: 'Détails',    template: this.tplB },
       { title: 'Paramètres', template: this.tplC, disabled: false },
     ];
-    
-  }
-  testCreateOrder(): void {
-    this.purefrontOrderService.createOrder(); 
-  }
-  async testAddItem() {
-    this.purefrontMenuService.getMenuItemById('68db8a119bbb351a3d11d3bd')
-    .subscribe(menuItem => {
-      if (!menuItem) {
-        console.error('Menu item not found');
-        return;
-      }
 
-      console.log('Menu item fetched by ID:', menuItem);
-
-      let orderItem: OrderItem = this.purefrontOrderService.convertMenuItemToOrderItem(menuItem, 1);
-      this.purefrontOrderService.addMenuItem(orderItem);
-    });
   }
 
-  testRemoveItem() {
-    this.purefrontOrderService.removeMenuItem('68db8a119bbb351a3d11d3bd');
-  }
-
-  testCompleteOrder() {
-    this.purefrontOrderService.completeOrder();
-  }
 }
-  
