@@ -34,7 +34,7 @@ export abstract class OrderService {
   abstract completeOrder(): Observable<void>;
 
   getTotalOrderPrice(): number {
-    //METHODE VIDE POUR L'INSTANT MAIS IL FAUDRA BIEN LUI FAIRE CALCULER LE VRAI PRIX DU PANIER
+    return this.cart.reduce((total, item) => total + item.menuItem.price * item.howMany, 0);
     return 50.88;//TODO: renvoyer le vrai prix du panier
   }
 

@@ -41,7 +41,7 @@ export class PurefrontOrderService extends OrderService {
   }
 
   addBipperNumber(bipper: number): void {
-    this.bipperNumber = bipper;
+    this.bipperNumber = bipper; 
   }
 
   completeOrder(): Observable<void> {

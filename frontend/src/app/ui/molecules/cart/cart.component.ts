@@ -17,11 +17,20 @@ const IMG = 'https://cdn.pixabay.com/photo/2022/04/11/08/52/iced-tea-7125271_960
   imports: [TitleComponent, ButtonComponent, CartItemComponent]
 })
 
+
 export class CartComponent {
-  open = false;
+
+  open = false
+  cartItems: CartItem[] = [];
+
 
   constructor(@Inject(ORDER_SERVICE) private orderService: OrderService) {}
-
+  ngOnInit() {
+    this.cartItems = this.orderService.getCart();
+  }
+  get total() {
+    return this.orderService.getTotalOrderPrice();
+  }
   toggle(): void {
     this.open = !this.open;
   }
@@ -29,13 +38,11 @@ export class CartComponent {
   close(): void {
     this.open = false;
   }
+
   trackById(index: number, item: CartItem) {
     return item.menuItem._id;
   }
 
-  cartItems: CartItem[] = [];
 
-  ngOnInit() {
-    this.cartItems=this.orderService.getCart();
-  }
+  
 }
