@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {NumpadComponent} from '../numpad/numpad.component';
 import {TitleComponent} from '../../atoms/title/title.component';
 import {ChoosePaymentComponent} from '../choose-payment/choose-payment.component';
+import {CustomPayment} from '../custom-payment/custom-payment.component';
 
 type PaymentTab = {
   /** Titre affiché au-dessus de la nav bar pour l’étape courante */
@@ -12,7 +13,7 @@ type PaymentTab = {
 
 @Component({
   selector: 'app-payment-steps-navbar',
-  imports: [NumpadComponent, TitleComponent, ChoosePaymentComponent],
+  imports: [NumpadComponent, TitleComponent, ChoosePaymentComponent, CustomPayment],
   standalone: true,
   templateUrl: './payment-steps-navbar.component.html',
   styleUrl: './payment-steps-navbar.component.scss'
