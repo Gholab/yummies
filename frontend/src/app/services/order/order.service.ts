@@ -6,7 +6,7 @@ import {CartItem} from '../../models/cart-item-model';
 // definir le order à partir de plusieurs menu items
 export abstract class OrderService {
   protected cart: CartItem[] = [];
-  
+
   protected bipperNumber = 0;
   protected customerCount = 1;
 
@@ -35,4 +35,7 @@ export abstract class OrderService {
     return this.cart;
   }
 
+  getBipperId() {
+    return this.bipperNumber;
+  }
 }

@@ -25,7 +25,6 @@ export class PaymentStepsNavbarComponent {
     { title: 'Préparez votre bipper', section: 'Bipper' },
     { title: 'Choisissez un mode de paiement', section: 'Modes de paiement' },
     { title: 'Répartition customisée', section: 'Paiement' },
-    { title: 'Dégustez votre commande', section: 'Dégustez' },
   ];
   @Input() public currentTabIndex = 0;
   protected readonly print = print;

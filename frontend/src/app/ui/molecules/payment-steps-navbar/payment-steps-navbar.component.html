@@ -17,11 +17,7 @@
       <app-choose-payment (nextStep)="goToNextStep()"></app-choose-payment>
     }
     @case (2) {
-      <app-custom-payment (nextStep)="goToNextStep()"></app-custom-payment>
-    }
-    @case(3) {
-      <!-- notre composant de l'onglet -->
-      <div style="background: blue; width: 40px; height: 40px;"></div>
+      <app-custom-payment ></app-custom-payment>
     }
     @default {
       <p>Étape inconnue</p>
