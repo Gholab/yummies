@@ -6,7 +6,7 @@ import {CartItem} from '../../models/cart-item-model';
 // definir le order à partir de plusieurs menu items
 export abstract class OrderService {
   protected cart: CartItem[] = [];
-  
+
   protected bipperNumber = 0;
   protected customerCount = 1;
 
@@ -27,7 +27,7 @@ export abstract class OrderService {
   abstract completeOrder(): Observable<void>;
 
   getTotalOrderPrice(): number {
-    return this.cart.reduce((total, item) => total + item.menuItem.price * item.howMany, 0);
+    return this.cart.reduce((total, item) => total + item.menuItem.price * Math.trunc(item.howMany), 0);
     return 50.88;//TODO: renvoyer le vrai prix du panier
   }
 
