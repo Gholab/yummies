@@ -3,6 +3,7 @@ import { NgClass } from '@angular/common';
 import {ButtonComponent} from '../../atoms/button/button.component';
 import {EditItemModalComponent} from '../edit-item-modal/edit-item-modal.component';
 import {ModalService} from '../../../services/modal.service';
+import {ModalComponent} from '../modal/modal.component';
 import {MenuItem} from '../../../models/menu-item.model';
 import {ORDER_SERVICE} from '../../../services/services.token';
 import {OrderService} from '../../../services/order/order.service';
@@ -20,7 +21,8 @@ export class CardItemComponent {
   @Input() item!: MenuItem;
   @Input() inlineMode : boolean = false;
 
-  constructor(private modalService: ModalService, @Inject(ORDER_SERVICE) private orderService: OrderService) {
+  constructor(private modalService: ModalService,
+              @Inject(ORDER_SERVICE) private orderService: OrderService) {
   }
 
   onEdit(event: MouseEvent) {
@@ -36,10 +38,17 @@ export class CardItemComponent {
     }
     let cartItem: CartItem = {
       menuItem: this.item,
-      modifications: {},
-      howMany: 1
+      howMany: this.computeItemDefaultHowMany()
     };
     this.orderService.addMenuItem(cartItem);
   }
 
+  private computeItemDefaultHowMany(){
+    let howMany = "1.";
+    for(let ingredient of this.item.ingredients){
+      let splittedRange = ingredient.range.split("-");
+      howMany = howMany+splittedRange[1];
+    }
+    return parseFloat(howMany);
+  }
 }

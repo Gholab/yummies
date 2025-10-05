@@ -2,7 +2,7 @@
 <div class="number-selector-container">
   <app-number-selector [max]="item.howMany" [min]="0" [(current)]="chosenQuantity" (currentChange)="onQuantityChange($event)"></app-number-selector>
   <div class="remaining-number">
-    restants: {{item.howMany - chosenQuantity}}
+    restants: {{ getNumberRemaining() }}
   </div>
 </div>
 

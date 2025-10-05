@@ -13,6 +13,7 @@ import { ORDER_SERVICE } from '../../../services/services.token';
 })
 export class CartItemComponent {
   @Input() item! : CartItem;
+  protected readonly Math = Math;
   constructor(@Inject(ORDER_SERVICE) private orderService: OrderService) {
   }
   ngOnInit() {
