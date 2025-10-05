@@ -75,7 +75,7 @@ export class MenuComponent implements AfterViewInit {
           description:
             "Une limonade pétillante faite maison pour une mise en bouche désaltérante.",
           ingredients: [
-            {name: 'citron', range: '1-2'},
+            {name: 'citron', range: '1-1-2'},
             {name: 'sucre', range: '0-1-2'},
           ],
           allergenes: ['aucun'],
@@ -89,7 +89,7 @@ export class MenuComponent implements AfterViewInit {
           description:
             "Café infusé à froid, riche en arômes et en douceur naturelle.",
           ingredients: [
-            {name: 'café arabica', range: '1-2'},
+            {name: 'café arabica', range: '1-1-2'},
             {name: 'eau filtrée', range: '1-1-1'},
           ],
           allergenes: ['aucun'],
@@ -108,8 +108,8 @@ export class MenuComponent implements AfterViewInit {
           description:
             "Un burger juteux avec pain brioché, steak haché et fromage fondant.",
           ingredients: [
-            {name: 'boeuf', range: '2-3'},
-            {name: 'fromage', range: '1-2'},
+            {name: 'boeuf', range: '1-2-3'},
+            {name: 'fromage', range: '0-1-2'},
           ],
           allergenes: ['gluten', 'lait', 'oeuf'],
         },
@@ -122,7 +122,7 @@ export class MenuComponent implements AfterViewInit {
           description:
             "Wrap de poulet grillé accompagné de crudités croquantes.",
           ingredients: [
-            {name: 'poulet', range: '2-3'},
+            {name: 'poulet', range: '1-2-3'},
             {name: 'tortilla', range: '1-1-1'},
           ],
           allergenes: ['gluten'],
@@ -136,7 +136,7 @@ export class MenuComponent implements AfterViewInit {
           description:
             "Salade fraîche composée de légumes de saison et vinaigrette maison.",
           ingredients: [
-            {name: 'laitue', range: '1-2'},
+            {name: 'laitue', range: '0-1-2'},
             {name: 'tomate', range: '1-1-2'},
           ],
           allergenes: ['moutarde'],

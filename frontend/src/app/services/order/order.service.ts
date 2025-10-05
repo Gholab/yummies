@@ -5,6 +5,6 @@ import { Order } from '../../models/order.model';
 export abstract class OrderService {
   abstract createOrder(tableNumber: number, customersCount: number): Observable<Order>;
   abstract addMenuItem(orderItem: OrderItem): Observable<Order>;
-  abstract removeMenuItem(menuItemId: string): Observable<Order>;
+  abstract removeMenuItem(itemIndex: number): Observable<Order>;
   abstract completeOrder(): Observable<Order>;
 }
