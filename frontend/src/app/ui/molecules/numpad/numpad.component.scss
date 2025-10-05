@@ -5,12 +5,16 @@
   flex-direction: column;
   align-items: center;
 }
+.enter-button{
+  grid-column: 2/4;
+}
 
 .display {
   font-family: $text-font;
-  width: 200px;
-  height: 50px;
-  border-radius: 10px;
+  font-size: $title-size-large;
+  width: 700px;
+  height: 150px;
+  border-radius: 20px;
   background-color: #f0eef9;
   display: flex;
   align-items: center;
@@ -21,5 +25,6 @@
 
 .keypad-grid {
   display: grid;
-  grid-template-columns: repeat(3, 70px);
+  grid-template-columns: repeat(3, 230px);
+  grid-template-rows: repeat(3,230px);
 }

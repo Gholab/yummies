@@ -1,5 +1,9 @@
 @use '../../../../styles.scss' as *;
-
+:host{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .digit-button {
   font-family: $text-font;
@@ -7,14 +11,12 @@
   cursor: pointer;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: 20px;
   padding: 5px;
   margin: 4px;
   border: 1px solid #7b8b6f;
   background-color: #dce6cc;
-  font-size: 1.5rem;
-
-  font-size: 1rem;
+  font-size: $title-size-medium;
 
   img {
     width: 20px;
@@ -27,11 +29,11 @@
 }
 
 .small-size{
-  width: 50px;
-  height: 50px;
+  width: 200px;
+  height: 200px;
 }
 .large-size{
-  width: 120px;
-  height: 50px;
+  width: 440px;
+  height: 200px;
 }
 

@@ -1,0 +1,39 @@
+@use "../../../../styles.scss" as *;
+@use 'sass:color';
+
+
+:host{
+  display: inline-flex;
+  font-size: $paragraph-size-medium;
+  font-family: $text-font;
+  color: $text-color-accent;
+  width: 100%;
+  align-items: center;
+  gap: 15px;
+  border-top: solid 1px $text-color-secondary;
+}
+
+.number-selector-container{
+  width: 100%;
+  height: 100%;
+  display: inline-grid;
+  align-items: center;
+  justify-content: center;
+}
+
+$bg-selected: if(
+    color.lightness($background-color-secondary) > 50%,
+    color.scale($background-color-secondary, $lightness: -5%),
+    color.scale($background-color-secondary, $lightness: +18%, $saturation: +10%)
+);
+
+:host {
+  background: $background-color-secondary;
+  transition: background-color .2s ease;
+}
+
+:host.has-quantity {
+  background: $bg-selected;
+  // petit rappel visuel optionnel :
+  box-shadow: inset 0 0 0 2px color.scale($bg-selected, $lightness: -15%);
+}
