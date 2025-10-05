@@ -34,7 +34,9 @@ export class CardItemComponent {
   }
 
   addItemToCart() {
-
+    if(this.inlineMode){
+      return;
+    }
     let cartItem: CartItem = {
       menuItem: this.item,
       modifications: {},

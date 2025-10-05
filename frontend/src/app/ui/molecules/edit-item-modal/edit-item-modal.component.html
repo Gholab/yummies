@@ -34,5 +34,9 @@
     </ng-template>
     <app-tabs [tabs]="tabItems"></app-tabs>
   </div>
-  <app-button text="Ajouter au panier" (click)="onAddToCart()"></app-button>
+  <div class="how-many">
+    <span>Nombre à ajouter: </span>
+    <app-number-selector [min]="1" [(current)]="howMany" [max]="10"></app-number-selector>
+  </div>
+  <app-button text="Ajouter au panier" (click)="onAddToCart()" size="l"></app-button>
 </div>
