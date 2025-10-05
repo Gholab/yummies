@@ -1,0 +1,6 @@
+<span class="price-display">
+  @if(isSplitPayment ) {
+    <span class="payment-steps">Paiement {{currentPayment}} sur {{totalPayments}} :</span>
+  }
+  {{ price.toFixed(2) }} €
+</span>

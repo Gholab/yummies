@@ -1,6 +1,10 @@
 import {Component, Input} from '@angular/core';
 import { NgClass } from '@angular/common';
 import {ButtonComponent} from '../../atoms/button/button.component';
+import {EditItemModalComponent} from '../edit-item-modal/edit-item-modal.component';
+import {ModalService} from '../../../services/modal.service';
+import {ModalComponent} from '../modal/modal.component';
+import {MenuItem} from '../../../models/menu-item.model';
 
 @Component({
   selector: 'card-item',
@@ -11,13 +15,16 @@ import {ButtonComponent} from '../../atoms/button/button.component';
 })
 
 export class CardItemComponent {
-  @Input() item: any;
+  @Input() item!: MenuItem;
   @Input() inlineMode : boolean = false;
+
+  constructor(private modalService: ModalService) {
+  }
 
   onEdit(event: MouseEvent) {
     event.stopPropagation();
-    //TODO: display Edit Item
-    console.log("edit item")
+    this.modalService.open(EditItemModalComponent, {
+      menuItem: this.item})
   }
 
   addItemToCart() {
