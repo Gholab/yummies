@@ -1,7 +1,7 @@
 import { Component , Input, ChangeDetectionStrategy } from '@angular/core';
 import {TitleComponent} from '../../atoms/title/title.component';
 import {CardItemComponent} from '../cardItem/cardItem.component';
-
+import {MenuItem} from '../../../models/menu-item.model';
 
 @Component({
   selector: 'app-product-grid',
@@ -13,14 +13,7 @@ import {CardItemComponent} from '../cardItem/cardItem.component';
 })
 export class ProductGridComponent {
   @Input() title = 'Produits';
-  @Input() items: ReadonlyArray<ProductItem> = [];
-  trackById = (_: number, item: ProductItem) => item?.id ?? _;
+  @Input() items: ReadonlyArray<MenuItem> = [];
+  trackById = (_: number, item: MenuItem) => item?._id ?? _;
 }
-
-export type ProductItem = {
-  id: number | string;
-  shortName: string;
-  image: string;
-  price: number;
-};
 

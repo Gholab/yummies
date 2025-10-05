@@ -1,93 +1,3 @@
-/*import {AfterViewInit, ChangeDetectorRef, Component, QueryList, TemplateRef, ViewChildren} from '@angular/core';
-import {TitleComponent} from '../../atoms/title/title.component';
-import {TabItem, TabsComponent} from '../../atoms/tabs/tabs.component';
-import {ProductGridComponent} from '../../molecules/product-grid/product-grid.component';
-
-export type ProductItem = {
-  id: number;
-  shortName: string;
-  image: string;
-  price: number;
-};
-
-@Component({
-  selector: 'app-menu',
-  imports: [TitleComponent, TabsComponent, ProductGridComponent],
-  templateUrl: './menu.component.html',
-  standalone: true,
-  styleUrl: './menu.component.scss'
-})
-
-export type MenuCategory = {
-  title: string;
-  items: ProductItem[];
-};
-const IMG = 'https://cdn.pixabay.com/photo/2022/04/11/08/52/iced-tea-7125271_960_720.jpg';
-
-export class MenuComponent implements AfterViewInit{
-  @ViewChildren('tabTpl') tabTpls!: QueryList<TemplateRef<unknown>>;
-  constructor(private cdr: ChangeDetectorRef) {}
-
-  tabItems: TabItem[] = [];
-
-  menuMock: ReadonlyArray<MenuCategory> = [
-    {
-      title: 'Populaire',
-      items: [
-        { id: 101, shortName: 'Iced Tea',  image: IMG, price: 5.20 },
-        { id: 102, shortName: 'Lemonade',  image: IMG, price: 4.80 },
-        { id: 103, shortName: 'Cold Brew', image: IMG, price: 6.00 },
-        { id: 104, shortName: 'Matcha',    image: IMG, price: 5.90 },
-        { id: 105, shortName: 'Smoothie',  image: IMG, price: 6.50 },
-        { id: 106, shortName: 'Milkshake', image: IMG, price: 5.70 },
-      ],
-    },
-    {
-      title: 'Plat',
-      items: [
-        { id: 201, shortName: 'Burger',  image: IMG, price: 9.90 },
-        { id: 202, shortName: 'Wrap',    image: IMG, price: 8.50 },
-        { id: 203, shortName: 'Salade',  image: IMG, price: 7.80 },
-        { id: 204, shortName: 'Frites',  image: IMG, price: 3.50 },
-        { id: 205, shortName: 'Nuggets', image: IMG, price: 5.90 },
-        { id: 206, shortName: 'Hot Dog', image: IMG, price: 6.20 },
-      ],
-    },
-    {
-      title: 'Dessert',
-      items: [
-        { id: 301, shortName: 'Donut',      image: IMG, price: 2.80 },
-        { id: 302, shortName: 'Brownie',    image: IMG, price: 3.50 },
-        { id: 303, shortName: 'Cookie',     image: IMG, price: 2.40 },
-        { id: 304, shortName: 'Sundae',     image: IMG, price: 3.90 },
-        { id: 305, shortName: 'Cheesecake', image: IMG, price: 4.20 },
-        { id: 306, shortName: 'Macaron',    image: IMG, price: 2.90 },
-      ],
-    },
-    {
-      title: 'Boisson',
-      items: [
-        { id: 401, shortName: 'Cola',     image: IMG, price: 3.00 },
-        { id: 402, shortName: 'Eau',      image: IMG, price: 2.00 },
-        { id: 403, shortName: 'Jus',      image: IMG, price: 3.50 },
-        { id: 404, shortName: 'Café',     image: IMG, price: 2.50 },
-        { id: 405, shortName: 'Thé',      image: IMG, price: 2.30 },
-        { id: 406, shortName: 'Smoothie', image: IMG, price: 4.80 },
-      ],
-    },
-  ];
-
-  ngAfterViewInit(): void {
-    const tplArray = this.tabTpls.toArray();
-    this.tabItems = this.menuMock.map((cat, i) => ({
-      title: cat.title,
-      template: tplArray[i]
-    }));
-    this.cdr.detectChanges();
-  }
-}*/
-
-
 import {
   AfterViewInit,
   ChangeDetectorRef,
@@ -101,18 +11,8 @@ import { TabItem, TabsComponent } from '../../atoms/tabs/tabs.component';
 import { CartComponent } from '../../molecules/cart/cart.component';
 import { ProductGridComponent } from '../../molecules/product-grid/product-grid.component';
 import {NgIf} from '@angular/common';
+import {MenuCategory} from '../../../models/menu-item.model';
 
-export type ProductItem = {
-  id: number;
-  shortName: string;
-  image: string;
-  price: number;
-};
-
-export type MenuCategory = {
-  title: string;
-  items: ProductItem[];
-};
 
 const IMG = 'https://cdn.pixabay.com/photo/2022/04/11/08/52/iced-tea-7125271_960_720.jpg';
 
@@ -128,61 +28,8 @@ export class MenuComponent implements AfterViewInit {
 
   tabItems: TabItem[] = [];
 
-  // Mock
-  menuMock: ReadonlyArray<MenuCategory> = [
-    {
-      title: 'Populaire',
-      items: [
-        { id: 101, shortName: 'Iced Tea', image: IMG, price: 5.2 },
-        { id: 102, shortName: 'Lemonade', image: IMG, price: 4.8 },
-        { id: 103, shortName: 'Cold Brew', image: IMG, price: 6.0 },
-        { id: 104, shortName: 'Matcha', image: IMG, price: 5.9 },
-        { id: 105, shortName: 'Smoothie', image: IMG, price: 6.5 },
-        { id: 106, shortName: 'Milkshake', image: IMG, price: 5.7 },
-        { id: 101, shortName: 'Iced Tea', image: IMG, price: 5.2 },
-        { id: 102, shortName: 'Lemonade', image: IMG, price: 4.8 },
-        { id: 103, shortName: 'Cold Brew', image: IMG, price: 6.0 },
-        { id: 104, shortName: 'Matcha', image: IMG, price: 5.9 },
-        { id: 105, shortName: 'Smoothie', image: IMG, price: 6.5 },
-        { id: 106, shortName: 'Milkshake', image: IMG, price: 5.7 },
-      ],
-    },
-    {
-      title: 'Plat',
-      items: [
-        { id: 201, shortName: 'Burger', image: IMG, price: 9.9 },
-        { id: 202, shortName: 'Wrap', image: IMG, price: 8.5 },
-        { id: 203, shortName: 'Salade', image: IMG, price: 7.8 },
-        { id: 204, shortName: 'Frites', image: IMG, price: 3.5 },
-        { id: 205, shortName: 'Nuggets', image: IMG, price: 5.9 },
-        { id: 206, shortName: 'Hot Dog', image: IMG, price: 6.2 },
-      ],
-    },
-    {
-      title: 'Dessert',
-      items: [
-        { id: 301, shortName: 'Donut', image: IMG, price: 2.8 },
-        { id: 302, shortName: 'Brownie', image: IMG, price: 3.5 },
-        { id: 303, shortName: 'Cookie', image: IMG, price: 2.4 },
-        { id: 304, shortName: 'Sundae', image: IMG, price: 3.9 },
-        { id: 305, shortName: 'Cheesecake', image: IMG, price: 4.2 },
-        { id: 306, shortName: 'Macaron', image: IMG, price: 2.9 },
-      ],
-    },
-    {
-      title: 'Boisson',
-      items: [
-        { id: 401, shortName: 'Cola', image: IMG, price: 3.0 },
-        { id: 402, shortName: 'Eau', image: IMG, price: 2.0 },
-        { id: 403, shortName: 'Jus', image: IMG, price: 3.5 },
-        { id: 404, shortName: 'Café', image: IMG, price: 2.5 },
-        { id: 405, shortName: 'Thé', image: IMG, price: 2.3 },
-        { id: 406, shortName: 'Smoothie', image: IMG, price: 4.8 },
-      ],
-    },
-  ];
-
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef) {
+  }
 
   ngAfterViewInit(): void {
     const buildTabs = () => {
@@ -200,5 +47,191 @@ export class MenuComponent implements AfterViewInit {
       buildTabs();
     });
   }
+
+  menuMock: ReadonlyArray<MenuCategory> = [
+    {
+      title: 'Entrées',
+      items: [
+        {
+          _id: '101',
+          shortName: 'Iced Tea',
+          price: 5.2,
+          category: 'STARTER',
+          image: IMG,
+          description:
+            "Un thé glacé rafraîchissant au goût doux et citronné, parfait pour bien commencer le repas.",
+          ingredients: [
+            {name: 'thé noir', range: '1-2-3'},
+            {name: 'citron', range: '0-1-2'},
+          ],
+          allergenes: ['aucun'],
+        },
+        {
+          _id: '102',
+          shortName: 'Lemonade',
+          price: 4.8,
+          category: 'STARTER',
+          image: IMG,
+          description:
+            "Une limonade pétillante faite maison pour une mise en bouche désaltérante.",
+          ingredients: [
+            {name: 'citron', range: '1-2'},
+            {name: 'sucre', range: '0-1-2'},
+          ],
+          allergenes: ['aucun'],
+        },
+        {
+          _id: '103',
+          shortName: 'Cold Brew',
+          price: 6.0,
+          category: 'STARTER',
+          image: IMG,
+          description:
+            "Café infusé à froid, riche en arômes et en douceur naturelle.",
+          ingredients: [
+            {name: 'café arabica', range: '1-2'},
+            {name: 'eau filtrée', range: '1-1-1'},
+          ],
+          allergenes: ['aucun'],
+        },
+      ],
+    },
+    {
+      title: 'Plats',
+      items: [
+        {
+          _id: '201',
+          shortName: 'Burger',
+          price: 9.9,
+          category: 'MAIN',
+          image: IMG,
+          description:
+            "Un burger juteux avec pain brioché, steak haché et fromage fondant.",
+          ingredients: [
+            {name: 'boeuf', range: '2-3'},
+            {name: 'fromage', range: '1-2'},
+          ],
+          allergenes: ['gluten', 'lait', 'oeuf'],
+        },
+        {
+          _id: '202',
+          shortName: 'Wrap',
+          price: 8.5,
+          category: 'MAIN',
+          image: IMG,
+          description:
+            "Wrap de poulet grillé accompagné de crudités croquantes.",
+          ingredients: [
+            {name: 'poulet', range: '2-3'},
+            {name: 'tortilla', range: '1-1-1'},
+          ],
+          allergenes: ['gluten'],
+        },
+        {
+          _id: '203',
+          shortName: 'Salade',
+          price: 7.8,
+          category: 'MAIN',
+          image: IMG,
+          description:
+            "Salade fraîche composée de légumes de saison et vinaigrette maison.",
+          ingredients: [
+            {name: 'laitue', range: '1-2'},
+            {name: 'tomate', range: '1-1-2'},
+          ],
+          allergenes: ['moutarde'],
+        },
+      ],
+    },
+    {
+      title: 'Desserts',
+      items: [
+        {
+          _id: '301',
+          shortName: 'Donut',
+          price: 2.8,
+          category: 'DESSERT',
+          image: IMG,
+          description: 'Donut moelleux glacé au sucre.',
+          ingredients: [
+            {name: 'farine', range: '2-3'},
+            {name: 'sucre', range: '1-2'},
+          ],
+          allergenes: ['gluten', 'oeuf', 'lait'],
+        },
+        {
+          _id: '302',
+          shortName: 'Brownie',
+          price: 3.5,
+          category: 'DESSERT',
+          image: IMG,
+          description: 'Brownie fondant au chocolat noir et aux noix.',
+          ingredients: [
+            {name: 'chocolat', range: '2-3'},
+            {name: 'noix', range: '0-1'},
+          ],
+          allergenes: ['gluten', 'lait', 'fruits à coque'],
+        },
+        {
+          _id: '303',
+          shortName: 'Cookie',
+          price: 2.4,
+          category: 'DESSERT',
+          image: IMG,
+          description:
+            "Cookie croustillant à l’extérieur et moelleux à l’intérieur.",
+          ingredients: [
+            {name: 'beurre', range: '1-2'},
+            {name: 'pépites de chocolat', range: '1-2-3'},
+          ],
+          allergenes: ['gluten', 'oeuf', 'lait'],
+        },
+      ],
+    },
+    {
+      title: 'Boissons',
+      items: [
+        {
+          _id: '401',
+          shortName: 'Cola',
+          price: 3.0,
+          category: 'BEVERAGE',
+          image: IMG,
+          description:
+            'Boisson gazeuse sucrée au goût caramel et caféine.',
+          ingredients: [
+            {name: 'eau gazeuse', range: '1-2'},
+            {name: 'sucre', range: '1-2'},
+          ],
+          allergenes: ['aucun'],
+        },
+        {
+          _id: '402',
+          shortName: 'Eau',
+          price: 2.0,
+          category: 'BEVERAGE',
+          image: IMG,
+          description: 'Eau de source pure et rafraîchissante.',
+          ingredients: [{name: 'eau', range: '1-1-1'}],
+          allergenes: ['aucun'],
+        },
+        {
+          _id: '403',
+          shortName: 'Jus',
+          price: 3.5,
+          category: 'BEVERAGE',
+          image: IMG,
+          description:
+            'Jus de fruits 100% naturel, pressé à froid.',
+          ingredients: [
+            {name: 'pomme', range: '1-2'},
+            {name: 'orange', range: '1-2-3'},
+          ],
+          allergenes: ['aucun'],
+        },
+      ],
+    },
+  ];
 }
+
 

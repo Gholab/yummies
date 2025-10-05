@@ -2,7 +2,7 @@
   <app-title size="s" [text]="title"></app-title>
 
   <div class="grid">
-    @for (item of items; track item.id) {
+    @for (item of items; track item._id) {
       <card-item [item]="item"></card-item>
     }
   </div>
