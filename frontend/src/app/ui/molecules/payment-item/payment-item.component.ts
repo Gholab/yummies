@@ -23,12 +23,11 @@ export class PaymentItem {
   @Output() selectionChange = new EventEmitter<{ index: number; quantity: number }>();
 
   getNumberRemaining(){
-    return this.item.howMany - this.chosenQuantity;
+    return Math.trunc(this.item.howMany - this.chosenQuantity);
   }
 
   onQuantityChange(val: number) {
     this.chosenQuantity = val;
     this.selectionChange.emit({ index: this.index, quantity: val });
   }
-
 }
