@@ -1,9 +1,10 @@
 import { OrderService } from './order.service';
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { OrderItem } from '../../models/order-item.model';
 import { Order } from '../../models/order.model';
 import { Observable } from 'rxjs';
+import {ModalService} from '../modal.service';
 
 @Injectable({
   providedIn: "root"
@@ -13,8 +14,8 @@ export class BffOrderService extends OrderService {
   private baseUrl = "http://localhost:9500/order";
 
 
-  constructor(private http: HttpClient) {
-    super();
+  constructor(protected _modalService: ModalService, private http: HttpClient) {
+    super(_modalService);
   }
   createOrder(bipperNumber: number, customersCount: number): Observable<Order> {
     const id = `order-${BffOrderService.orderCounter++}`;

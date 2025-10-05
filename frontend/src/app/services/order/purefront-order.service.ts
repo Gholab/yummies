@@ -5,14 +5,15 @@ import { OrderItem } from '../../models/order-item.model';
 import { Order } from '../../models/order.model';
 import { Observable, of } from 'rxjs';
 import { MenuItem } from '../../models/menu-item.model';
+import {ModalService} from '../modal.service';
 
 @Injectable({
   providedIn: "root"
 })
 export class PurefrontOrderService extends OrderService {
 
-  constructor(private http: HttpClient) {
-    super();
+  constructor(protected _modalService: ModalService, private http: HttpClient) {
+    super(_modalService);
   }
   private static orderCounter = 1; // pour générer des ids d'ordres uniques
   private baseUrl = "http://localhost:9500/tableOrders";
