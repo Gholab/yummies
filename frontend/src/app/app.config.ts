@@ -35,3 +35,4 @@ export const appConfig: ApplicationConfig = {
     ...(environment.useBff ? BFF_PROVIDES : PUREFRONT_PROVIDES)
   ]
 };
+

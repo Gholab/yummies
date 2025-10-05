@@ -10,6 +10,7 @@ import {MenuItem} from '../../../models/menu-item.model';
   selector: 'card-item',
   imports: [NgClass, ButtonComponent],
   templateUrl: './cardItem.component.html',
+  standalone: true,
   styleUrl: './cardItem.component.scss'
 })
 

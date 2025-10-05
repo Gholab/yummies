@@ -1,0 +1,29 @@
+@use "../../../../styles.scss" as *;
+
+:host{
+  display: inline-flex;
+  font-size: $paragraph-size-medium;
+  font-family: $text-font;
+  color: $text-color-accent;
+  width: 100%;
+  align-items: center;
+  gap: 15px;
+  border-top: solid 1px $text-color-secondary;
+  padding-left: 20px;
+}
+
+.bin-logo{
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img{
+    width: 60px;
+  }
+}
+
+.cart-item-quantity{
+  width: 75px;
+  font-size: $paragraph-size-large;
+}

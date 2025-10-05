@@ -1,0 +1,149 @@
+@use '../../../../styles.scss' as *;
+
+/* Le composant est un bottom-sheet fixé au bas de l'écran */
+:host {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: block;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.cart-sheet {
+  --collapsed-h: 10vh;
+  --expanded-h: 90vh;
+  --bg: #ffffff;
+  --border: #e9edf3;
+  --text: #0b1324;
+  --muted: #64748b;
+  --radius: 20px;
+  --shadow: 0 -20px 50px rgba(2, 6, 23, 0.15);
+  --header-h: 56px;
+
+  width: 100%;
+  height: var(--collapsed-h);
+  max-height: var(--expanded-h);
+  margin: 0 auto;
+  background: $background-color-primary;
+  color: var(--text);
+  border-radius: 50px;
+  box-shadow: var(--shadow);
+  border-top: 2px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  transition:
+    height 280ms cubic-bezier(.2, .8, .2, 1),
+    border-radius 280ms cubic-bezier(.2, .8, .2, 1),
+    box-shadow 280ms cubic-bezier(.2, .8, .2, 1);
+
+  pointer-events: auto;
+}
+
+.cart-sheet.open {
+  height: var(--expanded-h);
+}
+
+.sheet-header {
+  position: sticky;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: var(--header-h);
+  padding: 10px 16px;
+  background: transparent;
+  cursor: pointer;
+  user-select: none;
+  text-align: left;
+  width: 100%;
+  color: inherit;
+}
+
+.title {
+  font-size: $title-size-medium;
+  font-family: $text-font;
+  color: $text-color-secondary;
+}
+
+
+/* Pousse les icônes à droite */
+.spacer {
+  flex: 1 1 auto;
+}
+
+
+/* Icônes */
+
+.cart-logo{
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  top: -30px;
+  right: 60px;
+}
+
+.open-button{
+  display: block;
+  font-size: 50px;
+  font-family: $text-font;
+}
+
+.sheet-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 12px 16px 24px;
+  opacity: 1;
+  transition: opacity 180ms ease 80ms;
+
+  /* Scrollbar douce */
+  scrollbar-width: thin;
+  scrollbar-color: #c1c7d0 #f1f3f5;
+
+  &::-webkit-scrollbar { width: 10px; }
+  &::-webkit-scrollbar-track { background: #f1f3f5; border-radius: 8px; }
+  &::-webkit-scrollbar-thumb { background: #c1c7d0; border-radius: 8px; border: 2px solid #f1f3f5; }
+  &::-webkit-scrollbar-thumb:hover { background: #aab2bf; }
+}
+
+.cart-sheet:not(.open) .sheet-body {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Placeholder de contenu (à remplacer) */
+.placeholder {
+  color: var(--muted);
+}
+
+.cart-product-container{
+  height: 70%;
+  width: 80%;
+  background-color: white;
+  border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.cart-total{
+  margin-top: 50px;
+  font-family: $text-font;
+  font-size: $title-size-medium;
+  color: $text-color-accent;
+
+}
+
+.list-cart-product{
+  overflow-y: auto;
+}
