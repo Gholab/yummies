@@ -7,7 +7,18 @@
 
     <p class="title" (click)="toggle()">Votre panier</p>
 
-    <img class="cart-logo" aria-hidden="true" src="assets/icons/cart.svg"  (click)="toggle()" />
+    <div class="cart-logo-wrapper">
+      <img
+        class="cart-logo"
+        aria-hidden="true"
+        src="assets/icons/cart.svg"
+        (click)="toggle()" />
+      @if(cartItems.length>0){
+        <span class="cart-badge">
+          {{ cartItems.length }}
+        </span>
+      }
+    </div>
   </div>
 
   <div class="sheet-body" tabindex="-1">

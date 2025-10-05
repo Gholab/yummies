@@ -18,22 +18,10 @@
   min-height: 0;
   overflow-y: auto;
   padding-right: var(--scroll-padding-right);
-}
-.scroll {
-
-  --scroll-padding-right: 8px;
-
 
   --sb-size: 15px;
   --sb-track: $background-color-secondary;
   --sb-thumb-active: $text-color-secondary;
-
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 auto;
-  min-height: 0;
-  overflow-y: auto;
-  padding-right: var(--scroll-padding-right);
 
   /* --- Firefox --- */
   scrollbar-width: thin;
@@ -47,6 +35,11 @@
 
 app-title {
   margin-bottom: var(--gap);
+  text-transform: lowercase;
+}
+
+app-title::first-letter{
+  text-transform: capitalize;
 }
 
 

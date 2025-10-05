@@ -5,8 +5,11 @@
   flex-direction: column;
   align-items: center;
   font-family: $text-font;
-  height: 800px;
-  width: 700px;
+  height: 1000px;
+  width: 900px;
+}
+app-title{
+  text-transform: capitalize;
 }
 
 .container-header{
@@ -97,10 +100,10 @@
   width: 80%;
   span{
     color: $text-color-accent;
-    font-size: x-large;
+    font-size: $paragraph-size-medium;
     margin-bottom: 6px;
   }
   app-number-selector{
-    margin-bottom: 4px;
+    margin-bottom: 20px;
   }
 }
