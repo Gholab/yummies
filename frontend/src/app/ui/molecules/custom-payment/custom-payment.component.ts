@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {TitleComponent} from '../../atoms/title/title.component';
 import {PaymentItem} from '../payment-item/payment-item.component';
 import {CartItem} from '../../../models/cart-item-model';
