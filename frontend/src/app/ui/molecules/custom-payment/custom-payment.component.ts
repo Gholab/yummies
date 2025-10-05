@@ -51,13 +51,8 @@ export class CustomPayment {
         ],
         allergenes: ['gluten', 'lait', 'oeuf'],
       },
-      howMany: 2,
-      modifications: {
-        boeuf: 3,
-        fromage: 2,
-        oignon: 1,
-        sauce: 1,
-      },
+      howMany: 2.3211,
+
     },
     {
       menuItem: {
@@ -75,12 +70,7 @@ export class CustomPayment {
         ],
         allergenes: ['gluten', 'oeuf'],
       },
-      howMany: 1,
-      modifications: {
-        poulet: 2,
-        mayo: 0,
-        tomate: 2,
-      },
+      howMany: 1.202
     },
     {
       menuItem: {
@@ -98,12 +88,7 @@ export class CustomPayment {
         ],
         allergenes: ['gluten', 'oeuf'],
       },
-      howMany: 1,
-      modifications: {
-        poulet: 2,
-        mayo: 0,
-        tomate: 2,
-      },
+      howMany: 1.202
     }
   ]
   protected readonly onselectionchange = onselectionchange;
