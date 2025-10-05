@@ -20,7 +20,6 @@ export class UpdatingStatusComponent {
       console.log("pinged preparations: there are : " + preparations.length);
 
       if(preparations.length >= 1) {
-
         for(let preparationObject of preparations) {
           //if the current preparation is not already usually checked
           if(this.preparationsIdsToCheck.find(val => val === preparationObject._id) === undefined) {
