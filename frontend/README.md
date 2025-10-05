@@ -36,3 +36,12 @@ export class TestMenu implements OnInit {
   //...
 }
 ```
+
+
+# Simulation
+Pour voir l'évolution des tables, deux pages sur le front sont importantes :
+* `/check-status` : permet de voir la liste des commandes en cours, leur statut, d'en créer ou d'en supprimer. Lorsqu'on en crée une, elle a des valeurs par défaut.
+* `/update-status` : cette page, lorsqu'elle est ouverte, checke si il ya des commandes. Si oui, elle simule tous les appels qui auraient été fait en cuisine, et valide l'order.
+
+
+Donc, :warning: IL NE FAUT PAS GARDER OUVERT L'ONGLET "/update-status". Il faut juste ouvrir cette page lorsque l'on veut valider les orders.

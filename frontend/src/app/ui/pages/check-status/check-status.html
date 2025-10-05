@@ -1,0 +1,15 @@
+<div *ngFor="let table of tables">
+  <div *ngIf="table.orderId" [class.ready]="table.ready" class="status-container">
+    <p>Order pour table n° {{ table.tableId }} </p>
+    @if(table.ready) {
+      <p>Prête !!</p>
+    }
+    @else {
+      <p>Pas encore prête...</p>
+    }
+  </div>
+</div>
+
+
+<button (click)="createTable()">CREER UNE TABLE</button>
+<button (click)="deleteAllOrders()">Supprimer toutes les orders</button>
