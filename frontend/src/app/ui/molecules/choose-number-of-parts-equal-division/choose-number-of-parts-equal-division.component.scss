@@ -1,0 +1,47 @@
+@use '../../../../styles.scss' as *;
+
+* {
+  font-family: $text-font;
+  font-size: $paragraph-size-large;
+  text-align: center;
+  text-wrap: nowrap;
+}
+
+.choosenumberofparts {
+  width: $payment-modal-width;
+  border-radius: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 50px;
+
+  &-title {
+    font-family: $text-font;
+    font-size: $title-size-medium;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+}
+
+.parts-container {
+  margin: 40px auto;
+  background: white;
+  border-radius: 25px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.singlepart-price {
+  color: $text-color-secondary;
+}
+
+.total-price {
+  color: $text-color-primary;
+  font-size: $title-size-small;
+}
