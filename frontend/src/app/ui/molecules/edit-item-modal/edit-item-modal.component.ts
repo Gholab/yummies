@@ -8,6 +8,7 @@ import {TitleComponent} from '../../atoms/title/title.component';
 import {OrderItem} from '../../../models/order-item.model';
 import {OrderService} from '../../../services/order/order.service';
 import {ORDER_SERVICE} from '../../../services/services.token';
+import {CartItem} from '../../../models/cart-item-model';
 
 @Component({
   selector: 'app-edit-item-modal',
@@ -53,14 +54,11 @@ export class EditItemModalComponent {
       }
     }
 
-    let itemForCart: OrderItem= {
-      menuItemId: this.menuItem._id,
-      menuItemShortName: {
-        name: this.menuItem.shortName,
-        modifications: modifications
-      },
-      howMany: 1
-    }
+    let itemForCart: CartItem = {
+      menuItem: this.menuItem,
+      howMany: 1,
+      modifications: modifications
+    };
 
     this.orderService.addMenuItem(itemForCart);
     this.modalService.close(true);
