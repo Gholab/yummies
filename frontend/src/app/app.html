@@ -1,4 +1,15 @@
 <app-title text="Yummies" size="l" color="primary"></app-title>
+<h1>⚡ Test BFF Order Service</h1>
+
+<button (click)="testCreateOrder()">Créer commande (local)</button>
+<button (click)="testAddItem()">Ajouter Pizza</button>
+<button (click)="testRemoveItem()">Supprimer Pizza</button>
+<button (click)="testCompleteOrder()">Envoyer au backend</button>
+
+<hr>
+
+<!-- Le reste de ton template -->
+<router-outlet></router-outlet>
 
 <app-digit-button
   [label]="'5'"
