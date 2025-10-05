@@ -10,7 +10,7 @@ import { NgClass } from '@angular/common';
 })
 export class TitleComponent {
   @Input() text: string = '';
-  @Input() size: 'l' | 'm' | 's' = 'l';
+  @Input() size: 'xl' | 'l' | 'm' | 's' = 'l';
   @Input() color: 'primary' | 'secondary' = 'primary';
   @Input() noMargin: boolean = false;
 
