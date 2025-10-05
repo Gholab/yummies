@@ -9,8 +9,8 @@
       <p>parts égales</p>
     </div>
 
-    <p class="singlepart-price">Prix d'une part : {{ singlePartPrice.toFixed(2) }}</p>
-    <app-button text="Commencer le paiement" size="fullwidth" color="secondary"></app-button>
+    <p class="singlepart-price">Prix d'une part : {{ singlePartPrice.toFixed(2) }}€</p>
+    <app-button text="Commencer le paiement" size="fullwidth" color="secondary" (click)="startPayment()"></app-button>
   </div>
 
   <app-button icon="assets/icons/logout.png" text="Changer de mode de paiement" size="fullwidth" (click)="closeModal()"></app-button>
