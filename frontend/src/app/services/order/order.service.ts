@@ -35,4 +35,7 @@ export abstract class OrderService {
     return this.cart;
   }
 
+  getBipperId() {
+    return this.bipperNumber;
+  }
 }

@@ -13,7 +13,7 @@ import {ORDER_SERVICE} from '../../../services/services.token';
 export class LandingPageComponent {
 
   constructor(private router: Router,
-              @Inject(ORDER_SERVICE) private orderService: OrderService) {
+    @Inject(ORDER_SERVICE) private orderService: OrderService) {
   }
 
   onClick(){
