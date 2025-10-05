@@ -1,5 +1,5 @@
 <p class="cart-item-quantity">{{item.howMany}} x </p>
 <card-item [item]="item.menuItem" [inlineMode]="true"></card-item>
-<div class="bin-logo">
+<div class="bin-logo" (click)="removeItem()">
   <img src="assets/icons/bin.svg" alt="supress-item"/>
 </div>

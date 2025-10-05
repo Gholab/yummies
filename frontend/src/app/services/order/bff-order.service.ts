@@ -1,9 +1,7 @@
 import { OrderService } from './order.service';
 import {Inject, Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { OrderItem } from '../../models/order-item.model';
-import { Order } from '../../models/order.model';
-import {map, Observable} from 'rxjs';
+import {Observable} from 'rxjs';
 import {ModalService} from '../modal.service';
 import {CartItem} from '../../models/cart-item-model';
 
@@ -11,6 +9,7 @@ import {CartItem} from '../../models/cart-item-model';
   providedIn: "root"
 })
 export class BffOrderService extends OrderService {
+  
   private static orderCounter = 1; // pour générer des ids d'ordres uniques
   private baseUrl = "http://localhost:9500/order";
 
@@ -18,9 +17,10 @@ export class BffOrderService extends OrderService {
   constructor(protected _modalService: ModalService, private http: HttpClient) {
     super(_modalService);
   }
-  createOrder(bipperNumber: number, customersCount: number): Observable<any> {
+  createOrder(): Observable<any> {
     const id = `order-${BffOrderService.orderCounter++}`;
-    return this.http.get<Order>(`${this.baseUrl}/${id}/create-order?bipperNumber=${bipperNumber}&customersCount=${customersCount}`);
+    // à changer avec le vrai appel HTTP
+    return this.http.get<"">(`${this.baseUrl}/${id}/create-order`);
 
   }
 
@@ -29,14 +29,24 @@ export class BffOrderService extends OrderService {
   }
 
   addMenuItem(item: CartItem): Observable<any> {
-    return this.http.post<Order>(`${this.baseUrl}/${this.getOrderId()}/add-item`, item);
+        // à changer avec le vrai appel HTTP
+
+    return this.http.post<"">(`${this.baseUrl}/${this.getOrderId()}/add-item`, item);
   }
 
-  removeMenuItem(index: number): Observable<any> {
-    return this.http.delete<Order>(`${this.baseUrl}/${this.getOrderId()}/remove-item/${index}`);
+  removeMenuItem(menuItemId: string): Observable<any> {
+        // à changer avec le vrai appel HTTP
+
+    return this.http.delete<"">(`${this.baseUrl}/${this.getOrderId()}/remove-item/${menuItemId}`);
   }
 
   completeOrder(): Observable<any> {
-    return this.http.get<Order>(`${this.baseUrl}/${this.getOrderId()}/complete`);
+        // à changer avec le vrai appel HTTP
+
+    return this.http.get<"">(`${this.baseUrl}/${this.getOrderId()}/complete`);
+  }
+  override addBipperNumber(bipper: number): void {
+    this.bipperNumber = bipper;
+    // TODO APRES
   }
 }

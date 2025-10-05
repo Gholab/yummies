@@ -1,22 +1,10 @@
 import { Observable } from 'rxjs';
-import { OrderItem } from '../../models/order-item.model';
-import { Order } from '../../models/order.model';
 import {PaymentType} from '../../models/payment-type.enum';
 import {ModalService} from '../modal.service';
 import {PaymentModalComponent} from '../../ui/molecules/payment-modal/payment-modal.component';
 import {CartItem} from '../../models/cart-item-model';
 // definir le order à partir de plusieurs menu items
 export abstract class OrderService {
-  abstract createOrder(tableNumber: number, customersCount: number): Observable<void>;
-  abstract addMenuItem(orderItem: CartItem): Observable<void>;
-
-  /**
-   * Returns the removed item, if it was found. undefined otherwise
-   * @param index
-   */
-  abstract removeMenuItem(index: number): Observable<CartItem | undefined>;
-  abstract completeOrder(): Observable<void>;
-
   protected cart: CartItem[] = [];
 
   private paymentType: PaymentType = PaymentType.ONE_TIME;//arbitrary value
@@ -25,8 +13,25 @@ export abstract class OrderService {
 
   private currentPaymentStep: number=1;//soit le numéro actuel du paiement ("paiement 1 sur 5"), soit le nombre de produits réglés du panier ("3 produits sur 9")
   private totalPaymentSteps: number=1;
+  
+  protected bipperNumber = 0;
+  protected customerCount = 1;
 
   constructor(protected modalService: ModalService) {}
+
+
+  abstract createOrder(): Observable<void>;
+  abstract addMenuItem(orderItem: CartItem): Observable<void>;
+
+  /**
+   * Returns the removed item, if it was found. undefined otherwise
+   * @param menuItemId
+   */
+  abstract removeMenuItem(menuItemId: string): Observable<CartItem | undefined>;
+
+  abstract addBipperNumber(bipper: number): void;
+
+  abstract completeOrder(): Observable<void>;
 
   getTotalOrderPrice(): number {
     //METHODE VIDE POUR L'INSTANT MAIS IL FAUDRA BIEN LUI FAIRE CALCULER LE VRAI PRIX DU PANIER
