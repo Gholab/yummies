@@ -3,10 +3,11 @@ import {ORDER_SERVICE} from '../../../services/services.token';
 import {OrderService} from '../../../services/order/order.service';
 import {resolve} from '@angular/compiler-cli';
 import {Router} from '@angular/router';
+import {TitleComponent} from '../../atoms/title/title.component';
 
 @Component({
   selector: 'app-endpage',
-  imports: [],
+  imports: [TitleComponent],
   templateUrl: './endpage.html',
   styleUrl: './endpage.scss'
 })
