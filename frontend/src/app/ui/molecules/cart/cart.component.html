@@ -1,3 +1,4 @@
+<!--
 <div class="cart-sheet" [class.open]="open" role="dialog" aria-label="Panier" aria-modal="false">
   <div class="open-button" aria-hidden="true" (click)="toggle()">
     ^
@@ -7,14 +8,34 @@
 
     <p class="title" (click)="toggle()">Votre panier</p>
 
-    <img class="cart-logo" aria-hidden="true" src="assets/icons/cart.svg"  (click)="toggle()" />
+    <div class="cart-logo-wrapper">
+      <img
+        class="cart-logo"
+        aria-hidden="true"
+        src="assets/icons/cart.svg"
+        (click)="toggle()" />
+      @if ((cartItems$ | async) as cartItems) {
+        @if(cartItems.length>0){
+          <span class="cart-badge">
+            {{ cartItems.length }}
+          </span>
+        }
+      }
+
+    </div>
   </div>
 
   <div class="sheet-body" tabindex="-1">
     <div class="cart-product-container">
       <div class="list-cart-product">
-        @for (cartItem of cartItems; track (cartItem.menuItem._id + '-' + $index)) {
-          <app-cart-item [item]="cartItem"></app-cart-item>
+        @if ((cartItems$ | async) as cartItems) {
+          @if( cartItems.length > 0){
+            @for (cartItem of cartItems; track (cartItem.menuItem._id + '-' + $index)) {
+              <app-cart-item [item]="cartItem"></app-cart-item>
+            }
+          } @else {
+            <app-title text="Votre panier est vide" color="secondary" size="m"></app-title>
+          }
         }
       </div>
     </div>
@@ -23,3 +44,48 @@
   </div>
 </div>
 
+-->
+
+<div class="cart-sheet" [class.open]="open" role="dialog" aria-label="Panier" aria-modal="false">
+  <div class="open-button" aria-hidden="true" (click)="toggle()">^</div>
+
+  <div class="sheet-header">
+    <p class="title" (click)="toggle()">Votre panier</p>
+
+    <div class="cart-logo-wrapper">
+      <img
+        class="cart-logo"
+        aria-hidden="true"
+        src="assets/icons/cart.svg"
+        (click)="toggle()" />
+
+        @if (cartItems.length > 0) {
+          <span class="cart-badge">{{ cartItems.length }}</span>
+        }
+    </div>
+  </div>
+
+  <div class="sheet-body" tabindex="-1">
+    <div class="cart-product-container">
+      <div class="list-cart-product">
+          @if (cartItems.length > 0) {
+            @for (cartItem of cartItems; track cartItem.menuItem._id) {
+              <app-cart-item [item]="cartItem"></app-cart-item>
+            }
+          } @else {
+            <app-title text="Votre panier est vide" color="secondary" size="m"></app-title>
+          }
+
+      </div>
+    </div>
+
+    <div class="cart-total">Total : {{ total }} €</div>
+
+    <app-button
+      icon="assets/icons/payments.svg"
+      color="primary"
+      size="l"
+      text="Passer au paiement">
+    </app-button>
+  </div>
+</div>

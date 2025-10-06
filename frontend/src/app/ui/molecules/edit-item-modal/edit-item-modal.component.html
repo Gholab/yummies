@@ -4,7 +4,7 @@
       <img src="{{menuItem.image}}" alt="{{menuItem.shortName}}"/>
     </div>
     <div class="text-container">
-      <app-title text="{{menuItem.shortName}}" size="l" color="secondary" [noMargin]="true"></app-title>
+      <app-title text="{{menuItem.shortName}}" size="m" color="secondary" [noMargin]="true"></app-title>
       <span class="item-desc">{{ menuItem.description }}</span>
     </div>
   </div>
@@ -38,5 +38,5 @@
     <span>Nombre à ajouter: </span>
     <app-number-selector [min]="1" [(current)]="howMany" [max]="10"></app-number-selector>
   </div>
-  <app-button text="Ajouter au panier" (click)="onAddToCart()" size="l"></app-button>
+  <app-button text="Ajouter au panier" (click)="onAddToCart()" size="m"></app-button>
 </div>

@@ -17,6 +17,7 @@
   height: 250px;
   font-family: $text-font;
   font-size: $paragraph-size-medium;
+  text-transform: capitalize;
   .image-container{
     height: 50%;
     max-width: 50%;
@@ -48,8 +49,13 @@
   font-family: $text-font;
   width: 300px;
   height: 300px;
-  font-family: $text-font;
   font-size: $paragraph-size-medium;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+
+  &:active {
+    filter: brightness(0.9);
+    transform: scale(0.98);
+  }
 
   .image-container{
     margin-top: 10%;
@@ -74,9 +80,12 @@
   .item-name{
     margin-top: 7%;
     margin-bottom: 3%;
+    text-transform: capitalize;
+    text-overflow: ellipsis;
   }
 
   .item-card-footer{
     width: 90%;
   }
 }
+

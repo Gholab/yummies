@@ -16,9 +16,10 @@
   justify-content: center;
   z-index: 1001;
 }
+
 .modal-content {
   background-color: $background-color-secondary;
-  border-radius: 8%;
+  border-radius: 50px;
   padding: 2rem;
   min-width: 300px;
   min-height: 100px;
