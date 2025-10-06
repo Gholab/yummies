@@ -13,4 +13,5 @@ export class ButtonComponent {
   @Input() size: 'fullwidth' | 'l' | 'm' | 's' = 'l';
   @Input() color: 'primary' | 'secondary' = 'primary';
   @Input() icon: string | null = null;
+  @Input() disabled : boolean = false;
 }

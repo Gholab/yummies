@@ -6,7 +6,8 @@
     'primary-button': color === 'primary',
     'secondary-button': color === 'secondary',
     'with-icon': icon!== null,
-    'only-icon': icon!==null && text===''
+    'only-icon': icon!==null && text==='',
+    'buttonDisabled': disabled
     }">
 @if (icon) {
     <img [src]="icon" class="btn-icon"/>

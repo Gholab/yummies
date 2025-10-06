@@ -55,8 +55,15 @@ export class CartComponent {
   trackById(index: number, item: CartItem) {
     return item.menuItem._id;
   }
+
+  isPaymentDisabled(){
+    return this.orderService.getCart().length <= 0;
+  }
+
   paymentStep(): void {
-    this.router.navigate(['/payment']);
+    if(!this.isPaymentDisabled()){
+      this.router.navigate(['/payment']);
+    }
   }
 
 
