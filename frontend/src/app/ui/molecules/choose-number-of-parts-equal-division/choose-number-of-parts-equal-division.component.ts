@@ -44,6 +44,8 @@ export class ChooseNumberOfPartsEqualDivisionComponent {
 
   public startPayment() {
     this.paymentService.setCurrentPaymentStep(1);
+    this.paymentService.setTotalPaymentSteps(this.numberOfParts);
+    this.paymentService.setPaymentType(PaymentType.SPLIT_PAYMENT);
     this.modalService.close();
     this.paymentService.startPayment();
   }
