@@ -9,6 +9,12 @@
     padding: 5px 10px;
     margin: 10px;
     cursor: pointer;
+    transition: background-color 0.15s ease, transform 0.1s ease;
+
+    &:active {
+      filter: brightness(0.9);
+      transform: scale(0.98);
+    }
 }
 
 .with-icon{
@@ -88,10 +94,20 @@
   border-radius: 50%;
   padding: 5px;
   margin: 0;
+  &.large-button{
+    padding: 10px;
+    img {
+      width: 70px;
+      height: 70px;
+    }
+  }
+  &.medium-button {
 
-  &.medium-button img{
-    width: 35px;
-    height: 35px;
+    img {
+      width: 35px;
+      height: 35px;
+
+    }
   }
 
   &.small-button img{
