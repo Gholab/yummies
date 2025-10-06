@@ -1,7 +1,7 @@
 <app-title text="Sélectionnez les produits" color="primary" size="s"></app-title>
 <div class="list-payment-item-container">
   <div class="list-payment-item">
-    @for(item of cartMock; track item; let idx = $index){
+    @for(item of totalOrder; track item; let idx = $index){
       <app-payment-item [item]="item" [index]="idx" (selectionChange)="onSelectionChange($event)"></app-payment-item>
     }
   </div>

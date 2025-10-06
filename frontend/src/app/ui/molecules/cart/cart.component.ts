@@ -9,6 +9,8 @@ import {ORDER_SERVICE} from '../../../services/services.token';
 import {OrderService} from '../../../services/order/order.service';
 import {Observable} from 'rxjs';
 
+import {Router} from '@angular/router';
+
 const IMG = 'https://cdn.pixabay.com/photo/2022/04/11/08/52/iced-tea-7125271_960_720.jpg';
 
 @Component({
@@ -31,7 +33,11 @@ export class CartComponent {
     this.orderService.cart$.subscribe(items => this.cartItems = items);
   }
 
-  /*ngOnInit() {
+  /*
+
+  constructor(private router: Router, @Inject(ORDER_SERVICE) private orderService: OrderService) {}
+  ngOnInit() {
+
     this.cartItems = this.orderService.getCart();
   }*/
   get total() {
@@ -47,6 +53,9 @@ export class CartComponent {
 
   trackById(index: number, item: CartItem) {
     return item.menuItem._id;
+  }
+  paymentStep(): void {
+    this.router.navigate(['/payment']);
   }
 
 

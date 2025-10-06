@@ -8,6 +8,7 @@ export abstract class OrderService {
   protected cart: CartItem[] = [];
   private readonly _cart$ = new BehaviorSubject<CartItem[]>(this.cart);
 
+
   protected bipperNumber = 0;
   protected customerCount = 1;
 
@@ -28,7 +29,7 @@ export abstract class OrderService {
   abstract completeOrder(): Observable<void>;
 
   getTotalOrderPrice(): number {
-    return this.cart.reduce((total, item) => total + item.menuItem.price * item.howMany, 0);
+    return this.cart.reduce((total, item) => total + item.menuItem.price * Math.trunc(item.howMany), 0);
     return 50.88;//TODO: renvoyer le vrai prix du panier
   }
 
@@ -42,6 +43,11 @@ export abstract class OrderService {
 
   protected notifyCartChange(): void {
     this._cart$.next([...this.cart]); // on envoie une copie pour forcer la détection
+  }
+
+
+  getBipperId() {
+    return this.bipperNumber;
   }
 
 }
