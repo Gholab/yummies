@@ -1,17 +1,22 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { OrderDTO } from './dto/order.dto';
 import { OrderItemDTO } from './dto/orderItem.dto';
+import {HttpService} from '@nestjs/axios';
+import { first, firstValueFrom } from 'rxjs';
 @Injectable()
 export class OrdersService {
+  private baseUrl = "http://localhost:9500/dining";
   private orders: OrderDTO[] = []; 
+
+  constructor(private http: HttpService) {}
   // Créer une commande
-  create(dto: OrderDTO) {
+  create() {
     // to do : à modifier
     const newOrder: OrderDTO = {
       id: 'order-' + (this.orders.length + 1),
-      tableNumber: dto.tableNumber,
-      customersCount: dto.customersCount,
-      items: dto.items,
+      tableNumber: 0,
+      customersCount: 1,
+      items: [],
     };
     this.orders.push(newOrder);
     console.log('Order created:', newOrder);
@@ -29,7 +34,8 @@ export class OrdersService {
       throw new NotFoundException(`Order item with id ${menuItemId} not found`);
     }
     const [deleted] = order.items.splice(itemIndex, 1);
-    return deleted;
+    console.log(`Removed item ${menuItemId} from order ${id}`, deleted);
+    return order
   }
   addItem(id: string, orderItem: OrderItemDTO) {
     const order = this.orders.find((o) => o.id === id);
@@ -39,13 +45,64 @@ export class OrdersService {
     order.items.push(orderItem);
     return order;
   }
-  completeOrder(id: string) {
+  addBipper(id: string, bipper: number) {
     const order = this.orders.find((o) => o.id === id);
     if (!order) {
       throw new NotFoundException(`Order with id ${id} not found`);
     }
-    // to do : envoyer la commande à la cuisine, etc.
-    console.log(`Order with id ${id} completed`);
+    order.tableNumber = bipper;
+
     return order;
+  }
+  
+  async completeOrder(id: string) {
+    const order = this.orders.find((o) => o.id === id);
+    if (!order) {
+      throw new NotFoundException(`Order with id ${id} not found`);
+    }
+    //étape 1: create order 
+    const createResponse = await firstValueFrom(
+      this.http.post(
+      `${this.baseUrl}/tableOrders`, {
+        tableNumber: order.tableNumber,
+        customersCount: order.customersCount
+      })
+    );
+    const tableOrderId = createResponse.data._id;
+    console.log('Table order created with ID:', tableOrderId);
+
+    // étape 2: add items to order
+    for (const item of order.items) {
+      if (!item.menuItemId || item.howMany <= 0) {
+        console.warn(`Skipping invalid item: ${JSON.stringify(item)}`);
+        continue;
+      }
+      await firstValueFrom(
+        this.http.post(
+          `${this.baseUrl}/tableOrders/${tableOrderId}`, {
+            menuItemId: item.menuItemId,
+            menuItemShortName: item.menuItemShortName,
+            howMany: item.howMany
+          })
+      );
+      console.log(`Added item ${item.menuItemId} to table order ${tableOrderId}`);
+    }
+
+    // // étape 3: preparer la commande
+    await firstValueFrom(
+      this.http.post(
+        `${this.baseUrl}/tableOrders/${tableOrderId}/prepare`, {})
+    );
+    console.log(`Order ${tableOrderId} is now being prepared`);
+
+    // étape 4: finaliser la commande
+    await firstValueFrom(
+      this.http.post(
+        `${this.baseUrl}/tableOrders/${tableOrderId}/bill`, {})
+    );
+    console.log(`Order ${tableOrderId} has been billed`);
+
+    return { message: `Order ${id} completed and sent to dining service as table order ${tableOrderId}` };
+
   }
 }

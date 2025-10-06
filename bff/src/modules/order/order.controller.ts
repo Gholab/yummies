@@ -1,5 +1,4 @@
 import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
-import { OrderDTO } from './dto/order.dto';
 import { OrdersService } from './order.service';
 import { OrderItemDTO } from './dto/orderItem.dto';
 
@@ -8,9 +7,9 @@ export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
   @Post('/create-order')
-  create(@Body() dto: OrderDTO) {
-    console.log('Received create order request with data:', dto);
-    return this.ordersService.create(dto);
+  create() {
+    console.log('Received create order request');
+    return this.ordersService.create();
   }
 
   @Post(':orderId/add-item')
@@ -26,5 +25,10 @@ export class OrdersController {
   @Post(':orderId/complete')
   completeOrder(@Param('orderId') orderId: string) {
     return this.ordersService.completeOrder(orderId);
+  }
+
+  @Post(':orderId/add-bipper/:bipper')
+  addBipper(@Param('orderId') orderId: string, @Param('bipper') bipper: number) {
+    return this.ordersService.addBipper(orderId, Number(bipper));
   }
 }
