@@ -1,0 +1,14 @@
+@use '../../../../styles.scss' as *;
+
+
+.error-container{
+  width: 550px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: $text-color-primary;
+  font-family: $text-font;
+  font-size: $title-size-medium;
+}

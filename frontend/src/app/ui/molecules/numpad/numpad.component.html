@@ -1,9 +1,11 @@
 <div class="bipper-container">
   <!-- Zone d'affichage -->
-  <div class="display">
-    {{ inputValue || 'XXX' }}
+  <div class="display-container">
+    <div class="display">
+      {{ inputValue || '...' }}
+    </div>
+    <app-button class="suppress-button" icon="assets/icons/backspace.svg" color="primary" size='l' (click)="suppressInput()"></app-button>
   </div>
-
   <!-- Grille des boutons -->
   <div class="keypad-grid">
     <app-digit-button
@@ -22,3 +24,4 @@
     </app-digit-button>
   </div>
 </div>
+
