@@ -19,6 +19,8 @@ export class PurefrontOrderService extends OrderService {
 
   createOrder(): Observable<void> {
     //EMPTY FOR PURE FRONT
+    this.cart = [];
+    this.bipperNumber=0;
     console.log("Order created locally");
     return of();
   }

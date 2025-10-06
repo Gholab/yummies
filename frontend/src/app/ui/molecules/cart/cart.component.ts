@@ -29,7 +29,8 @@ export class CartComponent {
 
   cartItems: CartItem[] = [];
 
-  constructor(@Inject(ORDER_SERVICE) private orderService: OrderService) {
+  constructor(@Inject(ORDER_SERVICE) private orderService: OrderService,
+              private router : Router) {
     this.orderService.cart$.subscribe(items => this.cartItems = items);
   }
 
