@@ -55,18 +55,18 @@
     height: 125px;
     font-size: $title-size-small;
     img{
-        width: 30px;
-        height: 30px;
+        width: 60px;
+        height: 60px;
     }
 }
 
 .small-button{
     width: 450px;
     height: 125px;
-    font-size: $paragraph-size-medium;
+    font-size: $paragraph-size-large;
     img{
-        width: 20px;
-        height: 20px;
+        width: 50px;
+        height: 50px;
     }
 }
 
@@ -88,4 +88,14 @@
   border-radius: 50%;
   padding: 5px;
   margin: 0;
+
+  &.medium-button img{
+    width: 35px;
+    height: 35px;
+  }
+
+  &.small-button img{
+     width: 25px;
+    height: 25px;
+  }
 }

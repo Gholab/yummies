@@ -1,10 +1,13 @@
 import {ChangeDetectionStrategy, Component, Inject} from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+
 import {TitleComponent} from '../../atoms/title/title.component';
 import {ButtonComponent} from '../../atoms/button/button.component';
 import {CartItem} from '../../../models/cart-item-model';
 import {CartItemComponent} from '../cart-item/cart-item.component';
 import {ORDER_SERVICE} from '../../../services/services.token';
 import {OrderService} from '../../../services/order/order.service';
+import {Observable} from 'rxjs';
 
 const IMG = 'https://cdn.pixabay.com/photo/2022/04/11/08/52/iced-tea-7125271_960_720.jpg';
 
@@ -14,20 +17,23 @@ const IMG = 'https://cdn.pixabay.com/photo/2022/04/11/08/52/iced-tea-7125271_960
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TitleComponent, ButtonComponent, CartItemComponent]
+  imports: [TitleComponent, ButtonComponent, CartItemComponent, AsyncPipe]
 })
 
 
 export class CartComponent {
 
   open = false
+
   cartItems: CartItem[] = [];
 
-
-  constructor(@Inject(ORDER_SERVICE) private orderService: OrderService) {}
-  ngOnInit() {
-    this.cartItems = this.orderService.getCart();
+  constructor(@Inject(ORDER_SERVICE) private orderService: OrderService) {
+    this.orderService.cart$.subscribe(items => this.cartItems = items);
   }
+
+  /*ngOnInit() {
+    this.cartItems = this.orderService.getCart();
+  }*/
   get total() {
     return this.orderService.getTotalOrderPrice();
   }
@@ -44,5 +50,5 @@ export class CartComponent {
   }
 
 
-  
+
 }
