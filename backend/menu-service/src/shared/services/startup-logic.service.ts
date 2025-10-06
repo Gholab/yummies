@@ -215,126 +215,153 @@ export class StartupLogicService implements OnApplicationBootstrap {
                 "https://cdn.pixabay.com/photo/2016/08/09/19/03/fruit-1581400_960_720.jpg");
         } catch (e) {
         }
+        try {
+            await this.addMenuItem(JSON.stringify({
+                displayName: "Milkshake chocolat noisette",
+                description: "Boisson glacée à base de lait, glace au chocolat et éclats de noisettes.",
+                ingredients: [
+                    { name: "Lait", range: "0-1-1" },
+                    { name: "Glace au chocolat", range: "0-1-1" },
+                    { name: "Pâte de noisette", range: "0-1-1" },
+                    { name: "Chantilly", range: "0-1-1" },
+                    { name: "glaçons", range: "0-1-1" }
+                ],
+                allergenes: ["lactose", "fruits à coque"]
+            }), "milkshake noisette", 5.5, CategoryEnum.BEVERAGE, "https://assets.afcdn.com/recipe/20210331/118977_w1024h1024c1cx707cy1060cxt0cyt0cxb1414cyb2121.jpg");
+        } catch (e) {}
 
         try {
             await this.addMenuItem(JSON.stringify({
-                    displayName: "Bottled coke (33cl)",
-                    description: "",
-                    ingredients: [],
-                    allergenes: []
-                }), "coke", 3.5, CategoryEnum.BEVERAGE,
-                "https://cdn.pixabay.com/photo/2019/11/14/15/47/coke-4626458_1280.jpg");
-        } catch (e) {
-        }
+                displayName: "Smoothie banane cacahuète",
+                description: "Smoothie riche et onctueux à base de banane, beurre de cacahuète et lait.",
+                ingredients: [
+                    { name: "Banane", range: "0-1-1" },
+                    { name: "Beurre de cacahuète", range: "0-1-1" },
+                    { name: "Lait", range: "0-1-1" },
+                    { name: "Miel", range: "0-1-1" },
+                    { name: "Glace", range: "0-1-1" }
+                ],
+                allergenes: ["lactose", "arachides"]
+            }), "smoothie cacahuète", 5.8, CategoryEnum.BEVERAGE, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeJbP1BZO0lDbqvUEtyi6v9akmuntx49qSyw&s");
+        } catch (e) {}
+
         try {
             await this.addMenuItem(JSON.stringify({
-                    displayName: "Ice Tea (33cl)",
-                    description: "",
-                    ingredients: [],
-                    allergenes: []
-                }), "ice tea", 3.5, CategoryEnum.BEVERAGE,
-                "https://cdn.pixabay.com/photo/2022/04/11/08/52/iced-tea-7125271_960_720.jpg");
-        } catch (e) {
-        }
+                displayName: "Frappuccino caramel",
+                description: "Café glacé au caramel, lait entier et chantilly.",
+                ingredients: [
+                    { name: "Café expresso", range: "0-1-1" },
+                    { name: "Lait", range: "0-1-1" },
+                    { name: "Caramel", range: "0-1-1" },
+                    { name: "Chantilly", range: "0-1-1" },
+                    { name: "glaçons", range: "0-1-1" }
+                ],
+                allergenes: ["lactose", "sulfites"]
+            }), "frappuccino caramel", 5.2, CategoryEnum.BEVERAGE, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_zMzAqXcsdLEhI44howPN9RsNdspM_esicw&s");
+        } catch (e) {}
+
         try {
             await this.addMenuItem(JSON.stringify({
-                    displayName: "Bottled water",
-                    description: "",
-                    ingredients: [],
-                    allergenes: []
-                }), "bottled water", 1, CategoryEnum.BEVERAGE,
-                "https://cdn.pixabay.com/photo/2014/12/11/09/49/water-564048_960_720.jpg");
-        } catch (e) {
-        }
+                displayName: "Piña colada",
+                description: "Cocktail tropical à base de rhum, lait de coco et jus d’ananas.",
+                ingredients: [
+                    { name: "Rhum blanc", range: "0-1-1" },
+                    { name: "Lait de coco", range: "0-1-1" },
+                    { name: "Jus d’ananas", range: "0-1-1" },
+                    { name: "Sirop de sucre", range: "0-1-1" },
+                    { name: "glaçons", range: "0-1-1" }
+                ],
+                allergenes: ["fruits à coque", "sulfites"]
+            }), "pina colada", 7.5, CategoryEnum.BEVERAGE, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbnv0gazk5Jq4aykyqZn_21asWjL-ikwlCzQ&s");
+        } catch (e) {}
+
         try {
             await this.addMenuItem(JSON.stringify({
-                    displayName: "Sparkling water",
-                    description: "",
-                    ingredients: [],
-                    allergenes: []
-                }), "sparkling water", 1.5, CategoryEnum.BEVERAGE,
-                "https://cdn.pixabay.com/photo/2018/10/23/19/39/water-3768773_960_720.jpg");
-        } catch (e) {
-        }
+                displayName: "Irish coffee glacé",
+                description: "Café froid mélangé à du whisky irlandais, sucre brun et crème.",
+                ingredients: [
+                    { name: "Café", range: "0-1-1" },
+                    { name: "Whisky", range: "0-1-1" },
+                    { name: "Crème", range: "0-1-1" },
+                    { name: "Sucre brun", range: "0-1-1" },
+                    { name: "glaçons", range: "0-1-1" }
+                ],
+                allergenes: ["lactose", "sulfites"]
+            }), "irish coffee glacé", 7, CategoryEnum.BEVERAGE, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtWmuEfhMFQ7b1bgk7yEKkzDSV9l5FTdyMGw&s");
+        } catch (e) {}
+
         try {
             await this.addMenuItem(JSON.stringify({
-                    displayName: "Spritz",
-                    description: "",
-                    ingredients: [],
-                    allergenes: []
-                }), "spritz", 5, CategoryEnum.BEVERAGE,
-                "https://cdn.pixabay.com/photo/2020/05/12/21/17/spritz-5164971_960_720.jpg");
-        } catch (e) {
-        }
+                displayName: "Cocktail lait d’amande et miel",
+                description: "Boisson douce et parfumée à base de lait d’amande et miel, servie fraîche.",
+                ingredients: [
+                    { name: "Lait d’amande", range: "0-1-1" },
+                    { name: "Miel", range: "0-1-1" },
+                    { name: "Cannelle", range: "0-1-1" },
+                    { name: "glaçons", range: "0-1-1" }
+                ],
+                allergenes: ["fruits à coque"]
+            }), "cocktail amande miel", 4.8, CategoryEnum.BEVERAGE, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOUILMiK4Ms5tgVhzix1AFOhnzowNRj4pOIQ&s");
+        } catch (e) {}
+
         try {
             await this.addMenuItem(JSON.stringify({
-                    displayName: "Margarita",
-                    description: "",
-                    ingredients: [],
-                    allergenes: []
-                }), "margarita", 6.5, CategoryEnum.BEVERAGE,
-                "https://cdn.pixabay.com/photo/2014/08/11/08/37/margarita-415360_960_720.jpg");
-        } catch (e) {
-        }
+                displayName: "Milkshake fraise-biscuit",
+                description: "Milkshake gourmand à la fraise et morceaux de biscuit sablé.",
+                ingredients: [
+                    { name: "Lait", range: "0-1-1" },
+                    { name: "Fraises", range: "0-1-1" },
+                    { name: "Biscuits sablés", range: "0-1-1" },
+                    { name: "Chantilly", range: "0-1-1" },
+                    { name: "glaçons", range: "0-1-1" }
+                ],
+                allergenes: ["lactose", "gluten"]
+            }), "milkshake fraise biscuit", 5.6, CategoryEnum.BEVERAGE, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBxZqtQ9HN8aNnbLYrbj1ykDxUM5nlNk2tBw&s");
+        } catch (e) {}
+
         try {
             await this.addMenuItem(JSON.stringify({
-                    displayName: "Tequila sunrise",
-                    description: "",
-                    ingredients: [],
-                    allergenes: []
-                }), "tequila", 7, CategoryEnum.BEVERAGE,
-                "https://cdn.pixabay.com/photo/2018/01/25/19/33/summer-3106910_960_720.jpg");
-        } catch (e) {
-        }
+                displayName: "Cocktail chocolat-liqueur de noisette",
+                description: "Boisson glacée au chocolat, liqueur de noisette et crème fouettée.",
+                ingredients: [
+                    { name: "Chocolat", range: "0-1-1" },
+                    { name: "Liqueur de noisette", range: "0-1-1" },
+                    { name: "Crème", range: "0-1-1" },
+                    { name: "Sucre", range: "0-1-1" },
+                    { name: "glaçons", range: "0-1-1" }
+                ],
+                allergenes: ["lactose", "fruits à coque", "sulfites"]
+            }), "cocktail noisette chocolat", 6.8, CategoryEnum.BEVERAGE, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuQiQvSAKfPMykXr25JEN3kH_S1G2vRi9-Pw&s");
+        } catch (e) {}
+
         try {
             await this.addMenuItem(JSON.stringify({
-                    displayName: "Mojito",
-                    description: "",
-                    ingredients: [],
-                    allergenes: []
-                }), "mojito", 6, CategoryEnum.BEVERAGE,
-                "https://cdn.pixabay.com/photo/2015/03/30/12/35/mojito-698499_960_720.jpg");
-        } catch (e) {
-        }
+                displayName: "Frappé moka",
+                description: "Mélange glacé de café, lait, cacao et chantilly.",
+                ingredients: [
+                    { name: "Café", range: "0-1-1" },
+                    { name: "Lait", range: "0-1-1" },
+                    { name: "Cacao", range: "0-1-1" },
+                    { name: "Chantilly", range: "0-1-1" },
+                    { name: "glaçons", range: "0-1-1" }
+                ],
+                allergenes: ["lactose", "sulfites"]
+            }), "frappé moka", 5.3, CategoryEnum.BEVERAGE, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsdX0lSM9S7s6Ys84wc7nWrrlE_1BAyM6QYw&s");
+        } catch (e) {}
+
         try {
             await this.addMenuItem(JSON.stringify({
-                    displayName: "Martini",
-                    description: "",
-                    ingredients: [],
-                    allergenes: []
-                }), "martini", 7, CategoryEnum.BEVERAGE,
-                "https://cdn.pixabay.com/photo/2015/10/19/07/50/cocktail-995574_960_720.jpg");
-        } catch (e) {
-        }
-        try {
-            await this.addMenuItem(JSON.stringify({
-                    displayName: "Lemonade",
-                    description: "",
-                    ingredients: [],
-                    allergenes: []
-                }), "lemonade", 3, CategoryEnum.BEVERAGE,
-                "https://cdn.pixabay.com/photo/2016/07/21/11/17/drink-1532300_960_720.jpg");
-        } catch (e) {
-        }
-        try {
-            await this.addMenuItem(JSON.stringify({
-                    displayName: "Apple juice",
-                    description: "",
-                    ingredients: [],
-                    allergenes: []
-                }), "apple juice", 3, CategoryEnum.BEVERAGE,
-                "https://cdn.pixabay.com/photo/2016/11/28/22/07/punch-1866178_960_720.jpg");
-        } catch (e) {
-        }
-        try {
-            await this.addMenuItem(JSON.stringify({
-                    displayName: "Café",
-                    description: "",
-                    ingredients: [],
-                    allergenes: []
-                }), "café", 1.8, CategoryEnum.BEVERAGE,
-                "https://cdn.pixabay.com/photo/2014/12/11/02/56/coffee-563797_960_720.jpg");
-        } catch (e) {
-        }
+                displayName: "Cocktail bière et jus de pomme",
+                description: "Mélange rafraîchissant de bière blonde et de jus de pomme frais.",
+                ingredients: [
+                    { name: "Bière blonde", range: "0-1-1" },
+                    { name: "Jus de pomme", range: "0-1-1" },
+                    { name: "Sirop de sucre", range: "0-1-1" },
+                    { name: "glaçons", range: "0-1-1" }
+                ],
+                allergenes: ["gluten", "sulfites"]
+            }), "cocktail bière pomme", 6, CategoryEnum.BEVERAGE, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcST1Hl3XoEcEkifdrHhARgA65Ef641Qs7idtQ&s");
+        } catch (e) {}
+
     }
 }
