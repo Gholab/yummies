@@ -1,8 +1,5 @@
 export class OrderItemDTO {
   menuItemId: string;
-  menuItemShortName: {
-    name: string;
-    modifications: { [ingredientName: string]: number };
-  };
+  menuItemShortName: string;
   howMany: number;  
 }
