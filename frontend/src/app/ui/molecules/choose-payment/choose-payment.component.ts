@@ -51,7 +51,16 @@ export class ChoosePaymentComponent {
   customSplitPaymentOptionClick() {
     console.log("Custom split payment option clicked");
     this.paymentService.setPaymentType(PaymentType.CUSTOMIZED_REPARTITION);
+    this.paymentService.setTotalPaymentSteps(this.computeTotalItemsCount());
     this.nextStep.emit();
   }
 
+  computeTotalItemsCount(): number {
+    let totalItemsCount=0;
+    for(let item of this.orderService.getCart()) {
+      totalItemsCount+=Math.trunc(item.howMany);
+    }
+
+    return totalItemsCount;
+  }
 }

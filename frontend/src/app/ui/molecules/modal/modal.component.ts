@@ -43,6 +43,7 @@ export class ModalComponent implements OnDestroy {
   close(result?: any) {
     this.componentRef?.destroy();
     this.componentRef = undefined;
+
     this.onCloseCallback?.(result);
   }
 

@@ -14,6 +14,8 @@ export class PaymentService {
   private currentPaymentStep: number=1;//soit le numéro actuel du paiement ("paiement 1 sur 5"), soit le nombre de produits réglés du panier ("3 produits sur 9")
   private totalPaymentSteps: number=1;
 
+  private customRepartitionSelectedItemsPrice=0;
+
   constructor(@Inject(ORDER_SERVICE) private orderService: OrderService,
               private modalService: ModalService) {}
 
@@ -42,9 +44,16 @@ export class PaymentService {
     this.totalPaymentSteps=step;
   }
 
+  setCustomRepartitionSelectedItemsPrice(price: number) {
+    this.customRepartitionSelectedItemsPrice=price;
+  }
+
   getPriceToPay(): number {
     if(this.paymentType === PaymentType.SPLIT_PAYMENT) {
       return this.orderService.getTotalOrderPrice() / this.totalPaymentSteps;// = "divise le prix total par le nombre de gens qui payent"
+    }
+    else if(this.paymentType === PaymentType.CUSTOMIZED_REPARTITION) {
+      return this.customRepartitionSelectedItemsPrice;
     }
     else {
       //TODO: calculate the price that needs to be paid
@@ -53,7 +62,7 @@ export class PaymentService {
   }
 
   startPayment() {
-    this.modalService.open(PaymentModalComponent, {
+    return this.modalService.open(PaymentModalComponent, {
       price: this.getPriceToPay(),
       paymentType: this.getPaymentType(),
       currentPaymentStep: this.currentPaymentStep,
@@ -62,6 +71,9 @@ export class PaymentService {
   }
 
   waitForPayment(){
-    return new Promise(resolve => setTimeout(resolve, 3000));
+    return new Promise(resolve => setTimeout(() => {
+      this.totalAmountPaid+=this.customRepartitionSelectedItemsPrice;
+      resolve(void 0);
+    }, 3000));
   }
 }

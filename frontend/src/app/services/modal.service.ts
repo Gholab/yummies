@@ -17,14 +17,14 @@ export class ModalService {
       }
 
       this.modalRef.instance.open(component, inputs, (result?: any) => {
-        this.close();
-        resolve(result);
+        resolve(void 0);
       }, closable);
     });
   }
 
   close(result?: any) {
     if (this.modalRef) {
+      this.modalRef.instance.close();
       this.appRef.detachView(this.modalRef.hostView);
       this.modalRef.destroy();
       this.modalRef = undefined;
