@@ -7,6 +7,7 @@ import {
   Type
 } from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {ModalService} from '../../../services/modal.service';
 
 @Component({
   selector: 'app-modal',
@@ -21,6 +22,9 @@ export class ModalComponent implements OnDestroy {
   private componentRef?: ComponentRef<any>;
   private onCloseCallback?: (result?: any) => void;
   closable: boolean = true;
+
+  constructor(private modalService: ModalService) {
+  }
 
   open<T>(component: Type<T>, inputs?: Partial<T>, onClose?: (result?: any) => void, closable: boolean = true) {
     this.modalContent.clear();
@@ -37,7 +41,7 @@ export class ModalComponent implements OnDestroy {
 
   closeClick(result?: any){
     if(this.closable){
-      this.close(result);
+      this.modalService.close();
     }
   }
   close(result?: any) {
