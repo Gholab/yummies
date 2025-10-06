@@ -1,7 +1,7 @@
 import { OrderService } from './order.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { concatMap, from, map, Observable, of, toArray } from 'rxjs';
+import {BehaviorSubject, concatMap, from, map, Observable, of, toArray} from 'rxjs';
 import {ModalService} from '../modal.service';
 import {CartItem} from '../../models/cart-item-model';
 import {AddMenuItemDto} from '../../models/add-menu-item-dto.model';
@@ -19,7 +19,6 @@ export class PurefrontOrderService extends OrderService {
 
   createOrder(): Observable<void> {
     //EMPTY FOR PURE FRONT
-    this.cart = [];
     this.bipperNumber=0;
     console.log("Order created locally");
     return of();
@@ -82,7 +81,7 @@ export class PurefrontOrderService extends OrderService {
             this.http.post(`${this.baseUrl}/tableOrders/${tableOrderId}`, {
               menuItemId: cartItem.menuItem._id,
               menuItemShortName: cartItem.menuItem.shortName,
-              howMany: this.subtractKeepingDecimals(cartItem.howMany, 1) //ensures the right amount of items is sent to preparation
+              howMany: (cartItem.howMany>1 ? this.subtractKeepingDecimals(cartItem.howMany, 1) : 1)  //ensures the right amount of items is sent to preparation
             })
           ),
           toArray(), //permet d'attendre que tous les appels soient finis

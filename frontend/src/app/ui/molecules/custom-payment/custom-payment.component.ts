@@ -47,17 +47,7 @@ export class CustomPayment implements OnInit{
   }
 
   paySelectedItems() {
-    let selectedItemsCount=this.selectedQuantities.reduce((total, currentAmount) => {
-      if (total == 0) {
-        return Math.trunc(currentAmount);
-      }
-      else if (currentAmount == undefined) {
-        return total;
-      }
-      else {
-        return Math.trunc(total) + Math.trunc(currentAmount);
-      }
-    });
+    let selectedItemsCount = this.getSelectedItemsCount();
 
     let totalItemsCount: number=this.totalOrder.map(item => Math.trunc(item.howMany)).reduce((total, currentAmount) => {
       return total + currentAmount;
@@ -87,8 +77,27 @@ export class CustomPayment implements OnInit{
     });
   }
 
+  private getSelectedItemsCount() {
+    if(this.selectedQuantities.length == 0) return 0;
+
+    let selectedItemsCount = this.selectedQuantities.reduce((total, currentAmount) => {
+      if (total == 0) {
+        return Math.trunc(currentAmount);
+      } else if (currentAmount == undefined) {
+        return total;
+      } else {
+        return Math.trunc(total) + Math.trunc(currentAmount);
+      }
+    });
+    return selectedItemsCount;
+  }
+
   public resetAllInputs() {
     this.quantitySubject.next(0);
+  }
+
+  isPaymentDisabled(){
+    return this.getSelectedItemsCount() === 0;
   }
 
   protected readonly onselectionchange = onselectionchange;

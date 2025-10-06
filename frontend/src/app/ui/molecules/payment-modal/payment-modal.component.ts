@@ -61,6 +61,7 @@ export class PaymentModalComponent implements AfterViewInit{
     for(;this.currentPaymentStep<=this.totalPaymentSteps; this.currentPaymentStep++){
       await this.paymentService.waitForPayment();
     }
+    this.currentPaymentStep = this.totalPaymentSteps;
     this.orderService.completeOrder().subscribe(() => {
       this.modalService.close(true)
       this.router.navigate(['/endPage']);
