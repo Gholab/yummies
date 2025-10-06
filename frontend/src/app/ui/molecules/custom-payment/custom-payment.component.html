@@ -2,7 +2,7 @@
 <div class="list-payment-item-container">
   <div class="list-payment-item">
     @for(item of totalOrder; track item; let idx = $index){
-      <app-payment-item [item]="item" [index]="idx" (selectionChange)="onSelectionChange($event)"></app-payment-item>
+      <app-payment-item [item]="item" [index]="idx" (selectionChange)="onSelectionChange($event)" [quantity$]="quantitySubject.asObservable()"></app-payment-item>
     }
   </div>
 </div>
@@ -11,6 +11,6 @@
   <p>Prix de la sélection: {{ total }} €</p>
 </div>
 <div class="button-container">
-  <app-button text="Payer la sélection" color="secondary" icon="assets/icons/payments.svg" size="m"></app-button>
+  <app-button text="Payer la sélection" color="secondary" icon="assets/icons/payments.svg" size="m" (click)="paySelectedItems()"></app-button>
   <app-button text="Changer de mode de paiement" color="primary" icon="assets/icons/logout.png" size="s"></app-button>
 </div>

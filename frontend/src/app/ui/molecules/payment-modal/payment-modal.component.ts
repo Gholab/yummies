@@ -35,7 +35,7 @@ export class PaymentModalComponent implements AfterViewInit{
   async ngAfterViewInit(){
     switch(this.paymentType){
       case PaymentType.ONE_TIME:
-        await this.paymentService.waitForPayment()
+        await this.paymentService.waitForPayment();
         this.orderService.completeOrder().subscribe(() => {
           this.modalService.close(true)
           this.router.navigate(['/endPage']);
@@ -44,6 +44,16 @@ export class PaymentModalComponent implements AfterViewInit{
         break;
       case PaymentType.SPLIT_PAYMENT:
         await this.handleUniformSplit();
+        break;
+      case PaymentType.CUSTOMIZED_REPARTITION:
+        await this.paymentService.waitForPayment();
+        this.modalService.close(true);
+
+        if (this.paymentService.isOrderFullyPaid()) {
+          this.router.navigate(['/endPage']);
+        }
+
+        break;
     }
   }
 
