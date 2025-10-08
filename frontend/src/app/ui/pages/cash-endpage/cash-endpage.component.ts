@@ -6,19 +6,17 @@ import {Router} from '@angular/router';
 import {TitleComponent} from '../../atoms/title/title.component';
 
 @Component({
-  selector: 'app-endpage',
+  selector: 'app-cash-endpage',
   imports: [TitleComponent],
-  templateUrl: './endpage.html',
-  styleUrl: './endpage.scss'
+  templateUrl: './cash-endpage.html',
+  styleUrl: './cash-endpage.component.scss'
 })
-export class Endpage implements OnInit{
-  numBipper: number = -1;
+export class CashEndpage implements OnInit{
 
   constructor(@Inject(ORDER_SERVICE) private orderService: OrderService,
               private router: Router){}
 
   async ngOnInit(){
-    this.numBipper = this.orderService.getBipperId()
     await new Promise(resolve => setTimeout(resolve, 5000));
     this.orderService.resetOrder();
     this.router.navigate(['/']);

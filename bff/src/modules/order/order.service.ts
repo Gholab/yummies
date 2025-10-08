@@ -1,18 +1,21 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { OrderDTO } from './dto/order.dto';
-import { OrderItemDTO } from './dto/orderItem.dto';
+import { BackOrderItemDTO } from './dto/backOrderItemDTO';
 import {HttpService} from '@nestjs/axios';
 import { first, firstValueFrom } from 'rxjs';
+import {OrderWithCustomersDTO} from "./dto/order-with-customers.dto";
+import {FrontOrderItemDTO} from "./dto/frontOrderItemDTO";
+
 @Injectable()
 export class OrdersService {
   private baseUrl = "http://localhost:9500/dining";
-  private orders: OrderDTO[] = []; 
+  private orders: OrderDTO[] = [];
 
   constructor(private http: HttpService) {}
   // Créer une commande
   create() {
     // to do : à modifier
-    const newOrder: OrderDTO = {
+    const newOrder: OrderWithCustomersDTO = {
       id: 'order-' + (this.orders.length + 1),
       tableNumber: 0,
       customersCount: 1,
@@ -21,30 +24,12 @@ export class OrdersService {
     this.orders.push(newOrder);
     console.log('Order created:', newOrder);
     console.log('Current orders:', this.orders);
-    return newOrder;
+    return {
+        ...newOrder,
+      customersCount: undefined,
+    };
   }
-  // Supprimer une commande
-  removeItem(id: string, menuItemId: string) {
-    const order = this.orders.find((o) => o.id === id);
-    if (!order) {
-      throw new NotFoundException(`Order with id ${id} not found`);
-    }
-    const itemIndex = order.items.findIndex((item) => item.menuItemId === menuItemId);
-    if (itemIndex === -1) {
-      throw new NotFoundException(`Order item with id ${menuItemId} not found`);
-    }
-    const [deleted] = order.items.splice(itemIndex, 1);
-    console.log(`Removed item ${menuItemId} from order ${id}`, deleted);
-    return order
-  }
-  addItem(id: string, orderItem: OrderItemDTO) {
-    const order = this.orders.find((o) => o.id === id);
-    if (!order) {
-      throw new NotFoundException(`Order with id ${id} not found`);
-    }
-    order.items.push(orderItem);
-    return order;
-  }
+
   addBipper(id: string, bipper: number) {
     const order = this.orders.find((o) => o.id === id);
     if (!order) {
@@ -54,36 +39,38 @@ export class OrdersService {
 
     return order;
   }
-  
-  async completeOrder(id: string) {
+
+  async completeOrder(id: string, orderItems: FrontOrderItemDTO[]) {
     const order = this.orders.find((o) => o.id === id);
     if (!order) {
       throw new NotFoundException(`Order with id ${id} not found`);
     }
-    //étape 1: create order 
+    //étape 1: create order
     const createResponse = await firstValueFrom(
       this.http.post(
       `${this.baseUrl}/tableOrders`, {
         tableNumber: order.tableNumber,
-        customersCount: order.customersCount
+        customersCount: 1//arbitrary value
       })
     );
     const tableOrderId = createResponse.data._id;
     console.log('Table order created with ID:', tableOrderId);
 
     // étape 2: add items to order
-    for (const item of order.items) {
+    for (const frontItem of orderItems) {
+    let item: BackOrderItemDTO = {
+        menuItemId: frontItem.menuItem._id,
+        menuItemShortName: frontItem.menuItem.shortName,
+        howMany: frontItem.howMany
+    };
+
       if (!item.menuItemId || item.howMany <= 0) {
         console.warn(`Skipping invalid item: ${JSON.stringify(item)}`);
         continue;
       }
       await firstValueFrom(
         this.http.post(
-          `${this.baseUrl}/tableOrders/${tableOrderId}`, {
-            menuItemId: item.menuItemId,
-            menuItemShortName: item.menuItemShortName,
-            howMany: item.howMany
-          })
+          `${this.baseUrl}/tableOrders/${tableOrderId}`, item)
       );
       console.log(`Added item ${item.menuItemId} to table order ${tableOrderId}`);
     }

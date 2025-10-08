@@ -14,10 +14,6 @@ export class CheckStatus {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    for(let i=1; i < 10; i++) {
-      this.tables.push({});//initialize array
-    }
-
     this.updateAllStatus();
 
     setInterval(() => {

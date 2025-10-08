@@ -127,7 +127,7 @@ export class StartupLogicService implements OnApplicationBootstrap {
                     { name: "Piment", range: "0-1-1" }
                 ],
                 allergenes: ["fruits à coque", "sulfites"]
-            }), "soupe thaï", 12, CategoryEnum.STARTER, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgS3NtvbC1w3C5uLeLfU5SIwmH2hyN9WqiQg&s");
+            }), "soupe thai", 12, CategoryEnum.STARTER, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgS3NtvbC1w3C5uLeLfU5SIwmH2hyN9WqiQg&s");
         } catch (e) {}
         try {
             await this.addMenuItem(JSON.stringify({
@@ -199,8 +199,10 @@ export class StartupLogicService implements OnApplicationBootstrap {
             await this.addMenuItem(JSON.stringify({
                     displayName: "Dessert of fresh strawberries and vanilla mascarpone mousse",
                     description: "",
-                    ingredients: [],
-                    allergenes: []
+                    ingredients: [
+                        { name: "Strawberries", range: "1-1-2" },
+                        { name: "Creme", range: "1-1-2" }],
+                    allergenes: ["fruits rouges"]
                 }), "strawberries", 12, CategoryEnum.DESSERT,
                 "https://cdn.pixabay.com/photo/2018/04/09/18/20/strawberry-3304967_960_720.jpg");
         } catch (e) {
@@ -209,8 +211,10 @@ export class StartupLogicService implements OnApplicationBootstrap {
             await this.addMenuItem(JSON.stringify({
                     displayName: "Fresh seasonal fruit",
                     description: "",
-                    ingredients: [],
-                    allergenes: []
+                    ingredients: [
+                        { name: "fruits oranges", range: "0-1-2" },
+                        { name: "fruits rouges", range: "0-1-2" }],
+                    allergenes: ["fruits oranges", "fruits rouges"]
                 }), "seasonal fruit", 12, CategoryEnum.DESSERT,
                 "https://cdn.pixabay.com/photo/2016/08/09/19/03/fruit-1581400_960_720.jpg");
         } catch (e) {

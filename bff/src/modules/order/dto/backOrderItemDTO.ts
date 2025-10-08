@@ -1,5 +1,5 @@
-export class OrderItemDTO {
+export class BackOrderItemDTO {
   menuItemId: string;
   menuItemShortName: string;
-  howMany: number;  
+  howMany: number;
 }

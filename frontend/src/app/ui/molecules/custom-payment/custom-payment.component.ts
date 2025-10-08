@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {TitleComponent} from '../../atoms/title/title.component';
 import {PaymentItem} from '../payment-item/payment-item.component';
 import {CartItem} from '../../../models/cart-item-model';
@@ -25,6 +25,8 @@ import {Subject} from 'rxjs';
 export class CustomPayment implements OnInit{
   private selectedQuantities: number[] = [];
   totalOrder: CartItem[] = [];
+
+  @Output() goBack = new EventEmitter<void>();
 
   public quantitySubject: Subject<number> = new Subject();
 
@@ -98,6 +100,10 @@ export class CustomPayment implements OnInit{
 
   isPaymentDisabled(){
     return this.getSelectedItemsCount() === 0;
+  }
+
+  goPreviousStep() {
+    this.goBack.emit();
   }
 
   protected readonly onselectionchange = onselectionchange;

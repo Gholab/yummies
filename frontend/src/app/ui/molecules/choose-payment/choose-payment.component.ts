@@ -30,7 +30,7 @@ export class ChoosePaymentComponent {
   finishPayment() {
     console.log("Finish payment clicked");
     this.orderService.completeOrder().subscribe(() => {
-      this.router.navigate(['/endPage']);
+      this.router.navigate(['/cashEndPage']);
     })
   }
 
