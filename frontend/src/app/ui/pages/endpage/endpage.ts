@@ -20,6 +20,7 @@ export class Endpage implements OnInit{
   async ngOnInit(){
     this.numBipper = this.orderService.getBipperId()
     await new Promise(resolve => setTimeout(resolve, 5000));
+    this.orderService.resetOrder();
     this.router.navigate(['/']);
   }
 }

@@ -39,8 +39,13 @@ export class BffOrderService extends OrderService {
     return this.http.post<"">(`${this.baseUrl}/${this.getOrderId()}/add-item`, item);
   }
 
-  removeMenuItem(menuItemId: string): Observable<any> {
-    return this.http.delete<"">(`${this.baseUrl}/${this.getOrderId()}/remove-item/${menuItemId}`);
+  override removeMenuItem(menuItemId: string): boolean {
+    if (super.removeMenuItem(menuItemId)) {
+      this.http.delete<"">(`${this.baseUrl}/${this.getOrderId()}/remove-item/${menuItemId}`).subscribe(() => {});//we need to subscribe to start the DELETE request
+      return true;
+    }
+
+    return false;
   }
 
   completeOrder(): Observable<any> {

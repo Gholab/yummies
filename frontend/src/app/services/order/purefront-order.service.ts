@@ -24,22 +24,6 @@ export class PurefrontOrderService extends OrderService {
     return of();
   }
 
-  removeMenuItem(menuItemId: string): Observable<CartItem | undefined> {
-    const index = this.cart.findIndex(ci => ci.menuItem._id === menuItemId);
-    if (index === -1) {
-      console.error(`item with id ${menuItemId} not found in cart`);
-      return of(undefined);
-    }
-    if(Math.trunc(this.cart[index].howMany) === 1){
-      const [removedItem] = this.cart.splice(index, 1);
-      console.log('Menu item removed locally:', menuItemId, this.cart);
-      return of(removedItem);
-    }else{
-      this.cart[index].howMany = this.subtractKeepingDecimals(this.cart[index].howMany, 1);
-      return of(undefined);
-    }
-  }
-
   addBipperNumber(bipper: number): void {
     this.bipperNumber = bipper;
   }
@@ -73,14 +57,6 @@ export class PurefrontOrderService extends OrderService {
         );
       })
     );
-  }
-
-  private subtractKeepingDecimals(a: number, b: number): number {
-    const str = a.toString();
-    const decimalPart = str.split('.')[1];
-    const decimals = decimalPart ? decimalPart.length : 0;
-
-    return Number((a - b).toFixed(decimals));
   }
 
   // sur cette fonction on dit aussi les personnalisations, par exemple la quantité

@@ -42,6 +42,7 @@ export class OrdersService {
     console.log(`Removed item ${menuItemId} from order ${id}`, deleted);
     return order;
   }
+
   addItem(id: string, orderItem: FrontOrderItemDTO) {
     const order = this.orders.find((o) => o.id === id);
     if (!order) {
