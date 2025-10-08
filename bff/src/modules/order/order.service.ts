@@ -5,6 +5,7 @@ import {HttpService} from '@nestjs/axios';
 import { first, firstValueFrom } from 'rxjs';
 import {OrderWithCustomersDTO} from "./dto/order-with-customers.dto";
 import {FrontOrderItemDTO} from "./dto/frontOrderItemDTO";
+
 @Injectable()
 export class OrdersService {
   private baseUrl = "http://localhost:9500/dining";
@@ -28,36 +29,7 @@ export class OrdersService {
       customersCount: undefined,
     };
   }
-  // Supprimer une commande
-  removeItem(id: string, menuItemId: string) {
-    const order: OrderDTO | undefined = this.orders.find((o) => o.id === id);
-    if (!order) {
-      throw new NotFoundException(`Order with id ${id} not found`);
-    }
-    const itemIndex = order.items.findIndex((item: BackOrderItemDTO) => item.menuItemId === menuItemId);
-    if (itemIndex === -1) {
-      throw new NotFoundException(`Order item with id ${menuItemId} not found`);
-    }
-    const [deleted] = order.items.splice(itemIndex, 1);
-    console.log(`Removed item ${menuItemId} from order ${id}`, deleted);
-    return order;
-  }
 
-  addItem(id: string, orderItem: FrontOrderItemDTO) {
-    const order = this.orders.find((o) => o.id === id);
-    if (!order) {
-      throw new NotFoundException(`Order with id ${id} not found`);
-    }
-
-    let backItem = {
-        menuItemId: orderItem.menuItem._id,
-        menuItemShortName: orderItem.menuItem.shortName,
-        howMany: orderItem.howMany
-    };
-
-    order.items.push(backItem);
-    return order;
-  }
   addBipper(id: string, bipper: number) {
     const order = this.orders.find((o) => o.id === id);
     if (!order) {
@@ -68,7 +40,7 @@ export class OrdersService {
     return order;
   }
 
-  async completeOrder(id: string) {
+  async completeOrder(id: string, orderItems: FrontOrderItemDTO[]) {
     const order = this.orders.find((o) => o.id === id);
     if (!order) {
       throw new NotFoundException(`Order with id ${id} not found`);
@@ -85,7 +57,13 @@ export class OrdersService {
     console.log('Table order created with ID:', tableOrderId);
 
     // étape 2: add items to order
-    for (const item of order.items) {
+    for (const frontItem of orderItems) {
+    let item: BackOrderItemDTO = {
+        menuItemId: frontItem.menuItem._id,
+        menuItemShortName: frontItem.menuItem.shortName,
+        howMany: frontItem.howMany
+    };
+
       if (!item.menuItemId || item.howMany <= 0) {
         console.warn(`Skipping invalid item: ${JSON.stringify(item)}`);
         continue;
