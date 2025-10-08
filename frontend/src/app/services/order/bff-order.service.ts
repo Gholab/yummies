@@ -9,14 +9,14 @@ import {CartItem} from '../../models/cart-item-model';
   providedIn: "root"
 })
 export class BffOrderService extends OrderService {
-  
+
   private baseUrl = "http://localhost:4000/order";
   private orderId: string = "";
 
   constructor(protected _modalService: ModalService, private http: HttpClient) {
     super(_modalService);
   }
-  
+
   getOrderId(): string {
     return this.orderId;
   }
@@ -26,7 +26,7 @@ export class BffOrderService extends OrderService {
 
   createOrder(): Observable<any> {
     // à changer avec le vrai appel HTTP
-    this.http.get<any>(`${this.baseUrl}/create-order`).subscribe({
+    this.http.post<any>(`${this.baseUrl}/create-order`, {}).subscribe({
       next: (data: any) => {
         this.setOrderId(data.id);
       }
@@ -34,16 +34,10 @@ export class BffOrderService extends OrderService {
     return of();
   }
 
-  addMenuItem(item: CartItem): Observable<any> {
-    return this.http.post<"">(`${this.baseUrl}/${this.getOrderId()}/add-item`, item);
-  }
-
-  removeMenuItem(menuItemId: string): Observable<any> {
-    return this.http.delete<"">(`${this.baseUrl}/${this.getOrderId()}/remove-item/${menuItemId}`);
-  }
-
   completeOrder(): Observable<any> {
-    return this.http.get<"">(`${this.baseUrl}/${this.getOrderId()}/complete`);
+    return this.http.post<any>(`${this.baseUrl}/${this.getOrderId()}/complete`, [
+      ...this.cart
+    ]);
   }
   addBipperNumber(bipper: number): void {
     this.bipperNumber = bipper;

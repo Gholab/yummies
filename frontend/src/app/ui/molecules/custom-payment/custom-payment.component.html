@@ -12,5 +12,5 @@
 </div>
 <div class="button-container">
   <app-button text="Payer la sélection" color="secondary" icon="assets/icons/payments.svg" size="m" (click)="paySelectedItems()" [disabled]="isPaymentDisabled()"></app-button>
-  <app-button text="Changer de mode de paiement" color="primary" icon="assets/icons/logout.png" size="s"></app-button>
+  <app-button text="Changer de mode de paiement" color="primary" icon="assets/icons/logout.png" size="s" (click)="goPreviousStep()"></app-button>
 </div>

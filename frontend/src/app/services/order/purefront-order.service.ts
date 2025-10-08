@@ -24,50 +24,9 @@ export class PurefrontOrderService extends OrderService {
     return of();
   }
 
-
-  addMenuItem(item: CartItem): Observable<void> {
-    for(let cartItem of this.cart){
-      if(cartItem.menuItem._id === item.menuItem._id && (cartItem.howMany - Math.trunc(cartItem.howMany) ) === (item.howMany-Math.trunc(item.howMany)) ){
-        cartItem.howMany = this.addKeepingDecimals(cartItem.howMany, Math.trunc(item.howMany));
-        console.log("incremented number for already present item:", this.cart)
-        return of();
-      }
-    }
-    this.cart.push(item);
-    console.log('Menu item added locally:', item.menuItem._id, this.cart);
-    return of();
-  }
-
-  removeMenuItem(menuItemId: string): Observable<CartItem | undefined> {
-    const index = this.cart.findIndex(ci => ci.menuItem._id === menuItemId);
-    if (index === -1) {
-      console.error(`item with id ${menuItemId} not found in cart`);
-      return of(undefined);
-    }
-    if(Math.trunc(this.cart[index].howMany) === 1){
-      const [removedItem] = this.cart.splice(index, 1);
-      console.log('Menu item removed locally:', menuItemId, this.cart);
-      return of(removedItem);
-    }else{
-      this.cart[index].howMany = this.subtractKeepingDecimals(this.cart[index].howMany, 1);
-      console.log("reduced number of item iterations locally")
-      return of(undefined);
-    }
-  }
-
   addBipperNumber(bipper: number): void {
     this.bipperNumber = bipper;
     console.log(`Configured bipper (table) number locally : ${bipper}`);
-  }
-
-  addKeepingDecimals(a: number, b: number): number {
-    // Convertit le nombre en chaîne pour compter les décimales
-    const str = a.toString();
-    const decimalPart = str.split('.')[1];
-    const decimals = decimalPart ? decimalPart.length : 0;
-
-    // Effectue l’addition, puis arrondit à ce même nombre de décimales
-    return Number((a + b).toFixed(decimals));
   }
 
   completeOrder(): Observable<void> {
@@ -106,14 +65,6 @@ export class PurefrontOrderService extends OrderService {
         );
       })
     );
-  }
-
-  private subtractKeepingDecimals(a: number, b: number): number {
-    const str = a.toString();
-    const decimalPart = str.split('.')[1];
-    const decimals = decimalPart ? decimalPart.length : 0;
-
-    return Number((a - b).toFixed(decimals));
   }
 
   // sur cette fonction on dit aussi les personnalisations, par exemple la quantité

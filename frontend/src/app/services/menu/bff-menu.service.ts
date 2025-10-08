@@ -8,17 +8,17 @@ import {Observable} from 'rxjs';
   providedIn: "root"
 })
 export class BffMenuService extends MenuService {
-  private baseUrl= "http://localhost:9500/menu";
+  private baseUrl= "http://localhost:4000/menu";
 
   constructor(private http: HttpClient) {
     super();
   }
 
   getMenuItems(): Observable<MenuItem[]> {
-    return this.http.get<MenuItem[]>(`${this.baseUrl}/menus`);
+    return this.http.get<MenuItem[]>(`${this.baseUrl}`);
   }
 
   getMenuItemById(id: string): Observable<MenuItem | undefined> {
-    return this.http.get<MenuItem>(`${this.baseUrl}/menus/${id}`);
+    return this.http.get<MenuItem>(`${this.baseUrl}/${id}`);
   }
 }
