@@ -127,7 +127,7 @@ export class StartupLogicService implements OnApplicationBootstrap {
                     { name: "Piment", range: "0-1-1" }
                 ],
                 allergenes: ["fruits à coque", "sulfites"]
-            }), "soupe thaï", 12, CategoryEnum.STARTER, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgS3NtvbC1w3C5uLeLfU5SIwmH2hyN9WqiQg&s");
+            }), "soupe thai", 12, CategoryEnum.STARTER, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgS3NtvbC1w3C5uLeLfU5SIwmH2hyN9WqiQg&s");
         } catch (e) {}
         try {
             await this.addMenuItem(JSON.stringify({
