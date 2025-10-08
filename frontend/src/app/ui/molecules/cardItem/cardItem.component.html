@@ -1,0 +1,14 @@
+<div
+  class="{{inlineMode ? 'inline-display' : 'card-display' }}"
+  (click)="addItemToCart()">
+  <div class="image-container">
+    <img src="{{item.image}}" alt="{{item.shortName}}" />
+  </div>
+  <span class="item-name">{{item.shortName}}</span>
+  <div class="item-card-footer">
+    <span class="item-price">{{item.price}}€</span>
+    @if (!inlineMode){
+      <app-button icon="assets/icons/edit.svg" text="" (click)="onEdit($event)" size="m"></app-button>
+    }
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="bipper-container">
+  <!-- Zone d'affichage -->
+  <div class="display-container">
+    <div class="display">
+      {{ inputValue || '...' }}
+    </div>
+    <app-button class="suppress-button" icon="assets/icons/backspace.svg" color="primary" size='l' (click)="suppressInput()"></app-button>
+  </div>
+  <!-- Grille des boutons -->
+  <div class="keypad-grid">
+    <app-digit-button
+      *ngFor="let key of keys"
+      [label]="key"
+      color="primary"
+      (click)="onKeyClick(key)"
+      size="s">
+    </app-digit-button>
+    <app-digit-button
+      class="enter-button"
+      [label]="'→'"
+      color="primary"
+      (click)="onKeyClick('→')"
+      size="l">
+    </app-digit-button>
+  </div>
+</div>
+

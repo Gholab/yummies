@@ -1,0 +1,36 @@
+@use '../../../../styles.scss' as *;
+
+:host{
+  width: 100%;
+  height: 70vh;
+  padding: 50px;
+}
+
+.list-payment-item-container{
+  width: 85%;
+  height: 50%;
+  background-color: $background-color-secondary;
+  padding: 30px;
+  border-radius: 40px;
+  margin: auto;
+}
+
+.list-payment-item{
+  overflow-y: auto;
+  height: 100%;
+  width: 100%;
+}
+
+.selection-total{
+  font-size: $title-size-small;
+  font-family: $text-font;
+  justify-self: center;
+}
+
+.button-container{
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  align-items: center;
+  gap: 50px;
+}

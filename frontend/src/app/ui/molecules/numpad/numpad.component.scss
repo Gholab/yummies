@@ -1,0 +1,40 @@
+@use '../../../../styles.scss' as *;
+
+.bipper-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.enter-button{
+  grid-column: 2/4;
+}
+.display-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap : 30px;
+}
+.display {
+  font-family: $text-font;
+  font-size: $title-size-large;
+  width: 570px;
+  height: 150px;
+  border-radius: 20px;
+  background-color: #f0eef9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5px;
+  border: 1px solid #7b8b6f;
+}
+
+.keypad-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 230px);
+  grid-template-rows: repeat(3,230px);
+}
+
+.modal-content{
+  max-width: 800px;
+  height: 80%;
+}

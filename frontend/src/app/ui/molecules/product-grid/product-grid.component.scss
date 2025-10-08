@@ -1,0 +1,54 @@
+:host {
+  display: flex;
+  height: 100%;
+  min-height: 0;
+  width: 100%;
+  margin-left: 20px;
+  margin-right: 20px;
+  max-height: 80vh;
+}
+
+.scroll {
+  --gap: 16px;
+  --scroll-padding-right: 8px;
+
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: var(--scroll-padding-right);
+
+  --sb-size: 15px;
+  --sb-track: $background-color-secondary;
+  --sb-thumb-active: $text-color-secondary;
+
+  /* --- Firefox --- */
+  scrollbar-width: thin;
+  scrollbar-color: var(--sb-thumb) var(--sb-track);
+
+  &::-webkit-scrollbar {
+    width: var(--sb-size);
+  }
+
+}
+
+app-title {
+  margin-bottom: var(--gap);
+  text-transform: lowercase;
+}
+
+app-title::first-letter{
+  text-transform: capitalize;
+}
+
+
+.grid {
+  width: 1056px;
+  display: grid;
+  grid-template-columns: repeat(3, calc((100% - 2 * var(--gap)) / 3));
+  gap: 32px var(--gap);
+  place-items: center;
+  align-content: start;
+}
+

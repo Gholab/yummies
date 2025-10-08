@@ -1,0 +1,40 @@
+@use '../../../../styles.scss' as *;
+
+.paymentmodal {
+  width: $payment-modal-width;
+  border-radius: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 50px;
+
+  &-title {
+    font-family: $text-font;
+    font-size: $title-size-medium;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+}
+
+.pay-by-card-icon {
+  aspect-ratio: 1 / 1;
+  width: $image-size-large;
+}
+
+.please-consult-terminal {
+  color: $text-color-primary;
+  font-family: $text-font;
+  font-size: $paragraph-size-medium;
+  width: 70%;
+  text-align: center;
+}
+
+.customized-repartition-advancement {
+  font-size: $paragraph-size-medium;
+  font-family: $text-font;
+  color: $text-color-secondary;
+  margin-bottom: 0;
+}

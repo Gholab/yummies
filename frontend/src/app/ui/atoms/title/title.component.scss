@@ -1,0 +1,39 @@
+@use '../../../../styles.scss' as *;
+
+.title{
+    font-weight: bold;
+    font-family: $title-font;
+    font-style: italic;
+}
+
+.x-large-title{
+  font-size: 80px;
+}
+
+.large-title{
+    font-size:$title-size-large;
+}
+
+.medium-title{
+    font-size:$title-size-medium;
+}
+
+.small-title{
+    font-size:$title-size-small;
+}
+
+.primary-title{
+    color: $text-color-primary;
+}
+
+.secondary-title{
+    color: $text-color-secondary;
+}
+
+.accent-title {
+  color: $text-color-accent;
+}
+
+.noMargin{
+  margin: 0;
+}

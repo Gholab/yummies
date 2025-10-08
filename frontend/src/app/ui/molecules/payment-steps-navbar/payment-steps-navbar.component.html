@@ -1,0 +1,27 @@
+<div class="title-section">
+  <app-title [text]="tabs[currentTabIndex].title" color="primary" size="l"></app-title>
+</div>
+
+
+<ul class="navbar">
+  @for (tab of tabs; track tab; let idx = $index) {
+    <li [class.active]="idx <= currentTabIndex" [class.lastActive]="idx === currentTabIndex">{{tab.section}}</li>
+  }
+</ul>
+<div class="section-content">
+  @switch (currentTabIndex) {
+    @case (0) {
+      <app-numpad (nextStep)="goToNextStep()"></app-numpad>
+    }
+    @case (1) {
+      <app-choose-payment (nextStep)="goToNextStep()"></app-choose-payment>
+    }
+    @case (2) {
+      <app-custom-payment ></app-custom-payment>
+    }
+    @default {
+      <p>Étape inconnue</p>
+    }
+
+  }
+</div>

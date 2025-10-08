@@ -1,0 +1,17 @@
+<div class="choosenumberofparts">
+  <h5 class="choosenumberofparts-title">Diviser en parts égales</h5>
+
+  <div class="parts-container">
+    <p class="total-price">Total: {{ totalPrice.toFixed(2) }}€</p>
+    <div class="splitwish-container">
+      <p>Je souhaite diviser le total en :</p>
+      <app-number-selector [min]="1" [current]="1" [max]="4" (currentChange)="onNumberOfPartsChange($event)"></app-number-selector>
+      <p>parts égales</p>
+    </div>
+
+    <p class="singlepart-price">Prix d'une part : {{ singlePartPrice.toFixed(2) }}€</p>
+    <app-button text="Commencer le paiement" size="fullwidth" color="secondary" (click)="startPayment()"></app-button>
+  </div>
+
+  <app-button icon="assets/icons/logout.png" text="Changer de mode de paiement" size="fullwidth" (click)="closeModal()"></app-button>
+</div>
