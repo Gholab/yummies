@@ -23,7 +23,6 @@ export class NumpadComponent {
 
   onKeyClick(key: string | number) {
     if (key === '→') {
-      console.log('Submit value:', this.inputValue);
       if( Number(this.inputValue) < 0 || Number(this.inputValue) > 50){
         this.modalService.open(ErrorMessage, {
           text: "Veuillez entrer un numéro de bipper valide !",

@@ -29,7 +29,7 @@ export class PurefrontOrderService extends OrderService {
     for(let cartItem of this.cart){
       if(cartItem.menuItem._id === item.menuItem._id && (cartItem.howMany - Math.trunc(cartItem.howMany) ) === (item.howMany-Math.trunc(item.howMany)) ){
         cartItem.howMany = this.addKeepingDecimals(cartItem.howMany, Math.trunc(item.howMany));
-        console.log("incremented already present item")
+        console.log("incremented number for already present item:", this.cart)
         return of();
       }
     }
@@ -50,12 +50,14 @@ export class PurefrontOrderService extends OrderService {
       return of(removedItem);
     }else{
       this.cart[index].howMany = this.subtractKeepingDecimals(this.cart[index].howMany, 1);
+      console.log("reduced number of item iterations locally")
       return of(undefined);
     }
   }
 
   addBipperNumber(bipper: number): void {
     this.bipperNumber = bipper;
+    console.log(`Configured bipper (table) number locally : ${bipper}`);
   }
 
   addKeepingDecimals(a: number, b: number): number {
@@ -69,31 +71,38 @@ export class PurefrontOrderService extends OrderService {
   }
 
   completeOrder(): Observable<void> {
+    console.log("#### Start sending tableOrder to backend ####")
     return this.http.post(`${this.baseUrl}/tableOrders`, {
       tableNumber: this.bipperNumber,
       customersCount: 1
     }).pipe(
       concatMap((res: any) => {
         const tableOrderId = res._id;
-
+        console.log(`tableOrder created, tableOrderId: ${tableOrderId}`);
         return from(this.cart).pipe(
-          concatMap(cartItem =>
-            this.http.post(`${this.baseUrl}/tableOrders/${tableOrderId}`, {
-              menuItemId: cartItem.menuItem._id,
-              menuItemShortName: cartItem.menuItem.shortName,
-              howMany: (cartItem.howMany>1 ? this.subtractKeepingDecimals(cartItem.howMany, 1) : 1)  //ensures the right amount of items is sent to preparation
-            })
+          concatMap( (cartItem) => {
+              console.log(`adding ${cartItem.menuItem.shortName} to tableOrder`);
+              return this.http.post(`${this.baseUrl}/tableOrders/${tableOrderId}`, {
+                menuItemId: cartItem.menuItem._id,
+                menuItemShortName: cartItem.menuItem.shortName,
+                howMany: (cartItem.howMany>1 ? this.subtractKeepingDecimals(cartItem.howMany, 1) : 1)  //ensures the right amount of items is sent to preparation
+              })
+          }
           ),
-          toArray(), //permet d'attendre que tous les appels soient finis
-          concatMap(() =>
-            // Étape 3 : lancer la préparation
-            this.http.post(`${this.baseUrl}/tableOrders/${tableOrderId}/prepare`, {})
+          toArray(),
+          concatMap(() => {
+            console.log(`Start preparation of tableOrder ${tableOrderId}`);
+            return this.http.post(`${this.baseUrl}/tableOrders/${tableOrderId}/prepare`, {})
+            }
           ),
-          concatMap(() =>
-            // Étape 4 : lancer la facturation
-            this.http.post(`${this.baseUrl}/tableOrders/${tableOrderId}/bill`, {})
+          concatMap(() =>{
+            console.log(`mark tableOrder ${tableOrderId} as billed`);
+            return this.http.post(`${this.baseUrl}/tableOrders/${tableOrderId}/bill`, {})
+          }
+
           ),
-          map(() => void 0) // pour renvoyer un Observable<void>
+          map(() =>{
+            console.log("#### transaction completed ####"); return void 0})
         );
       })
     );

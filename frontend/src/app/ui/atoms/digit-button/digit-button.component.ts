@@ -13,13 +13,12 @@ export class DigitButtonComponent {
   @Input() label: string | number = '';
 
   @Input() color: 'primary' = 'primary';
-  
+
   @Input() size: 's' | 'l' = 's';
 
   @Output() clicked = new EventEmitter<string | number>();
 
   onClick() {
-    console.log('DigitButton clicked:', this.label);
     this.clicked.emit(this.label);
   }
 
