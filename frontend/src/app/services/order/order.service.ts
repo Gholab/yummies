@@ -21,6 +21,14 @@ export abstract class OrderService {
     this.bipperNumber=0;
   }
 
+  getTotalItemsCount() {
+    if(this.cart.length === 0) return 0;
+
+    return this.cart.map(item => Math.trunc(item.howMany)).reduce((total, currentAmount) => {
+      return total + currentAmount;
+    });
+  }
+
   addMenuItem(item: CartItem): Observable<void> {
     for(let cartItem of this.cart){
       if(cartItem.menuItem._id === item.menuItem._id && (cartItem.howMany - Math.trunc(cartItem.howMany) ) === (item.howMany-Math.trunc(item.howMany)) ){

@@ -5,6 +5,7 @@ import {LandingPageComponent} from './ui/pages/landing-page-component/landing-pa
 import {CheckStatus} from './ui/pages/check-status/check-status';
 import {UpdatingStatusComponent} from './ui/pages/updating-status/updating-status.component';
 import {Endpage} from './ui/pages/endpage/endpage';
+import {CashEndpage} from './ui/pages/cash-endpage/cash-endpage.component';
 
 export const routes: Routes = [
   {
@@ -18,6 +19,10 @@ export const routes: Routes = [
   {
     path: 'endPage',
     component: Endpage
+  },
+  {
+    path: 'cashEndPage',
+    component: CashEndpage
   },
   {
     path: "",
