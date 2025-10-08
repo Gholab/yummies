@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { OrdersService } from './order.service';
-import { OrderItemDTO } from './dto/orderItem.dto';
+import { BackOrderItemDTO } from './dto/backOrderItemDTO';
+import {FrontOrderItemDTO} from "./dto/frontOrderItemDTO";
 
 @Controller('order') // => /order
 export class OrdersController {
@@ -13,7 +14,7 @@ export class OrdersController {
   }
 
   @Post(':orderId/add-item')
-  addMenuItem(@Param('orderId') orderId: string, @Body() orderItem: OrderItemDTO) {
+  addMenuItem(@Param('orderId') orderId: string, @Body() orderItem: FrontOrderItemDTO) {
     return this.ordersService.addItem(orderId, orderItem);
   }
 

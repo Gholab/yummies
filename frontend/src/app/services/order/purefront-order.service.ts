@@ -24,20 +24,6 @@ export class PurefrontOrderService extends OrderService {
     return of();
   }
 
-
-  addMenuItem(item: CartItem): Observable<void> {
-    for(let cartItem of this.cart){
-      if(cartItem.menuItem._id === item.menuItem._id && (cartItem.howMany - Math.trunc(cartItem.howMany) ) === (item.howMany-Math.trunc(item.howMany)) ){
-        cartItem.howMany = this.addKeepingDecimals(cartItem.howMany, Math.trunc(item.howMany));
-        console.log("incremented already present item")
-        return of();
-      }
-    }
-    this.cart.push(item);
-    console.log('Menu item added locally:', item.menuItem._id, this.cart);
-    return of();
-  }
-
   removeMenuItem(menuItemId: string): Observable<CartItem | undefined> {
     const index = this.cart.findIndex(ci => ci.menuItem._id === menuItemId);
     if (index === -1) {
@@ -56,16 +42,6 @@ export class PurefrontOrderService extends OrderService {
 
   addBipperNumber(bipper: number): void {
     this.bipperNumber = bipper;
-  }
-
-  addKeepingDecimals(a: number, b: number): number {
-    // Convertit le nombre en chaîne pour compter les décimales
-    const str = a.toString();
-    const decimalPart = str.split('.')[1];
-    const decimals = decimalPart ? decimalPart.length : 0;
-
-    // Effectue l’addition, puis arrondit à ce même nombre de décimales
-    return Number((a + b).toFixed(decimals));
   }
 
   completeOrder(): Observable<void> {

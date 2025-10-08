@@ -40,7 +40,7 @@ export class CardItemComponent {
       menuItem: this.item,
       howMany: this.computeItemDefaultHowMany()
     };
-    this.orderService.addMenuItem(cartItem);
+    this.orderService.addMenuItem(cartItem).subscribe(() => {});//necessary to subscribe to trigger the POST
   }
 
   private computeItemDefaultHowMany(){
