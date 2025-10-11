@@ -22,7 +22,7 @@ export class OrdersService {
       items: [],
     };
     this.orders.push(newOrder);
-    console.log('Order created:', newOrder);
+    console.log('New Order created, id:', newOrder.id);
     console.log('Current orders:', this.orders);
     return {
         ...newOrder,
@@ -36,7 +36,7 @@ export class OrdersService {
       throw new NotFoundException(`Order with id ${id} not found`);
     }
     order.tableNumber = bipper;
-
+    console.log(`Set Bipper id ${bipper} for order of id ${id}`)
     return order;
   }
 
@@ -54,7 +54,7 @@ export class OrdersService {
       })
     );
     const tableOrderId = createResponse.data._id;
-    console.log('Table order created with ID:', tableOrderId);
+    console.log('Table order created in backend with ID:', tableOrderId);
 
     // étape 2: add items to order
     for (const frontItem of orderItems) {
@@ -87,7 +87,7 @@ export class OrdersService {
       this.http.post(
         `${this.baseUrl}/tableOrders/${tableOrderId}/bill`, {})
     );
-    console.log(`Order ${tableOrderId} has been billed`);
+    console.log(`Order ${tableOrderId} set to billed`);
 
     return { message: `Order ${id} completed and sent to dining service as table order ${tableOrderId}` };
 
