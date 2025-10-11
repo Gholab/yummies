@@ -9,13 +9,13 @@ import {Observable} from 'rxjs';
 })
 export class BffMenuService extends MenuService {
   private baseUrl= "http://localhost:4000/menu";
-
+  private loggerPrefix: string = "[BFF Version | MenuService] :";
   constructor(private http: HttpClient) {
     super();
   }
 
   getMenuItems(): Observable<MenuItem[]> {
-    console.log("Fetching menu from BFF")
+    console.log(this.loggerPrefix+"Fetching menu from BFF")
     return this.http.get<MenuItem[]>(`${this.baseUrl}`);
   }
 

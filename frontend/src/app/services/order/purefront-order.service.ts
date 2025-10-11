@@ -15,32 +15,32 @@ export class PurefrontOrderService extends OrderService {
     super(_modalService);
   }
   private baseUrl = "http://localhost:9500/dining";
-
+  private loggerPrefix: string = "[PureFront Version | OrderService] :";
 
   createOrder(): Observable<void> {
     //EMPTY FOR PURE FRONT
     this.bipperNumber=0;
-    console.log("Order created locally");
+    console.log(this.loggerPrefix+"Order created locally");
     return of();
   }
 
   addBipperNumber(bipper: number): void {
     this.bipperNumber = bipper;
-    console.log(`Configured bipper (table) number locally : ${bipper}`);
+    console.log(this.loggerPrefix+`Configured bipper (table) number locally : ${bipper}`);
   }
 
   completeOrder(): Observable<void> {
-    console.log("#### Start sending tableOrder to backend ####")
+    console.log(this.loggerPrefix+"#### Start sending tableOrder to backend ####")
     return this.http.post(`${this.baseUrl}/tableOrders`, {
       tableNumber: this.bipperNumber,
       customersCount: 1
     }).pipe(
       concatMap((res: any) => {
         const tableOrderId = res._id;
-        console.log(`tableOrder created, tableOrderId: ${tableOrderId}`);
+        console.log(this.loggerPrefix+`tableOrder created, tableOrderId: ${tableOrderId}`);
         return from(this.cart).pipe(
           concatMap( (cartItem) => {
-              console.log(`adding ${cartItem.menuItem.shortName} to tableOrder`);
+              console.log(this.loggerPrefix+`adding ${cartItem.menuItem.shortName} to tableOrder`);
               return this.http.post(`${this.baseUrl}/tableOrders/${tableOrderId}`, {
                 menuItemId: cartItem.menuItem._id,
                 menuItemShortName: cartItem.menuItem.shortName,
@@ -50,18 +50,18 @@ export class PurefrontOrderService extends OrderService {
           ),
           toArray(),
           concatMap(() => {
-            console.log(`Start preparation of tableOrder ${tableOrderId}`);
+            console.log(this.loggerPrefix+`Start preparation of tableOrder ${tableOrderId}`);
             return this.http.post(`${this.baseUrl}/tableOrders/${tableOrderId}/prepare`, {})
             }
           ),
           concatMap(() =>{
-            console.log(`mark tableOrder ${tableOrderId} as billed`);
+            console.log(this.loggerPrefix+`mark tableOrder ${tableOrderId} as billed`);
             return this.http.post(`${this.baseUrl}/tableOrders/${tableOrderId}/bill`, {})
           }
 
           ),
           map(() =>{
-            console.log("#### transaction completed ####"); return void 0})
+            console.log(this.loggerPrefix+"#### transaction completed ####"); return void 0})
         );
       })
     );
