@@ -27,7 +27,7 @@ export class BffOrderService extends OrderService {
   createOrder(): Observable<any> {
     // à changer avec le vrai appel HTTP
     console.log("Creating order in bff")
-    this.http.post<any>(`${this.baseUrl}/create-order`, {}).subscribe({
+    this.http.post<any>(`${this.baseUrl}`, {}).subscribe({
       next: (data: any) => {
         console.log("Order created in BFF, orderId: ", data.id)
         this.setOrderId(data.id);
@@ -45,6 +45,6 @@ export class BffOrderService extends OrderService {
   addBipperNumber(bipper: number): void {
     this.bipperNumber = bipper;
     console.log("sending bipper Id to BFF")
-    this.http.post<"">(`${this.baseUrl}/${this.getOrderId()}/add-bipper/${bipper}`, {}).subscribe();
+    this.http.post<"">(`${this.baseUrl}/${this.getOrderId()}/bipper/${bipper}`, {}).subscribe();
   }
 }
