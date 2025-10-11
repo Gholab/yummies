@@ -16,7 +16,6 @@ export class BipperComponent {
 
   onKeyClick(key: string | number) {
     if (key === '→') {
-      console.log('Submit value:', this.inputValue);
       this.inputValue = ''; // reset après validation
       return;
     }

@@ -33,7 +33,7 @@ export abstract class OrderService {
     for(let cartItem of this.cart){
       if(cartItem.menuItem._id === item.menuItem._id && (cartItem.howMany - Math.trunc(cartItem.howMany) ) === (item.howMany-Math.trunc(item.howMany)) ){
         cartItem.howMany = this.addKeepingDecimals(cartItem.howMany, Math.trunc(item.howMany));
-        console.log("incremented already present item")
+        console.log("locally incremented already present item: ", this.cart)
         return of();
       }
     }
@@ -68,7 +68,6 @@ export abstract class OrderService {
 
   getTotalOrderPrice(): number {
     return this.cart.reduce((total, item) => total + item.menuItem.price * Math.trunc(item.howMany), 0);
-    return 50.88;//TODO: renvoyer le vrai prix du panier
   }
 
   getCart() {

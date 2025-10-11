@@ -17,16 +17,16 @@
 
     getMenuItems(): Observable<MenuItem[]> {
       let unparsedMenuItems=this.http.get<UnparsedMenuItem[]>(`${this.baseUrl}/menus`);
-      console.log("unparsedMenuItems", unparsedMenuItems);
+      console.log("fetched menu items from backend :", unparsedMenuItems);
       let parsedMenuItems = unparsedMenuItems.pipe(map(items=>items.map(item=>{console.log(item);  return this.parseMenuItem(item)})));
-      console.log("parsedMenuItems", parsedMenuItems);
+      console.log("Parsed menu items : ", parsedMenuItems);
 
       return parsedMenuItems;
     }
 
     getMenuItemById(id: string): Observable<MenuItem | undefined> {
       let unparsedMenuItem=this.http.get<UnparsedMenuItem>(`${this.baseUrl}/menus/${id}`);
-
+      console.log(`Fetched menuItem of id ${id} and parsed it`)
       return unparsedMenuItem.pipe(map(item=>this.parseMenuItem(item)));
     }
 
