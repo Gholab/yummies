@@ -15,6 +15,7 @@ export class BffMenuService extends MenuService {
   }
 
   getMenuItems(): Observable<MenuItem[]> {
+    console.log("Fetching menu from BFF")
     return this.http.get<MenuItem[]>(`${this.baseUrl}`);
   }
 

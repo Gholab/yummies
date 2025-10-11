@@ -21,10 +21,12 @@ export class MenuService {
   }
 
   async getItems(): Promise<ParsedMenuItemDto[]> {
+    console.log("Fetching items from backend")
     const response = await this.http.get<UnparsedMenuItemDto[]>(`${this.baseUrl}/menus`).toPromise();
     if (!response || !response.data) {
       throw new Error('Erreur lors de la récupération du menu');
     }
+    console.log("items received, parsing and returning parsed Items")
     return response.data.map((item: UnparsedMenuItemDto) => this.parseMenuItem(item));
   }
 
