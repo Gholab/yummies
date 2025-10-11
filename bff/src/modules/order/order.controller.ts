@@ -7,7 +7,7 @@ import {FrontOrderItemDTO} from "./dto/frontOrderItemDTO";
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
-  @Post('/create-order')
+  @Post('/')
   create() {
     console.log('Received create order request');
     return this.ordersService.create();
@@ -18,7 +18,7 @@ export class OrdersController {
     return this.ordersService.completeOrder(orderId, items);
   }
 
-  @Post(':orderId/add-bipper/:bipper')
+  @Post(':orderId/bipper/:bipper')
   addBipper(@Param('orderId') orderId: string, @Param('bipper') bipper: number) {
     return this.ordersService.addBipper(orderId, Number(bipper));
   }
