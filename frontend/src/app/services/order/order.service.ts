@@ -40,7 +40,7 @@ export abstract class OrderService {
     }
     this.cart.push(item);
     this._cart$.next(this.cart);
-    console.log('Menu item added locally:', item.menuItem._id, this.cart);
+    console.log(`[FRONTEND] OrderService: Menu item added locally: ${item.menuItem._id}`, this.cart);
     return of();
   }
 
@@ -57,7 +57,7 @@ export abstract class OrderService {
     if (Math.trunc(this.cart[index].howMany) === 1) {
       const [removedItem] = this.cart.splice(index, 1);
       this._cart$.next(this.cart);
-      console.log('Menu item removed locally:', menuItemId, this.cart);
+      console.log(`[FRONTEND] OrderService: Menu item removed locally: ${menuItemId}`, this.cart);
       return true;
     } else {
       this.cart[index].howMany = this.subtractKeepingDecimals(this.cart[index].howMany, 1);

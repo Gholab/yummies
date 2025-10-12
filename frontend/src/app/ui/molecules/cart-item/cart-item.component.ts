@@ -20,7 +20,6 @@ export class CartItemComponent {
 
   }
   removeItem(){
-    console.log("Removing item with id: ", this.item.menuItem._id);
     // remove using id in cart
     this.orderService.removeMenuItem(this.item.menuItem._id);
   }

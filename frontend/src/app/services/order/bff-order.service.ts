@@ -26,10 +26,10 @@ export class BffOrderService extends OrderService {
 
   createOrder(): Observable<any> {
     // à changer avec le vrai appel HTTP
-    console.log("Creating order in bff")
+    console.log("[FRONTEND, BFF] OrderService: Creating order in BFF"); 
     this.http.post<any>(`${this.baseUrl}`, {}).subscribe({
       next: (data: any) => {
-        console.log("Order created in BFF, orderId: ", data.id)
+        console.log("[FRONTEND, BFF] OrderService: Order created in BFF, orderId: ", data.id)
         this.setOrderId(data.id);
       }
     });
@@ -37,14 +37,14 @@ export class BffOrderService extends OrderService {
   }
 
   completeOrder(): Observable<any> {
-    console.log("Complete order and send cart content to BFF")
+    console.log("[FRONTEND, BFF] OrderService: Sending cart content to BFF");
     return this.http.post<any>(`${this.baseUrl}/${this.getOrderId()}/complete`, [
       ...this.cart
     ]);
   }
   addBipperNumber(bipper: number): void {
     this.bipperNumber = bipper;
-    console.log("sending bipper Id to BFF")
+    console.log(`[FRONTEND, BFF] OrderService: Configured bipper (table) number in BFF : ${bipper}`);
     this.http.post<"">(`${this.baseUrl}/${this.getOrderId()}/bipper/${bipper}`, {}).subscribe();
   }
 }
