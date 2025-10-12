@@ -40,6 +40,14 @@ export class OrdersService {
     return order;
   }
 
+  private subtractKeepingDecimals(a: number, b: number): number {
+    const str = a.toString();
+    const decimalPart = str.split('.')[1];
+    const decimals = decimalPart ? decimalPart.length : 0;
+
+    return Number((a - b).toFixed(decimals));
+  }
+
   async completeOrder(id: string, orderItems: FrontOrderItemDTO[]) {
     const order = this.orders.find((o) => o.id === id);
     if (!order) {
@@ -61,7 +69,7 @@ export class OrdersService {
     let item: BackOrderItemDTO = {
         menuItemId: frontItem.menuItem._id,
         menuItemShortName: frontItem.menuItem.shortName,
-        howMany: frontItem.howMany
+        howMany: (frontItem.howMany>1 ? this.subtractKeepingDecimals(frontItem.howMany, 1) : frontItem.howMany)
     };
 
       if (!item.menuItemId || item.howMany <= 0) {
