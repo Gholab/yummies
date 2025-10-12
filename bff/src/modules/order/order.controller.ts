@@ -9,7 +9,7 @@ export class OrdersController {
 
   @Post('/')
   create() {
-    console.log('Received create order request');
+    // console.log('Received create order request');
     return this.ordersService.create();
   }
 
