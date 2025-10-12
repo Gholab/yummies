@@ -106,5 +106,5 @@ export abstract class OrderService {
       const decimals = decimalPart ? decimalPart.length : 0;
 
       return Number((a - b).toFixed(decimals));
-    }
+  }
 }
