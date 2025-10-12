@@ -7,7 +7,6 @@ export class MenuController {
 
   @Get('')
   getMenuItems() {
-    console.log('Received GET menu request');
     return this.menuService.getItems();
   }
 

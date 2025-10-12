@@ -20,17 +20,17 @@ export class PurefrontOrderService extends OrderService {
   createOrder(): Observable<void> {
     //EMPTY FOR PURE FRONT
     this.bipperNumber=0;
-    console.log("Order created locally");
+    console.log("[FRONTEND, PUREFRONT] OrderService: Creating order locally");
     return of();
   }
 
   addBipperNumber(bipper: number): void {
     this.bipperNumber = bipper;
-    console.log(`Configured bipper (table) number locally : ${bipper}`);
+    console.log(`[FRONTEND, PUREFRONT] OrderService: Configured bipper (table) number locally : ${bipper}`);
   }
 
   completeOrder(): Observable<void> {
-    console.log("#### Start sending tableOrder to backend ####")
+    console.log("[FRONTEND, PUREFRONT] OrderService: Start sending tableOrder to backend");
     return this.http.post(`${this.baseUrl}/tableOrders`, {
       tableNumber: this.bipperNumber,
       customersCount: 1
@@ -50,18 +50,19 @@ export class PurefrontOrderService extends OrderService {
           ),
           toArray(),
           concatMap(() => {
-            console.log(`Start preparation of tableOrder ${tableOrderId}`);
+            console.log(`[FRONTEND, PUREFRONT] OrderService: Start preparation of tableOrder ${tableOrderId}`);
             return this.http.post(`${this.baseUrl}/tableOrders/${tableOrderId}/prepare`, {})
             }
           ),
           concatMap(() =>{
-            console.log(`mark tableOrder ${tableOrderId} as billed`);
+            console.log(`[FRONTEND, PUREFRONT] OrderService: mark tableOrder ${tableOrderId} as billed`);
             return this.http.post(`${this.baseUrl}/tableOrders/${tableOrderId}/bill`, {})
           }
 
           ),
           map(() =>{
-            console.log("#### transaction completed ####"); return void 0})
+            console.log(`[FRONTEND, PUREFRONT] OrderService: tableOrder ${tableOrderId} is billed and complete`);
+            return void 0})
         );
       })
     );

@@ -5,6 +5,7 @@ import {HttpService} from '@nestjs/axios';
 import { first, firstValueFrom } from 'rxjs';
 import {OrderWithCustomersDTO} from "./dto/order-with-customers.dto";
 import {FrontOrderItemDTO} from "./dto/frontOrderItemDTO";
+import { logHttp } from 'src/common/utils/log-http';
 
 @Injectable()
 export class OrdersService {
@@ -22,8 +23,8 @@ export class OrdersService {
       items: [],
     };
     this.orders.push(newOrder);
-    console.log('New Order created, id:', newOrder.id);
-    console.log('Current orders:', this.orders);
+    console.log('[BFF] OrdersService: Created new order locally with id', newOrder.id);
+    console.log('[BFF] OrdersService: Current orders:', this.orders);
     return {
         ...newOrder,
       customersCount: undefined,
@@ -36,7 +37,7 @@ export class OrdersService {
       throw new NotFoundException(`Order with id ${id} not found`);
     }
     order.tableNumber = bipper;
-    console.log(`Set Bipper id ${bipper} for order of id ${id}`)
+    console.log(`[BFF] OrdersService: Locally set Bipper id ${bipper} for order of id ${id}`);
     return order;
   }
 
@@ -54,6 +55,7 @@ export class OrdersService {
       throw new NotFoundException(`Order with id ${id} not found`);
     }
     //étape 1: create order
+    const startCreate = Date.now();
     const createResponse = await firstValueFrom(
       this.http.post(
       `${this.baseUrl}/tableOrders`, {
@@ -61,8 +63,11 @@ export class OrdersService {
         customersCount: 1//arbitrary value
       })
     );
+    logHttp(createResponse, startCreate, {
+      tableNumber: order.tableNumber, customersCount: 1
+    })
     const tableOrderId = createResponse.data._id;
-    console.log('Table order created in backend with ID:', tableOrderId);
+    console.log('[BFF] OrdersService: Table order created in backend with ID:', tableOrderId);
 
     // étape 2: add items to order
     for (const frontItem of orderItems) {
@@ -76,26 +81,32 @@ export class OrdersService {
         console.warn(`Skipping invalid item: ${JSON.stringify(item)}`);
         continue;
       }
-      await firstValueFrom(
+      const startAddItem = Date.now();
+      const addItemResponse = await firstValueFrom(
         this.http.post(
           `${this.baseUrl}/tableOrders/${tableOrderId}`, item)
       );
-      console.log(`Added item ${item.menuItemId} to table order ${tableOrderId}`);
+      logHttp(addItemResponse, startAddItem, item);
+      // console.log(`Added item ${item.menuItemId} to table order ${tableOrderId}`);
     }
 
     // // étape 3: preparer la commande
-    await firstValueFrom(
+    const startPrepare = Date.now();
+    const prepareResponse = await firstValueFrom(
       this.http.post(
         `${this.baseUrl}/tableOrders/${tableOrderId}/prepare`, {})
     );
-    console.log(`Order ${tableOrderId} is now being prepared`);
+    logHttp(prepareResponse, startPrepare, {});
+    // console.log(`Order ${tableOrderId} is now being prepared`);
 
     // étape 4: finaliser la commande
-    await firstValueFrom(
+    const startBill = Date.now();
+    const billResponse = await firstValueFrom(
       this.http.post(
         `${this.baseUrl}/tableOrders/${tableOrderId}/bill`, {})
     );
-    console.log(`Order ${tableOrderId} set to billed`);
+    logHttp(billResponse, startBill, {});
+    // console.log(`Order ${tableOrderId} set to billed`);
 
     return { message: `Order ${id} completed and sent to dining service as table order ${tableOrderId}` };
 

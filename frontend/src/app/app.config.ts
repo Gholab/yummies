@@ -6,14 +6,17 @@ import {
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import {MENU_SERVICE} from './services/services.token';
-import {ORDER_SERVICE} from './services/services.token';
-import {BffMenuService} from './services/menu/bff-menu.service';
-import {PurefrontMenuService} from './services/menu/purefront-menu.service';
-import {environment} from '../environments/environment';
-import {provideHttpClient} from '@angular/common/http';
+import { MENU_SERVICE } from './services/services.token';
+import { ORDER_SERVICE } from './services/services.token';
+import { BffMenuService } from './services/menu/bff-menu.service';
+import { PurefrontMenuService } from './services/menu/purefront-menu.service';
+import { environment } from '../environments/environment';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BffOrderService } from './services/order/bff-order.service';
 import { PurefrontOrderService } from './services/order/purefront-order.service';
+import { HttpLoggerInterceptor } from './interceptors/http-logger.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
 
 export const BFF_PROVIDES = [
   { provide: MENU_SERVICE, useClass: BffMenuService },
@@ -31,8 +34,10 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(),
-    ...(environment.useBff ? BFF_PROVIDES : PUREFRONT_PROVIDES)
+    provideHttpClient(withInterceptorsFromDi()),
+    { provide: HTTP_INTERCEPTORS, useClass: HttpLoggerInterceptor, multi: true },
+      ...(environment.useBff ? BFF_PROVIDES : PUREFRONT_PROVIDES),
+
   ]
 };
 
