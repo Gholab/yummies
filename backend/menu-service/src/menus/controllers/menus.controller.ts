@@ -26,6 +26,7 @@ export class MenusController {
   @Get()
   @ApiOkResponse({ type: MenuItem, isArray: true })
   async getFullMenu(): Promise<MenuItem[]> {
+      console.log("GET REQUEST : requested menus")
     return this.menusService.findAll();
   }
 
