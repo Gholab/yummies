@@ -54,6 +54,7 @@ export class PreparationsController {
   @ApiUnprocessableEntityResponse({ type: ItemsToBeCookedNotFoundException, description: 'Some item names not found by the kitchen' })
   @Post()
   async requestNewPreparation(@Body() preparationRequestDto: PreparationRequestDto): Promise<Preparation[]> {
+      console.log("POST REQUEST : starting to prepare requested items")
     return await this.preparationsService.cookItems(preparationRequestDto);
   }
 
@@ -74,6 +75,7 @@ export class PreparationsController {
   @Post(':preparationId/takenToTable')
   async preparationIsServed(@Param() preparationIdParams: PreparationIdParams): Promise<Preparation> {
     // declaration by the waiter that the preparation is brought to the table
+      console.log("POST REQUEST : declare preparation served " + preparationIdParams.preparationId)
     return await this.preparationsService.isTakenForService(preparationIdParams.preparationId);
   }
 }
