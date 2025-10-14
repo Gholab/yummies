@@ -14,7 +14,6 @@ import {NgIf} from '@angular/common';
 import {MenuCategory} from '../../../models/menu-item.model';
 import {MENU_SERVICE} from '../../../services/services.token';
 import {MenuService} from '../../../services/menu/menu.service';
-import {resolve} from '@angular/compiler-cli';
 import {map, Observable} from 'rxjs';
 
 
@@ -39,7 +38,7 @@ export class MenuComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void{
     this.populateMenuItemsList().subscribe(() => {
-      console.log("list populated")
+      console.log("[Frontend] MenuComponent: Menu items loaded", this.menuItemsList);
     });
   }
 

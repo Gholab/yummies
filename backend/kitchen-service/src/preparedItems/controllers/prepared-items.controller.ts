@@ -61,6 +61,7 @@ export class PreparedItemsController {
   @HttpCode(200)
   @Post(':preparedItemId/start')
   async startToPrepareItemOnPost(@Param() preparedItemIdParams: PreparedItemIdParams): Promise<PreparedItem> {
+      console.log("POST REQUEST : started prepared item " + preparedItemIdParams.preparedItemId)
     return await this.preparedItemsService.startCookingItem(preparedItemIdParams.preparedItemId);
   }
 
@@ -72,6 +73,7 @@ export class PreparedItemsController {
   @HttpCode(200)
   @Post(':preparedItemId/finish')
   async finishToPrepareItemOnPost(@Param() preparedItemIdParams: PreparedItemIdParams): Promise<PreparedItem> {
+      console.log("POST REQUEST : finished prepared item " + preparedItemIdParams.preparedItemId)
     return await this.preparedItemsService.finishCookingItem(preparedItemIdParams.preparedItemId);
   }
 }

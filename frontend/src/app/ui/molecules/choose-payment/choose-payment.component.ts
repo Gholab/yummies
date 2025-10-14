@@ -30,12 +30,12 @@ export class ChoosePaymentComponent {
   finishPayment() {
     console.log("Finish payment clicked");
     this.orderService.completeOrder().subscribe(() => {
-      this.router.navigate(['/endPage']);
+      this.router.navigate(['/cashEndPage']);
     })
   }
 
   onePaymentOptionClick() {
-    console.log("One payment option clicked");
+    console.log('[Frontend] ChoosePaymentComponent: One payment option clicked');
     this.paymentService.setPaymentType(PaymentType.ONE_TIME);
     this.modalService.open(PaymentModalComponent, {
       price: this.orderService.getTotalOrderPrice(),
@@ -43,13 +43,13 @@ export class ChoosePaymentComponent {
     })
   }
   splitPaymentOptionClick() {
-    console.log("Split payment option clicked");
+    console.log('[Frontend] ChoosePaymentComponent: Split payment option clicked');
     this.paymentService.setPaymentType(PaymentType.SPLIT_PAYMENT);
     this.modalService.open(ChooseNumberOfPartsEqualDivisionComponent, {}, false);
   }
 
   customSplitPaymentOptionClick() {
-    console.log("Custom split payment option clicked");
+    console.log('[Frontend] ChoosePaymentComponent: Custom split payment option clicked');
     this.paymentService.setPaymentType(PaymentType.CUSTOMIZED_REPARTITION);
     this.paymentService.setTotalPaymentSteps(this.computeTotalItemsCount());
     this.nextStep.emit();

@@ -1,5 +1,5 @@
 <div *ngFor="let table of tables">
-  <div *ngIf="table.orderId" [class.ready]="table.ready" class="status-container">
+  <div *ngIf="table && table.orderId" [class.ready]="table.ready" class="status-container">
     <p>Order pour table n° {{ table.tableId }} </p>
     @if(table.ready) {
       <p>Prête !!</p>

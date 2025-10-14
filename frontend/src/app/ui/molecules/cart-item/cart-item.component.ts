@@ -17,10 +17,9 @@ export class CartItemComponent {
   constructor(@Inject(ORDER_SERVICE) private orderService: OrderService) {
   }
   ngOnInit() {
-    console.log("CartItemComponent ngOnInit with id: ", this.item.menuItem._id);
+
   }
   removeItem(){
-    console.log("Removing item with id: ", this.item.menuItem._id);
     // remove using id in cart
     this.orderService.removeMenuItem(this.item.menuItem._id);
   }

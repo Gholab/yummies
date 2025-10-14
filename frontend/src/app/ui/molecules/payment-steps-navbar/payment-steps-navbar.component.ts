@@ -32,6 +32,11 @@ export class PaymentStepsNavbarComponent {
   goToNextStep() {
     this.currentTabIndex++;
   }
+
+  goBackOneStep() {
+    this.currentTabIndex--;
+  }
+
   onPaymentTypeSelected(paymentType: PaymentType) {
     this.selectedPaymentType = paymentType;
     console.log('Selected payment type:', this.selectedPaymentType);

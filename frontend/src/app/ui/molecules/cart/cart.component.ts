@@ -66,6 +66,7 @@ export class CartComponent {
     }
   }
 
-
-
+  getTotalItemsInCart() {
+    return this.orderService.getTotalItemsCount();
+  }
 }

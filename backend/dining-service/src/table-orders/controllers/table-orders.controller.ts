@@ -59,7 +59,8 @@ export class TableOrdersController {
   @ApiUnprocessableEntityResponse({ type: TableOrderAlreadyBilledException, description: 'TableOrder is already billed' })
   @Post(':tableOrderId')
   async addMenuItemToTableOrder(@Param() getTableOrderParams: GetTableOrderParams, @Body() addMenuItemDto: AddMenuItemDto): Promise<TableOrder> {
-    return this.tableOrdersService.addOrderingLineToTableOrder(getTableOrderParams.tableOrderId, addMenuItemDto);
+      console.log("POST REQUEST : add Item " + addMenuItemDto.menuItemShortName + " to table order " + getTableOrderParams.tableOrderId)
+      return this.tableOrdersService.addOrderingLineToTableOrder(getTableOrderParams.tableOrderId, addMenuItemDto);
   }
 
   @ApiParam({ name: 'tableOrderId' })
@@ -68,6 +69,7 @@ export class TableOrdersController {
   @ApiUnprocessableEntityResponse({ type: TableOrderAlreadyBilledException, description: 'TableOrder is already billed' })
   @Post(':tableOrderId/prepare')
   async prepareTableOrder(@Param() getTableOrderParams: GetTableOrderParams): Promise<PreparationDto[]> {
+   console.log("POST REQUEST : prepare table order " + getTableOrderParams.tableOrderId)
     return this.tableOrdersService.sendItemsForPreparation(getTableOrderParams.tableOrderId);
   }
 
@@ -78,6 +80,7 @@ export class TableOrdersController {
   @HttpCode(200)
   @Post(':tableOrderId/bill')
   async billTableOrder(@Param() getTableOrderParams: GetTableOrderParams): Promise<TableOrder> {
+      console.log("POST REQUEST : bill table order " + getTableOrderParams.tableOrderId)
     return this.tableOrdersService.billOrder(getTableOrderParams.tableOrderId);
   }
 }

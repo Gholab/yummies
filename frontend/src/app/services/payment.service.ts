@@ -25,6 +25,7 @@ export class PaymentService {
   isOrderFullyPaid(): boolean {
     //TODO : il est possible que cette logique ne soit pas suffisante.
     //TODO (peut être): pour la répartition customisée, vérifier que le panier ne contient plus d'items à payer ???
+    console.log(`[FRONTEND] PaymentService: Checking if order is fully paid`);
     return this.orderService.getTotalOrderPrice() <= this.totalAmountPaid;
   }
 
@@ -50,9 +51,11 @@ export class PaymentService {
 
   getPriceToPay(): number {
     if(this.paymentType === PaymentType.SPLIT_PAYMENT) {
+      console.log(`[FRONTEND] PaymentService: Getting price to pay for split payment`);
       return this.orderService.getTotalOrderPrice() / this.totalPaymentSteps;// = "divise le prix total par le nombre de gens qui payent"
     }
     else if(this.paymentType === PaymentType.CUSTOMIZED_REPARTITION) {
+      console.log(`[FRONTEND] PaymentService: Getting price to pay for customized repartition: ${this.customRepartitionSelectedItemsPrice}`);
       return this.customRepartitionSelectedItemsPrice;
     }
     else {
@@ -62,6 +65,7 @@ export class PaymentService {
   }
 
   startPayment() {
+    console.log(`[FRONTEND] PaymentService: Starting payment of type ${PaymentType[this.paymentType]}`);
     return this.modalService.open(PaymentModalComponent, {
       price: this.getPriceToPay(),
       paymentType: this.getPaymentType(),
@@ -71,6 +75,7 @@ export class PaymentService {
   }
 
   waitForPayment(){
+    console.log(`[FRONTEND] PaymentService: Waiting for payment to be processed...`);
     return new Promise(resolve => setTimeout(() => {
       this.totalAmountPaid+=this.customRepartitionSelectedItemsPrice;
       resolve(void 0);

@@ -17,7 +17,7 @@
       <app-choose-payment (nextStep)="goToNextStep()"></app-choose-payment>
     }
     @case (2) {
-      <app-custom-payment ></app-custom-payment>
+      <app-custom-payment (goBack)="goBackOneStep()"></app-custom-payment>
     }
     @default {
       <p>Étape inconnue</p>

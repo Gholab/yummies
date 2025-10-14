@@ -50,7 +50,9 @@ export class PaymentModalComponent implements AfterViewInit{
         this.modalService.close(true);
 
         if (this.paymentService.isOrderFullyPaid()) {
-          this.router.navigate(['/endPage']);
+          this.orderService.completeOrder().subscribe(() => {
+            this.router.navigate(['/endPage']);
+          });
         }
 
         break;
