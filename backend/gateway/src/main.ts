@@ -30,6 +30,10 @@ async function bootstrap() {
     target: `http://${dependenciesConfig.dining_service_url_with_port}`,
     changeOrigin: true,
   }));
+  app.use('/reservation', createProxyMiddleware({
+    target: "http://localhost:3003",
+    changeOrigin: true
+  }));
 
   // Run the app
   const appPort = configService.get('app.port');
