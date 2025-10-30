@@ -3,7 +3,7 @@ services:
     image: "nestjs-restaurant/reservation-service"
     restart: always
     ports:
-      - 3003:3000
+      - 3003:3003
     depends_on:
       - mongo_db_reservation
     networks:
