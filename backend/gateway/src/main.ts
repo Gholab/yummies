@@ -31,7 +31,7 @@ async function bootstrap() {
     changeOrigin: true,
   }));
   app.use('/reservation', createProxyMiddleware({
-    target: "http://localhost:3003",
+    target: "http://reservation-service:3003",
     changeOrigin: true
   }));
 
