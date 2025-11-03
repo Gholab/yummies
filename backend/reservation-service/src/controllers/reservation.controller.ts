@@ -1,7 +1,6 @@
 import { Reservation } from "../schemas/reservation.schema";
 import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Res } from "@nestjs/common";
-import { ReservationService } from "../services/reservation.service.ts";
-import { NoReservationFoundErrorDto } from "../exceptions/no-reservation-found-error.dto";
+import { ReservationService } from "../services/reservation.service";
 
 
 @Controller('reservations') // /reservations
