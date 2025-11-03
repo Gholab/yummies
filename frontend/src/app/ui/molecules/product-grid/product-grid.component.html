@@ -5,7 +5,10 @@
   }
   <div class="grid">
     @for (item of items; track item._id) {
-      <card-item [item]="item"></card-item>
+      <card-item [item]="item"
+                 [isSelected]="item._id === selectedItemId"
+                 [isGroupMode]="type === 'group'"
+        (itemSelected)="onItemSelected($event)"></card-item>
     }
   </div>
 </div>
