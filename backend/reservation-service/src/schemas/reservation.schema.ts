@@ -6,6 +6,8 @@ export type ReservationDocument = Reservation & Document;
 
 @Schema()
 export class Reservation {
+    @Prop()
+    companyName: String;
 
     @Prop()
     code: number;
