@@ -10,6 +10,7 @@ services:
       - ${MENU_SERVICE}
       - ${KITCHEN_SERVICE}
       - ${DINING_SERVICE}
+      - reservation-service
     environment:
       - MENU_SERVICE_URL_WITH_PORT=${MENU_SERVICE}:3000
       - KITCHEN_SERVICE_URL_WITH_PORT=${KITCHEN_SERVICE}:3000
