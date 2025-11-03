@@ -13,7 +13,12 @@ import {MenuItem} from '../../../models/menu-item.model';
 })
 export class ProductGridComponent {
   @Input() title = 'Produits';
+  @Input() type = '';
   @Input() items: ReadonlyArray<MenuItem> = [];
+  @Input() subtitle: string = '';
   trackById = (_: number, item: MenuItem) => item?._id ?? _;
+
 }
+
+
 

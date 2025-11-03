@@ -1,0 +1,13 @@
+<div class="carousel-background">
+  <app-title [text]="'✨'+title" size="s" color="primary" class="carousel-title"></app-title>
+  <div class="carousel-container">
+    <div class="carousel-track">
+      @for (item of items; track item){
+        <card-item
+          [item]="item"
+          class="carousel-card">
+        </card-item>
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+@use "../../../../styles.scss" as *;
+
+.carousel-background{
+ background-color: $background-color-primary;
+}
+.carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  // padding: 10px 0;
+  background-color: $background-color-primary;
+
+  // Dégradés sur les bords
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 80px; // largeur de la zone de dégradé
+    height: 100%;
+    z-index: 2;
+    pointer-events: none; // ne bloque pas les clics sur les cartes
+  }
+
+  &::before {
+    left: 0;
+    background: linear-gradient(to right, $background-color-primary 0%, transparent 100%);
+  }
+
+  &::after {
+    right: 0;
+    background: linear-gradient(to left, $background-color-primary 0%, transparent 100%);
+  }
+}
+
+.carousel-track {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 10px;
+  margin-bottom: 20px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .carousel-card {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+  }
+}
+
+.carousel-container {
+  scroll-snap-type: x mandatory;
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+
+.carousel-title{
+  padding-left: 100px;
+  margin-right: 100px;
+}

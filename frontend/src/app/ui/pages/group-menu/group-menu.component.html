@@ -1,0 +1,18 @@
+<div class="title-container">
+  <app-title text="Yummies" size="l" color="primary"></app-title>
+  <app-title text="Group Name" size="s" color="primary"></app-title>
+</div>
+
+<div class="group-menu-content">
+  <app-product-grid title="Entrees" subtitle="✨Inclus dans le menu du groupe :" type="group" [items]="MOCK_GROUP_ITEMS"></app-product-grid>
+  <app-card-item-carousel title="En extra" [items]=MOCK_ITEMS></app-card-item-carousel>
+
+  <app-product-grid title="Plats" subtitle="✨Inclus dans le menu du groupe :" type="group" [items]="MOCK_GROUP_ITEMS"></app-product-grid>
+  <app-card-item-carousel title="En extra" [items]=MOCK_ITEMS></app-card-item-carousel>
+
+  <app-product-grid title="Desserts" subtitle="✨Inclus dans le menu du groupe :" type="group" [items]="MOCK_GROUP_ITEMS"></app-product-grid>
+  <app-card-item-carousel title="En extra" [items]=MOCK_ITEMS></app-card-item-carousel>
+</div>
+
+<app-cart></app-cart>
+
