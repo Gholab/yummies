@@ -47,13 +47,12 @@ export class StartupLogicService implements OnApplicationBootstrap {
         } catch (e) {}
         try {
             await this.addMenuItem(JSON.stringify({
-                displayName: "Tarte aux poireaux et lardons",
-                description: "Une tarte salée croustillante avec poireaux fondants et lardons fumés.",
+                displayName: "Tarte aux poireaux",
+                description: "Une tarte salée croustillante avec poireaux fondants",
                 ingredients: [
                     { name: "Pâte brisée", range: "0-1-1" },
                     { name: "Poireaux", range: "0-1-1" },
                     { name: "Crème fraîche", range: "0-1-1" },
-                    { name: "Lardons", range: "0-1-3" },
                     { name: "Oeufs", range: "0-1-1" }
                 ],
                 allergenes: ["gluten", "oeufs", "lactose"]
