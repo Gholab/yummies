@@ -1,0 +1,13 @@
+@use "../../../../styles" as *;
+
+.group-code-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.error-msg {
+  font-size: $title-size-small;
+  font-family: $text-font;
+  color: $text-color-primary;
+}

@@ -16,8 +16,9 @@ import {ModalService} from './services/modal.service';
 import {EditItemModalComponent} from './ui/molecules/edit-item-modal/edit-item-modal.component';
 import {ModalComponent} from './ui/molecules/modal/modal.component';
 import {LandingPageComponent} from './ui/pages/landing-page-component/landing-page.component';
-import { BipperComponent } from './ui/molecules/bipper/bipper.component';
 import {Endpage} from './ui/pages/endpage/endpage';
+import {GroupCodeModalComponent} from './ui/molecules/group-code-modal/group-code-modal.component';
+import {ChooseTypeComponent} from './ui/pages/choose-type/choose-type.component';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +30,8 @@ import {Endpage} from './ui/pages/endpage/endpage';
             PaymentStepsNavbarComponent, ChoosePaymentComponent,
             PaymentOptionComponent, PaymentModalComponent,
             PriceDisplayComponent,LandingPageComponent,
-            BipperComponent, Endpage],
+            Endpage, GroupCodeModalComponent,
+            ChooseTypeComponent],
   templateUrl: './app.html',
 })
 export class App implements OnInit {
