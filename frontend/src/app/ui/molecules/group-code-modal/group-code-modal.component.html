@@ -1,0 +1,5 @@
+<div class="group-code-container">
+  <app-title text="Rentrez votre code de groupe" size="m"></app-title>
+  <span *ngIf="hasError" class="error-msg">Le code que vous avez rentré est invalide.</span>
+  <app-numpad [modeBipper]="false" (nextStep)="enableErrorMsg()"></app-numpad>
+</div>

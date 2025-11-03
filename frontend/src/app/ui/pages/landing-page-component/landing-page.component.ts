@@ -18,7 +18,7 @@ export class LandingPageComponent {
 
   onClick(){
     this.orderService.createOrder();
-    this.router.navigate(["/menu"]);
+    this.router.navigate(["/chooseType"]);
   }
 
 }
