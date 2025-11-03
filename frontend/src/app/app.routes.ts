@@ -7,6 +7,8 @@ import {UpdatingStatusComponent} from './ui/pages/updating-status/updating-statu
 import {Endpage} from './ui/pages/endpage/endpage';
 import {CashEndpage} from './ui/pages/cash-endpage/cash-endpage.component';
 import {GroupMenuComponent} from './ui/pages/group-menu/group-menu.component';
+import {ChooseTypeComponent} from './ui/pages/choose-type/choose-type.component';
+
 
 export const routes: Routes = [
   {
@@ -16,6 +18,10 @@ export const routes: Routes = [
   {
     path: 'menu/group',
     component: GroupMenuComponent
+  },
+  {
+    path: "chooseType",
+    component: ChooseTypeComponent
   },
   {
     path: 'payment',

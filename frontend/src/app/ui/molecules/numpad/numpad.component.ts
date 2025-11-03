@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Output } from '@angular/core';
+import {Component, EventEmitter, Inject, Input, Output} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DigitButtonComponent } from '../../atoms/digit-button/digit-button.component';
 import { OrderService } from '../../../services/order/order.service';
@@ -7,6 +7,8 @@ import { ORDER_SERVICE } from '../../../services/services.token';
 import {ButtonComponent} from '../../atoms/button/button.component';
 import {TitleComponent} from '../../atoms/title/title.component';
 import {ErrorMessage} from '../error-message/error-message.component';
+import {GroupService} from '../../../services/group.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-numpad',
@@ -16,25 +18,49 @@ import {ErrorMessage} from '../error-message/error-message.component';
   styleUrls: ['./numpad.component.scss']
 })
 export class NumpadComponent {
-  constructor(@Inject(ORDER_SERVICE) private orderService: OrderService, private modalService: ModalService) {}
+  constructor(@Inject(ORDER_SERVICE) private orderService: OrderService,
+              private modalService: ModalService,
+              private groupService: GroupService,
+              private router: Router) {}
+  @Input() modeBipper = true;
   @Output() nextStep = new EventEmitter<void>();
   inputValue: string = '';
   keys: (number)[] = [1,2,3,4,5,6,7,8,9,0];
 
   onKeyClick(key: string | number) {
     if (key === '→') {
-      if( Number(this.inputValue) < 0 || Number(this.inputValue) > 50){
-        this.modalService.open(ErrorMessage, {
-          text: "Veuillez entrer un numéro de bipper valide !",
-        }).then(r => {this.inputValue = '';});
-        return
+      if(this.modeBipper){
+        this.setBipperNumber();
+      }else{
+        this.tryGroupCode();
       }
-      let numValue = parseInt(this.inputValue, 10);
-      this.orderService.addBipperNumber(numValue);
-      this.inputValue = ''; // reset après validation
-      this.nextStep.emit();
+      return;
     }
     this.inputValue += key.toString();
+  }
+
+  setBipperNumber(){
+    if( Number(this.inputValue) < 0 || Number(this.inputValue) > 50){
+      this.modalService.open(ErrorMessage, {
+        text: "Veuillez entrer un numéro de bipper valide !",
+      }).then(r => {this.inputValue = '';});
+      return
+    }
+    let numValue = parseInt(this.inputValue, 10);
+    this.orderService.addBipperNumber(numValue);
+    this.inputValue = ''; // reset après validation
+    this.nextStep.emit();
+  }
+
+  tryGroupCode(){
+    this.groupService.submitCode(parseInt(this.inputValue, 10)).subscribe({
+      next: value => {
+        this.router.navigate(['/menu/group']);
+      },
+      error: err => {
+        this.nextStep.emit();
+      }
+    })
   }
 
   suppressInput(){
