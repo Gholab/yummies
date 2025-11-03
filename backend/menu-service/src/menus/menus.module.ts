@@ -5,10 +5,12 @@ import { MenuItem, MenuItemSchema } from './schemas/menu-item.schema';
 
 import { MenusController } from './controllers/menus.controller';
 import { MenusService } from './services/menus.service';
+import {ReservationProxyService} from "./services/reservation-proxy.service";
+import {HttpModule} from "@nestjs/axios";
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: MenuItem.name, schema: MenuItemSchema }])],
+  imports: [MongooseModule.forFeature([{ name: MenuItem.name, schema: MenuItemSchema }]), HttpModule],
+  providers: [MenusService, ReservationProxyService],
   controllers: [MenusController],
-  providers: [MenusService],
 })
 export class MenusModule {}
