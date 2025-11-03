@@ -19,14 +19,43 @@ export class ReservationProxyService {
             let reservation = reservationResponse.data;
             console.log("the reservation")
             console.log(reservation)
+
+
             for(let mealCategory in reservation.menu) {//mealCategory = "starters", "mains", "desserts", "_id"
                 if (mealCategory !== "_id") {
                     reservation.menu[mealCategory]=await Promise.all(reservation.menu[mealCategory]
-                        .map(async (mealShortname) => await this.menuService.findByShortname(mealShortname)));
+                        .map(async (mealShortname) => {
+                            let menuItem=await this.menuService.findByShortname(mealShortname);
+                            menuItem.price=0;//make sure the client will not pay it
+                            return menuItem;
+                        }));
                 }
             }
 
-            return reservation;
+            let allProducts = await this.menuService.findAll();
+
+            let extras = {
+                desserts: [],
+                mains: [],
+                starters: []
+            };
+
+            for(let mealCategory in extras) {
+                extras[mealCategory]=allProducts.filter((menuItem) => {
+                    //"slice(0, -1)" enlève le "s" à la fin du nom de catégorie. "desserts" => "dessert"
+                    return menuItem.category === mealCategory.toUpperCase().slice(0, -1) &&
+                        !reservation.menu[mealCategory].some((reservationItem) => reservationItem.shortName === menuItem.shortName);
+                });
+            }
+
+            return {
+                groupStarters: reservation.menu["starters"],
+                groupMains: reservation.menu["mains"],
+                groupDesserts: reservation.menu["desserts"],
+                extraStarters: extras.starters,
+                extraMains: extras.mains,
+                extraDesserts: extras.desserts
+            };
         }
         catch(e) {
             /* istanbul ignore next */
