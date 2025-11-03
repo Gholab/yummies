@@ -55,6 +55,7 @@ export class NumpadComponent {
   tryGroupCode(){
     this.groupService.submitCode(parseInt(this.inputValue, 10)).subscribe({
       next: value => {
+        this.modalService.close(true);
         this.router.navigate(['/menu/group']);
       },
       error: err => {
