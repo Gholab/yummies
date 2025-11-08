@@ -3,6 +3,7 @@
 </div>
 
 <div class="reservation-list-content">
+  <app-button  (click)="addReservation()" class="add-reservation" text="Ajouter une reservation" color="secondary" size="s"></app-button>
   @for (r of reservations; track r.reservationCode) {
     <app-reservation-item
       [reservation]="r"

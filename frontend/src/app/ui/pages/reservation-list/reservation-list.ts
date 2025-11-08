@@ -1,19 +1,23 @@
 import { Component } from '@angular/core';
 import {Reservation, ReservationItem} from '../../molecules/reservation-item/reservation-item';
 import {TitleComponent} from '../../atoms/title/title.component';
+import {ButtonComponent} from '../../atoms/button/button.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-reservation-list',
   imports: [
     ReservationItem,
-    TitleComponent
+    TitleComponent,
+    ButtonComponent
   ],
   templateUrl: './reservation-list.html',
   standalone: true,
   styleUrl: './reservation-list.scss'
 })
 export class ReservationList {
-
+  constructor(private router:Router) {
+  }
 
   reservations = [
     {
@@ -35,6 +39,10 @@ export class ReservationList {
   onPayReservation(reservation: Reservation) {
     console.log('💰 Paiement de la réservation :', reservation);
     alert(`Paiement lancé pour ${reservation.companyName}`);
+  }
+
+  addReservation(){
+    this.router.navigate(['/reservation/new']);
   }
 
 }
