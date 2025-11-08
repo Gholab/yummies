@@ -30,6 +30,10 @@ export abstract class OrderService {
     });
   }
 
+  setCustomerCount(n: number){
+    this.customerCount = n;
+  }
+
   addMenuItem(item: CartItem): Observable<void> {
     for(let cartItem of this.cart){
       if(cartItem.menuItem._id === item.menuItem._id && (cartItem.howMany - Math.trunc(cartItem.howMany) ) === (item.howMany-Math.trunc(item.howMany)) ){

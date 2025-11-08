@@ -55,6 +55,9 @@ export class NumpadComponent {
   tryGroupCode(){
     this.groupService.submitCode(parseInt(this.inputValue, 10)).subscribe({
       next: value => {
+        this.orderService.setCustomerCount(value.code);
+        this.groupService.setGroupName(value.companyName);
+        this.groupService.setGroupCode(parseInt(this.inputValue, 10));
         this.modalService.close(true);
         this.router.navigate(['/menu/group']);
       },
