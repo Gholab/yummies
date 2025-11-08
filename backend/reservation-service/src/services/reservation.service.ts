@@ -15,14 +15,17 @@ export class ReservationService {
         
     }
 
-
     async create(reservation: Reservation) : Promise<Reservation> {
         const newRes = new this.reservationModel(reservation);
         return newRes.save();
     }
 
-    async findByCode(code: number): Promise<Reservation> {
-        let res = await this.reservationModel.findOne({code: code}).exec();
+    async findAll() {
+        return this.reservationModel.find().lean();
+    }
+
+    async findByCode(code: number) {
+        let res = await this.reservationModel.findOne({code: code}).lean();
         if(res === null){
             throw new NoReservationFoundErrorDto(code);
         }

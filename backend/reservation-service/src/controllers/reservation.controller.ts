@@ -8,14 +8,19 @@ export class ReservationController {
     constructor(private reservationService: ReservationService) {
     }
 
+    @Get()
+    async getAllReservations(@Res() response) {
+        return response.status(HttpStatus.OK).json(await this.reservationService.findAll());
+    }
+
 
     @Get("/:code")
     async getReservationByCode(@Res() response, @Param('code') code: number) {
         try {
             let reservation = await this.reservationService.findByCode(code);
-            return response.status(HttpStatus.OK).json({ reservation });
-        } catch (e: any) {
-            return response.status(HttpStatus.NOT_FOUND).json({ e });
+            return response.status(HttpStatus.OK).json({...reservation});
+        }catch (e: any){
+            return response.status(HttpStatus.NOT_FOUND).json({e});
         }
     }
 
