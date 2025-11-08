@@ -33,6 +33,89 @@ export class StartupLogicService implements OnApplicationBootstrap {
     async onApplicationBootstrap() {
         try {
             await this.addMenuItem(JSON.stringify({
+                displayName: "Homemade foie gras terrine",
+                description: "Terrine de foie gras maison, servie avec du pain d'épices et une confiture de figues.",
+                ingredients: [
+                    { name: "Foie gras", range: "0-1-2" },
+                    { name: "Pain d'épices", range: "1-1-2" },
+                    { name: "Confiture de figues", range: "0-1-2" }
+                ],
+                allergenes: ["lactose", "gluten", "sulfites"]
+            }), "foie gras", 18, CategoryEnum.STARTER, 'https://cdn.pixabay.com/photo/2016/11/12/15/28/restaurant-1819024_960_720.jpg');
+        } catch (e) {
+        }
+        try {
+            await this.addMenuItem(JSON.stringify({
+                displayName: "Soft-boiled egg breaded with breadcrumbs and nuts",
+                description: "Œuf mollet pané aux chapelure et noix, servi avec une sauce légère.",
+                ingredients: [
+                    { name: "Œuf", range: "0-1-2" },
+                    { name: "Chapelure", range: "1-1-2" },
+                    { name: "Noix", range: "0-1-1" }
+                ],
+                allergenes: ["oeufs", "gluten", "noix"]
+            }), "soft-boiled egg", 16, CategoryEnum.STARTER, 'https://cdn.pixabay.com/photo/2019/06/03/22/06/eggs-4250077_960_720.jpg');
+        } catch (e) {
+        }
+        try {
+            await this.addMenuItem(JSON.stringify({
+                displayName: "Goat cheese foam from 'Valbonne goat farm'",
+                description: "Mousse de fromage de chèvre de la ferme de chèvres de Valbonne.",
+                ingredients: [
+                    { name: "Fromage de chèvre", range: "0-1-2" },
+                    { name: "Crème", range: "1-1-2" },
+                    { name: "Oeufs", range: "0-1-1" },
+                    { name: "Figues", range: "0-1-1" }
+                ],
+                allergenes: ["lactose", "oeufs"]
+            }), 'goat cheese', 15, CategoryEnum.STARTER, 'https://cdn.pixabay.com/photo/2016/09/15/19/24/salad-1672505_960_720.jpg');
+        } catch (e) {
+        }
+        try {
+            await this.addMenuItem('Homemade dill salmon gravlax', 'salmon', 16, CategoryEnum.STARTER, 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg');
+            await this.addMenuItem(JSON.stringify({
+                displayName: "Homemade dill salmon gravlax",
+                description: "Saumon mariné à l'aneth fait maison, servi avec une sauce à la moutarde et à l'aneth.",
+                ingredients: [
+                    { name: "Saumon", range: "0-1-2" },
+                    { name: "Aneth", range: "0-1-1" },
+                    { name: "Moutarde", range: "0-1-1" }
+                ],
+                allergenes: ["poisson", "sulfites"]
+            }), 'salmon', 16, CategoryEnum.STARTER, 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg');
+        } catch (e) {
+        }
+        try {
+            await this.addMenuItem('Crab maki with fresh mango', 'crab maki', 16, CategoryEnum.STARTER, 'https://cdn.pixabay.com/photo/2016/03/05/22/23/asian-1239269_960_720.jpg');
+            await this.addMenuItem(JSON.stringify({
+                displayName: "Crab maki with fresh mango",
+                description: "Maki de crabe frais avec mangue fraîche, avocat et concombre.",
+                ingredients: [
+                    { name: "Crabe", range: "0-0-1" },
+                    { name: "Mangue", range: "0-1-1" },
+                    { name: "Avocat", range: "0-1-1" },
+                    { name: "Concombre", range: "1-1-1" }
+                ],
+                allergenes: ["poisson", "sulfites"]
+            }), 'crab maki', 16, CategoryEnum.STARTER, 'https://cdn.pixabay.com/photo/2016/03/05/22/23/asian-1239269_960_720.jpg');
+        } catch (e) {
+        }
+        try {
+            await this.addMenuItem('Burrata Mozzarella', 'burrata', 16, CategoryEnum.STARTER, 'https://cdn.pixabay.com/photo/2021/02/08/12/40/burrata-5994616_960_720.jpg');
+            await this.addMenuItem(JSON.stringify({
+                displayName: "Burrata Mozzarella",
+                description: "Fromage burrata mozzarella crémeux servi avec des tomates cerises rôties et du basilic frais.",
+                ingredients: [
+                    { name: "Burrata", range: "0-1-2" },
+                    { name: "Tomates cerises", range: "0-1-1" },
+                    { name: "Basilic", range: "0-1-1" }
+                ],
+                allergenes: ["lactose"]
+            }), 'burrata', 16, CategoryEnum.STARTER, 'https://cdn.pixabay.com/photo/2021/02/08/12/40/burrata-5994616_960_720.jpg');
+        } catch (e) {
+        }
+        try {
+            await this.addMenuItem(JSON.stringify({
                 displayName: "Risotto aux champignons sauvages",
                 description: "Crémeux risotto cuisiné avec des champignons de saison et du parmesan.",
                 ingredients: [

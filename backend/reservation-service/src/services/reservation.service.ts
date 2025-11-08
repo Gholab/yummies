@@ -45,8 +45,8 @@ export class ReservationService {
             throw new NoReservationFoundErrorDto(-1);
         }
     }
-    async getOrderCountForReservation(code: number) {
-        const diningServiceUrl = `http://dining-service:3000/tableOrders/reservation/${code}/orderCount`;
+    async getOrderCountForReservation(reservation: Reservation) {
+        const diningServiceUrl = `http://dining-service:3000/tableOrders/reservation/${reservation.code}/orderCount`;
         let orderCount: number;
         try {
             const response = await firstValueFrom(this.httpService.get(diningServiceUrl));
@@ -56,6 +56,40 @@ export class ReservationService {
             orderCount = 0;
         }
         return orderCount;
+    }
+    async getRealPriceForMenuItem(menuItemShortname: string) {
+        const menuServiceUrl = `http://menu-service:3000/menu/${menuItemShortname}`;
+        let price: number;
+        try {
+            const response = await firstValueFrom(this.httpService.get(menuServiceUrl));
+            price = response.data.price;
+        } catch (error) {
+            console.error(`[RESERVATION SERVICE] Impossible de récupérer le prix depuis menu-service pour l'item ${menuItemShortname} :`, error.message);
+            price = 0;
+        }
+        return price;
+    }
+    async getRealPriceForReservation(reservation: Reservation) {
+        let starterAvgPrice = 0;
+        let mainAvgPrice = 0;
+        let dessertAvgPrice = 0;
+        reservation.menu.starters.forEach(async (starter) => {
+            const realPrice = await this.getRealPriceForMenuItem(starter);
+            starterAvgPrice += realPrice;
+        });
+        starterAvgPrice = starterAvgPrice / reservation.menu.starters.length;
+        reservation.menu.mains.forEach(async (main) => {
+            const realPrice = await this.getRealPriceForMenuItem(main);
+            mainAvgPrice += realPrice;
+        });
+        mainAvgPrice = mainAvgPrice / reservation.menu.mains.length;
+        reservation.menu.desserts.forEach(async (dessert) => {
+            const realPrice = await this.getRealPriceForMenuItem(dessert);
+            dessertAvgPrice += realPrice;
+        });
+        dessertAvgPrice = dessertAvgPrice / reservation.menu.desserts.length;
+        reservation.realPrice = starterAvgPrice + mainAvgPrice + dessertAvgPrice;
+        return reservation.realPrice;
     }
 
     async calculatePriceForReservation(code: number){
@@ -70,9 +104,9 @@ export class ReservationService {
             totalPrice: 0,
         };
         // get order count from dining-service
-        res.paiementInfo.orderCount = await this.getOrderCountForReservation(code);
-        // TODO: recupere le real price depuis le menu-service
-        res.realPrice = 0;
+        res.paiementInfo.orderCount = await this.getOrderCountForReservation(res);
+        // get real price for reservation
+        res.realPrice = await this.getRealPriceForReservation(res);
 
         const diffPercent = ((res.customerEstimation - res.paiementInfo.orderCount)) * 100
         let totalPrice = 0;
