@@ -1,0 +1,14 @@
+<div class="reservation-list-title-container">
+  <app-title text="Liste des reservations" size="m" color="primary"></app-title>
+</div>
+
+<div class="reservation-list-content">
+  @for (r of reservations; track r.reservationCode) {
+    <app-reservation-item
+      [reservation]="r"
+      (payReservation)="onPayReservation($event)">
+    </app-reservation-item>
+  } @empty {
+    <p class="empty">Aucune réservation enregistrée.</p>
+  }
+</div>

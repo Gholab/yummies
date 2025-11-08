@@ -9,6 +9,7 @@ import {CashEndpage} from './ui/pages/cash-endpage/cash-endpage.component';
 import {GroupMenuComponent} from './ui/pages/group-menu/group-menu.component';
 import {ChooseTypeComponent} from './ui/pages/choose-type/choose-type.component';
 import {CreateReservation} from './ui/pages/create-reservation/create-reservation';
+import {ReservationList} from './ui/pages/reservation-list/reservation-list';
 
 export const routes: Routes = [
   {
@@ -52,8 +53,8 @@ export const routes: Routes = [
     component: CreateReservation
 
   },
-  /*{
+  {
     path: "reservations",
-    component: Reservation
-  }*/
+    component: ReservationList
+  }
 ];
