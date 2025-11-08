@@ -17,11 +17,12 @@ import { MenuItemShortNameAlreadyExistsException } from '../exceptions/menu-item
 
 import { MenusService } from '../services/menus.service';
 import { MenuItemIdNotFoundException } from '../exceptions/menu-item-id-not-found.exception';
+import {ReservationProxyService} from "../services/reservation-proxy.service";
 
 @ApiTags('menus')
 @Controller('/menus')
 export class MenusController {
-  constructor(private readonly menusService: MenusService) {}
+  constructor(private readonly menusService: MenusService, private readonly reservationProxyService: ReservationProxyService) {}
 
   @Get()
   @ApiOkResponse({ type: MenuItem, isArray: true })
@@ -36,6 +37,11 @@ export class MenusController {
   @ApiNotFoundResponse({ type: MenuItemIdNotFoundException, description: 'MenuItem not found' })
   async getMenuItem(@Param() getMenuItemParams: GetMenuItemParams): Promise<MenuItem> {
     return this.menusService.findOne(getMenuItemParams.menuItemId);
+  }
+
+  @Get("/reservations/:reservationCode")
+  async getReservationMenu(@Param() params: {reservationCode: number}) {
+      return await this.reservationProxyService.getReservationByCode(params.reservationCode);
   }
 
   @ApiBody({ type: AddMenuItemDto })
