@@ -48,8 +48,15 @@ export class NumpadComponent {
     }
     let numValue = parseInt(this.inputValue, 10);
     this.orderService.addBipperNumber(numValue);
-    this.inputValue = ''; // reset après validation
-    this.nextStep.emit();
+    if(this.orderService.getTotalOrderPrice() === 0){
+      this.orderService.completeOrder().subscribe(() => {
+        this.router.navigate(['/endPage']);
+      });
+    }else{
+      this.inputValue = ''; // reset après validation
+      this.nextStep.emit();
+    }
+
   }
 
   tryGroupCode(){
@@ -58,6 +65,7 @@ export class NumpadComponent {
         this.orderService.setCustomerCount(value.code);
         this.groupService.setGroupName(value.companyName);
         this.groupService.setGroupCode(parseInt(this.inputValue, 10));
+        this.groupService.setBookedTables(value.tableNumbers);
         this.modalService.close(true);
         this.router.navigate(['/menu/group']);
       },

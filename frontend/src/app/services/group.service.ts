@@ -41,4 +41,10 @@ export class GroupService {
   getGroupCode(){
     return this.groupCode;
   }
+
+  resetGroup(){
+    this.bookedTables = [];
+    this.groupCode = -1;
+    this.groupName = "";
+  }
 }
