@@ -40,7 +40,6 @@ export class Reservation {
     paiementInfo?: {
         payed: boolean;
         orderCount: number;
-        pricePerOrder: number;
         totalPrice: number;
     }
 }
