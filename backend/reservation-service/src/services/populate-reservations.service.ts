@@ -34,6 +34,7 @@ export class StartupReservationService implements OnApplicationBootstrap {
         },
         tableNumbers: [5, 6],
         menuPrice: 25,
+        customerEstimation: 10
       });
 
       await this.createReservation({
@@ -46,6 +47,7 @@ export class StartupReservationService implements OnApplicationBootstrap {
         },
         tableNumbers: [7, 8, 9],
         menuPrice: 26,
+        customerEstimation: 15
       });
 
       await this.createReservation({
@@ -58,6 +60,7 @@ export class StartupReservationService implements OnApplicationBootstrap {
         },
         tableNumbers: [8, 9],
         menuPrice: 20,
+        customerEstimation: 12
       });
 
       await this.createReservation({
@@ -70,6 +73,7 @@ export class StartupReservationService implements OnApplicationBootstrap {
         },
         tableNumbers: [11, 12],
         menuPrice: 17,
+        customerEstimation: 15
       });
 
       await this.createReservation({
@@ -82,6 +86,7 @@ export class StartupReservationService implements OnApplicationBootstrap {
         },
         tableNumbers: [1, 2],
         menuPrice: 28,
+        customerEstimation: 20
       });
 
       console.log('[Reservation Service] Initial reservations populated successfully!');
