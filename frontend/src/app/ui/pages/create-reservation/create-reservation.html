@@ -1,0 +1,68 @@
+<div class="create-reservation-container">
+  <div class="title-container">
+    <app-title text="Créer une Réservation" size="l" color="primary"></app-title>
+  </div>
+  <div class="create-reservation-content">
+    <div class="form-section">
+      <app-input
+        label="Nom de l'entreprise"
+        placeholder="Ex : OpenAI France"
+        [(value)]="companyName">
+      </app-input>
+
+      <app-input
+        label="Code de la réservation"
+        placeholder="Ex : RES-2025"
+        [(value)]="reservationCode">
+      </app-input>
+
+      <app-input
+        label="Nombre de personnes attendues"
+        placeholder="Ex : 25"
+        type="number"
+        [(value)]="expectedGuests">
+      </app-input>
+
+      <app-input
+        label="Prix du menu (€)"
+        placeholder="Ex : 35"
+        type="number"
+        [(value)]="menuPrice">
+      </app-input>
+
+    </div>
+
+    <div class="menu-selection">
+      <app-product-grid
+        title="Entrées"
+        subtitle="Choisissez jusqu'à 3 entrées"
+        type="group"
+        [maxSelectableItems]="3"
+        [items]="starters"
+        (itemSelected)="toggleSelection($event)">
+      </app-product-grid>
+
+
+      <app-product-grid
+        title="Plats"
+        subtitle="Choisissez jusqu'à 3 plats"
+        type="group"
+        [items]="mains"
+        [maxSelectableItems]="3"
+        (itemSelected)="toggleSelection($event)">
+      </app-product-grid>
+
+      <app-product-grid
+        title="Desserts"
+        subtitle="Choisissez jusqu'à 3 desserts"
+        type="group"
+        [items]="desserts"
+        [maxSelectableItems]="3"
+        (itemSelected)="toggleSelection($event)">
+      </app-product-grid>
+
+    </div>
+
+    <app-button size="m" color="primary" text="Enregistrer la reservation" (click)="saveReservation()" ></app-button>
+  </div>
+</div>

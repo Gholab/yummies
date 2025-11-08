@@ -1,0 +1,37 @@
+@use "../../../../styles.scss" as *;
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  margin-bottom: 16px;
+
+  label {
+    font-weight: bold;
+    font-family: $text-font;
+    color: $text-color-primary;
+    font-size: $paragraph-size-medium;
+  }
+
+  input {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background: $background-color-secondary;
+    color: $text-color-primary;
+    font-size: $paragraph-size-medium;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:focus {
+      outline: none;
+      border-color: $text-color-secondary;
+      box-shadow: 0 0 0 2px rgba($text-color-secondary, 0.2);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+}

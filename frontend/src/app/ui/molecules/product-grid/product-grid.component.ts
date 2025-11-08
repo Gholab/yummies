@@ -1,4 +1,4 @@
-import {Component, Input, ChangeDetectionStrategy, Inject} from '@angular/core';
+import {Component, Input, ChangeDetectionStrategy, Inject, EventEmitter, Output} from '@angular/core';
 import {TitleComponent} from '../../atoms/title/title.component';
 import {CardItemComponent} from '../cardItem/cardItem.component';
 import {MenuItem} from '../../../models/menu-item.model';
@@ -19,35 +19,53 @@ export class ProductGridComponent {
   @Input() type = '';
   @Input() items: ReadonlyArray<MenuItem> = [];
   @Input() subtitle: string = '';
+  @Input() maxSelectableItems = 1; // par défaut, une seule sélection
 
-  selectedItemId: string | null = null;
+  @Output() itemSelected = new EventEmitter<MenuItem>();
+
+  selectedItemIds: string[] = [];
+
   constructor(@Inject(ORDER_SERVICE) private orderService: OrderService) {}
   trackById = (_: number, item: MenuItem) => item?._id ?? _;
 
-
   onItemSelected(item: MenuItem) {
     console.log("Item selected !!!! : ", item);
-    if (this.selectedItemId === item._id) {
-      console.log("Déselection : ", item);
-      // Déselection
-      this.selectedItemId = null;
-      this.orderService.removeMenuItem(item._id); // ✅ supprime du panier
-    } else {
-      console.log("Sélection : this.selectedItemId", this.selectedItemId);
-      // Sélection d'un nouvel item
-      if (this.selectedItemId) {
-        // Si un autre était sélectionné → le retirer du panier
-        this.orderService.removeMenuItem(this.selectedItemId);
-      }
-      this.selectedItemId = item._id;
 
-      // ✅ ajout dans le panier
+    const isSelected = this.selectedItemIds.includes(item._id);
+
+    // 🔸 Si déjà sélectionné → on le retire
+    if (isSelected) {
+      console.log("Déselection : ", item);
+      this.selectedItemIds = this.selectedItemIds.filter(id => id !== item._id);
+      this.orderService.removeMenuItem(item._id);
+    }
+    // 🔸 Si nouveau clic → tentative d’ajout
+    else {
+      // Si on n’est pas en mode group → reset la sélection
+      if (this.type !== 'group') {
+        if (this.selectedItemIds.length > 0) {
+          this.selectedItemIds.forEach(id => this.orderService.removeMenuItem(id));
+        }
+        this.selectedItemIds = [item._id];
+      }
+      // Si mode group → vérifier qu’on n’a pas atteint le max
+      else {
+        if (this.selectedItemIds.length >= this.maxSelectableItems) {
+          console.warn(`Nombre max d’items sélectionnés atteint (${this.maxSelectableItems}).`);
+          return;
+        }
+        this.selectedItemIds.push(item._id);
+      }
+
+      // ✅ Ajout dans le panier
       const cartItem: CartItem = {
         menuItem: item,
         howMany: this.computeItemDefaultHowMany(item)
       };
       this.orderService.addMenuItem(cartItem).subscribe(() => {});
     }
+
+    this.itemSelected.emit(item);
   }
 
   computeItemDefaultHowMany(item: MenuItem) {
