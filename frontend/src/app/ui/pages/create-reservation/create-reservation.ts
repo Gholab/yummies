@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import {ChangeDetectorRef, Component, Inject} from '@angular/core';
 import { TitleComponent } from '../../atoms/title/title.component';
 import { ProductGridComponent } from '../../molecules/product-grid/product-grid.component';
 import { ButtonComponent} from '../../atoms/button/button.component';
 import { FormsModule } from '@angular/forms';
-import { MenuItem} from '../../../models/menu-item.model';
+import {MenuCategory, MenuItem} from '../../../models/menu-item.model';
 import {InputComponent} from '../../atoms/input/input';
+import {map, Observable} from 'rxjs';
+import {MENU_SERVICE} from '../../../services/services.token';
+import {MenuService} from '../../../services/menu/menu.service';
 
 @Component({
   selector: 'app-create-reservation',
@@ -26,6 +29,17 @@ export class CreateReservation {
   selectedPlats: MenuItem[] = [];
   selectedDesserts: MenuItem[] = [];
 
+  menuItemsList: MenuItem[] = [];
+  constructor(private cdr: ChangeDetectorRef,
+              @Inject(MENU_SERVICE) private menuService: MenuService) {
+  }
+
+  ngOnInit(): void{
+    this.populateMenuItemsList().subscribe((list) => {
+      this.menuItemsList = list;
+      console.log("[Frontend] MenuComponent: Menu items loaded", this.menuItemsList);
+    });
+  }
 
 
   // 🟦 Gestion des sélections (limité à 3 par catégorie)
@@ -49,7 +63,9 @@ export class CreateReservation {
 
 
   get starters(): MenuItem[] {
-    return this.allItems.filter(i => i.category === 'STARTER');
+    console.log(this.menuItemsList);
+
+    return this.menuItemsList.filter(i => i.category === 'STARTER');
   }
 
   get mains(): MenuItem[] {
@@ -99,6 +115,10 @@ export class CreateReservation {
 
     console.log('✅ Réservation enregistrée :', reservation);
     alert('Réservation créée avec succès !');
+  }
+
+  private populateMenuItemsList(): Observable<MenuItem[]> {
+    return this.menuService.getMenuItems();
   }
 
   allItems: MenuItem[] = [
