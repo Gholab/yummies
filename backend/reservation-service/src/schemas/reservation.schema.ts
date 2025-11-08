@@ -29,6 +29,20 @@ export class Reservation {
 
     @Prop()
     menuPrice: number;
+
+    @Prop({required:false})
+    realPrice?: number;
+
+    @Prop()
+    customerEstimation: number;
+
+    @Prop({required:false})
+    paiementInfo?: {
+        payed: boolean;
+        orderCount: number;
+        pricePerOrder: number;
+        totalPrice: number;
+    }
 }
 
 
