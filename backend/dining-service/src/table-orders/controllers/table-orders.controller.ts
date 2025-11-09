@@ -91,6 +91,7 @@ export class TableOrdersController {
   async getTotalOrdersForReservation(@Param('reservationCode') reservationCode: number): Promise<{ totalOrders: number }> {
     console.log("GET REQUEST : total orders for reservation " + reservationCode);
     const totalOrders = await this.tableOrdersService.getTotalOrdersForReservation(reservationCode);
+    console.log("RESPONSE : total orders for reservation " + reservationCode + " is " + totalOrders);
     return { totalOrders };
   }
 

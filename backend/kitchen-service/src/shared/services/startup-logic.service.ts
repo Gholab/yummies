@@ -37,6 +37,24 @@ export class StartupLogicService implements OnApplicationBootstrap {
     try {
       await this.addRecipe('tarte poireaux', PostEnum.COLD_DISH,['Faire la tarte', 'La manger'], 16);
     } catch (e) {
+    }try {
+      await this.addRecipe('foie gras', PostEnum.COLD_DISH,['Sortir le foie gras', 'Le manger'], 18);
+    } catch (e) {
+    }try {
+      await this.addRecipe('soft-boiled egg', PostEnum.COLD_DISH,['Sortir les oeufs', 'Le manger'], 16);
+    } catch (e) {
+    }try {
+      await this.addRecipe('goat cheese', PostEnum.COLD_DISH,['Sortir les oeufs', 'Le manger'], 15);
+    } catch (e) {
+    }try {
+      await this.addRecipe('salmon', PostEnum.HOT_DISH,['Sortir les oeufs', 'Le manger'], 16);
+    } catch (e) {
+    }try {
+      await this.addRecipe('crab maki', PostEnum.COLD_DISH,['Sortir les oeufs', 'Le manger'], 16);
+    } catch (e) {
+    }try {
+      await this.addRecipe('burrata', PostEnum.COLD_DISH,['Sortir les oeufs', 'Le manger'], 16);
+    } catch (e) {
     }
     try {
       await this.addRecipe('poulet curry', PostEnum.HOT_DISH,['Take goat cheese', 'Cook it!'], 15);

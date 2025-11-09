@@ -34,8 +34,8 @@ export class CreateReservation {
 
   menuItemsList: MenuItem[] = [];
   constructor(private cdr: ChangeDetectorRef,
-              @Inject(MENU_SERVICE) private menuService: MenuService, 
-              private router:Router
+              @Inject(MENU_SERVICE) private menuService: MenuService,
+              private router:Router,
               private groupService: GroupService) {
 
   }
@@ -152,7 +152,7 @@ export class CreateReservation {
     return this.menuService.getMenuItems();
   }
 
-  private goBack(){
+  goBack(){
     this.router.navigate(['/reservations']);
   }
 
@@ -160,5 +160,5 @@ export class CreateReservation {
   private getBookedTables() {
     return this.bookedTables.split(",").map(s => parseInt(s))
   }
-  
+
 }

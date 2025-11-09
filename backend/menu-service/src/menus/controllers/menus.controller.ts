@@ -44,7 +44,7 @@ export class MenusController {
       return await this.reservationProxyService.getReservationByCode(params.reservationCode);
   }
 
-  @Get(":shortName")
+  @Get("/shortname/:shortName")
   async getMenuItemByShortName(@Param("shortName") shortName: string): Promise<MenuItem> {
     return this.menusService.findByShortname(shortName);
   }

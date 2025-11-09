@@ -2,14 +2,15 @@
   <div class="reservation-info">
     <div class="reservation-header">
       <app-title [text]="reservation.companyName" size="s" color="primary" class="company"></app-title>
-      <span class="code">#{{ reservation.reservationCode }}</span>
+      <span class="code">#{{ reservation.code }}</span>
     </div>
 
     <div class="reservation-details">
-      <p><strong>Invités attendus :</strong> {{ reservation.expectedGuests }}</p>
-      <p><strong>Participants :</strong> {{ reservation.actualGuests }}</p>
-      <p><strong>Prix du menu :</strong> {{ reservation.menuPrice | currency:'EUR' }}</p>
-      <p><strong>Total :</strong> {{ totalPrice | currency:'EUR' }}</p>
+      <p><strong>Invités attendus :</strong> {{ reservation.customerEstimation }}</p>
+      <p><strong>Participants :</strong> {{ reservation.paiementInfo.orderCount }}</p>
+      <p><strong>Prix du menu sans réduction :</strong> {{ reservation.realPrice | currency:'EUR' }}</p>
+      <p><strong>Prix du menu avec réduction :</strong> {{ reservation.menuPrice | currency:'EUR' }}</p>
+      <p><strong>Total à Payer:</strong> {{ reservation.paiementInfo.totalPrice | currency:'EUR' }}</p>
     </div>
   </div>
 
@@ -18,6 +19,7 @@
       text="Payer la réservation >"
       color="primary"
       size="xs"
+      [disabled]="reservation.paiementInfo.payed"
       (click)="onPayClick()">
     </app-button>
   </div>

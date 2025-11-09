@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {Reservation} from '../ui/molecules/reservation-item/reservation-item';
 
 @Injectable({ providedIn: 'root' })
 export class GroupService {
@@ -56,5 +57,13 @@ export class GroupService {
     menu: { starters: string[]; mains: string[]; desserts: string[] }
   }) {
     return this.http.post(`${this.baseUrl}`, reservation);
+  }
+
+  computeAndGetReservations() {
+    return this.http.get<Reservation[]>(`${this.baseUrl}/computed`);
+  }
+
+  payForReservation(code: number) {
+    return this.http.post(`${this.baseUrl}/${code}/bill`, {});
   }
 }

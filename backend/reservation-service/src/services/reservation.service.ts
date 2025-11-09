@@ -46,7 +46,7 @@ export class ReservationService {
         }
     }
     async getOrderCountForReservation(reservation: Reservation) {
-        const diningServiceUrl = `http://dining-service:3000/tableOrders/reservation/${reservation.code}/orderCount`;
+        const diningServiceUrl = `http://dining-service:3000/tableOrders/reservation/${reservation.code}/ordersCount`;
         let orderCount: number;
         try {
             const response = await firstValueFrom(this.httpService.get(diningServiceUrl));
@@ -58,44 +58,50 @@ export class ReservationService {
         return orderCount;
     }
     async getRealPriceForMenuItem(menuItemShortname: string) {
-        const menuServiceUrl = `http://menu-service:3000/menu/${menuItemShortname}`;
+        const menuServiceUrl = `http://menu-service:3000/menus/shortname/${menuItemShortname}`;
         let price: number;
         try {
             const response = await firstValueFrom(this.httpService.get(menuServiceUrl));
             price = response.data.price;
+            console.log(`[RESERVATION SERVICE] Prix récupéré depuis menu-service pour l'item ${menuItemShortname} : ${price}`);
         } catch (error) {
             console.error(`[RESERVATION SERVICE] Impossible de récupérer le prix depuis menu-service pour l'item ${menuItemShortname} :`, error.message);
             price = 0;
         }
+        console.log(`[RESERVATION SERVICE] Prix final pour l'item ${menuItemShortname} : ${price}`);
         return price;
     }
-    async getRealPriceForReservation(reservation: Reservation) {
-        let starterAvgPrice = 0;
-        let mainAvgPrice = 0;
-        let dessertAvgPrice = 0;
-        reservation.menu.starters.forEach(async (starter) => {
-            const realPrice = await this.getRealPriceForMenuItem(starter);
-            starterAvgPrice += realPrice;
-        });
-        starterAvgPrice = starterAvgPrice / reservation.menu.starters.length;
-        reservation.menu.mains.forEach(async (main) => {
-            const realPrice = await this.getRealPriceForMenuItem(main);
-            mainAvgPrice += realPrice;
-        });
-        mainAvgPrice = mainAvgPrice / reservation.menu.mains.length;
-        reservation.menu.desserts.forEach(async (dessert) => {
-            const realPrice = await this.getRealPriceForMenuItem(dessert);
-            dessertAvgPrice += realPrice;
-        });
-        dessertAvgPrice = dessertAvgPrice / reservation.menu.desserts.length;
-        reservation.realPrice = starterAvgPrice + mainAvgPrice + dessertAvgPrice;
-        return reservation.realPrice;
+
+    private async averagePrice(shortnames: string[]): Promise<number> {
+        if (!shortnames || shortnames.length === 0) return 0;
+        const prices = await Promise.all(shortnames.map((n) => this.getRealPriceForMenuItem(n)));
+        const sum = prices.reduce((acc, p) => acc + p, 0);
+        return sum / shortnames.length;
+    }
+    async getRealPriceForReservation(reservation: Reservation): Promise<number> {
+        const starterAvgPrice = await this.averagePrice(reservation.menu.starters);
+        console.log(`SERVICE : starter average price for reservation with code ${reservation.code} is ${starterAvgPrice}`);
+
+        const mainAvgPrice = await this.averagePrice(reservation.menu.mains);
+        console.log(`SERVICE : main average price for reservation with code ${reservation.code} is ${mainAvgPrice}`);
+
+        const dessertAvgPrice = await this.averagePrice(reservation.menu.desserts);
+        console.log(`SERVICE : dessert average price for reservation with code ${reservation.code} is ${dessertAvgPrice}`);
+
+        const totalPrice = starterAvgPrice + mainAvgPrice + dessertAvgPrice;
+        console.log(`SERVICE : total real price for reservation with code ${reservation.code} is ${totalPrice}`);
+        return totalPrice;
     }
 
     async calculatePriceForReservation(code: number){
         let res = await this.reservationModel.findOne({code: code}).exec();
         if (res === null){
-            throw new NoReservationFoundErrorDto(-1);
+            throw new NoReservationFoundErrorDto(code);
+        }
+        if(res.paiementInfo){ //don't modify if reservation is payed
+            if(res.paiementInfo.payed){
+                return res.paiementInfo.totalPrice;
+            }
         }
         // initialize paiementInfo 
         res.paiementInfo = {
@@ -107,12 +113,12 @@ export class ReservationService {
         res.paiementInfo.orderCount = await this.getOrderCountForReservation(res);
         // get real price for reservation
         res.realPrice = await this.getRealPriceForReservation(res);
-
-        const diffPercent = ((res.customerEstimation - res.paiementInfo.orderCount)) * 100
+        console.log(`SERVICE : real price for reservation with code ${code} is ${res.realPrice}`);
+        const diffPercent = (100 - ((res.paiementInfo.orderCount / res.customerEstimation) * 100))
         let totalPrice = 0;
         if ( Math.abs(diffPercent) <= this.TOLERANCE_PERCENTAGE ){
             totalPrice = res.menuPrice * res.paiementInfo.orderCount;
-        } else if ( diffPercent < -this.TOLERANCE_PERCENTAGE ){
+        } else if ( diffPercent > this.TOLERANCE_PERCENTAGE ){
             totalPrice = res.realPrice * res.paiementInfo.orderCount;
         } else {
             const extraPeople = res.paiementInfo.orderCount - res.customerEstimation;
@@ -121,5 +127,28 @@ export class ReservationService {
         res.paiementInfo.totalPrice = totalPrice;
         await res.save();
         return totalPrice;
+    }
+
+    async calculatePricesAndGetReservations(){
+        const reservations = await this.reservationModel.find().lean();
+        for(let reservation of reservations){
+            console.log("Computing Price for Reservation with code : "+ reservation.code);
+            await this.calculatePriceForReservation(reservation.code);
+        }
+        return this.reservationModel.find().lean();
+    }
+
+    async markReservationAsPaid(code: number) {
+        let res = await this.reservationModel.findOne({code: code}).exec();
+        if (res === null){
+            throw new NoReservationFoundErrorDto(code);
+        }
+        if(res.paiementInfo){
+            res.paiementInfo.payed = true;
+        }else{
+            throw new NoReservationFoundErrorDto(code)
+        }
+
+        await res.save();
     }
 }

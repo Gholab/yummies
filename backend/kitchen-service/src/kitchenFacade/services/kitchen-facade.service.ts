@@ -51,6 +51,7 @@ export class KitchenFacadeService {
 
     const createPreparedItemCalls = [];
     recipeWithItemToBeCookedList.forEach((recipeWithItemToBeCooked) => {
+      console.log("howMany Received : "+ recipeWithItemToBeCooked.itemToBeCooked.howMany);
       for (let i = 0; i < recipeWithItemToBeCooked.itemToBeCooked.howMany; i += 1) {
         createPreparedItemCalls.push(
           this.createPreparedItem(
