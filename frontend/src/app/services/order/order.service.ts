@@ -19,6 +19,7 @@ export abstract class OrderService {
   resetOrder() {
     this.cart = [];
     this.bipperNumber=0;
+    this.customerCount = 1;
     this._cart$.next(this.cart);
   }
 
