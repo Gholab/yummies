@@ -13,7 +13,10 @@
       <div class="ingredient-tab">
         @for (ingredient of Object.keys(ingredientStatus); track ingredient){
           <div class="ingredient-selector">
-            <span style="font-size: x-large">{{ ingredient }}</span> <app-number-selector [min]="ingredientStatus[ingredient].min" [(current)]="ingredientStatus[ingredient].current" [max]="ingredientStatus[ingredient].max"></app-number-selector>
+            <span style="font-size: x-large">{{ ingredient }}</span>
+            @if(!onlyView){
+              <app-number-selector [min]="ingredientStatus[ingredient].min" [(current)]="ingredientStatus[ingredient].current" [max]="ingredientStatus[ingredient].max"></app-number-selector>
+            }
           </div>
         }
       </div>
@@ -34,9 +37,12 @@
     </ng-template>
     <app-tabs [tabs]="tabItems"></app-tabs>
   </div>
+
+  @if(!onlyView){
   <div class="how-many">
     <span>Nombre à ajouter: </span>
     <app-number-selector [min]="1" [(current)]="howMany" [max]="10"></app-number-selector>
   </div>
   <app-button text="Ajouter au panier" (click)="onAddToCart()" size="m"></app-button>
+  }
 </div>

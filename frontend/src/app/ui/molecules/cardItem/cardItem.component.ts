@@ -22,6 +22,7 @@ export class CardItemComponent {
   @Input() inlineMode : boolean = false;
   @Input() isSelected: boolean = false;
   @Input() isGroupMode: boolean = false;
+  @Input() onlyView: boolean = false;
 
   @Output() itemSelected = new EventEmitter<MenuItem>();
 
@@ -33,7 +34,7 @@ export class CardItemComponent {
     event.stopPropagation();
     event.preventDefault();
     this.modalService.open(EditItemModalComponent, {
-      menuItem: this.item})
+      menuItem: this.item, onlyView: this.onlyView})
   }
 
   addItemToCart() {

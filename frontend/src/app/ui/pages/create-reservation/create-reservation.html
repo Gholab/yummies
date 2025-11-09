@@ -42,7 +42,8 @@
         type="group"
         [maxSelectableItems]="3"
         [items]="starters"
-        (itemSelected)="toggleSelection($event)">
+        (itemSelected)="toggleSelection($event)"
+        [onlyViewItems]="true">
       </app-product-grid>
 
 
@@ -52,7 +53,8 @@
         type="group"
         [items]="mains"
         [maxSelectableItems]="3"
-        (itemSelected)="toggleSelection($event)">
+        (itemSelected)="toggleSelection($event)"
+        [onlyViewItems]="true">
       </app-product-grid>
 
       <app-product-grid
@@ -61,7 +63,8 @@
         type="group"
         [items]="desserts"
         [maxSelectableItems]="3"
-        (itemSelected)="toggleSelection($event)">
+        (itemSelected)="toggleSelection($event)"
+        [onlyViewItems]="true">
       </app-product-grid>
 
     </div>

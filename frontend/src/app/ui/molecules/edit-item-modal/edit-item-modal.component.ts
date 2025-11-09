@@ -13,10 +13,12 @@ import {CartItem} from '../../../models/cart-item-model';
   selector: 'app-edit-item-modal',
   imports: [ButtonComponent, TabsComponent, NumberSelectorComponent, TitleComponent],
   templateUrl: './edit-item-modal.component.html',
+  standalone: true,
   styleUrl: './edit-item-modal.component.scss'
 })
 export class EditItemModalComponent {
   @Input() menuItem! : MenuItem;
+  @Input() onlyView : boolean = false;
   @ViewChild("ingredients", { static: true }) ingredientsTab!: TemplateRef<unknown>;
   @ViewChild("allergenes", { static: true }) allergeneTab!: TemplateRef<unknown>;
   tabItems: TabItem[] = [];

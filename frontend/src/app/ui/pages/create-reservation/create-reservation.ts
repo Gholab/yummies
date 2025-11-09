@@ -122,6 +122,4 @@ export class CreateReservation {
   goBack(){
     this.router.navigate(['/reservations']);
   }
-
-
 }
