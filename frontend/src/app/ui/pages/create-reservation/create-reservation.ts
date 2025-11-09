@@ -139,8 +139,8 @@ export class CreateReservation {
         this.expectedGuests = null;
         this.menuPrice= null;
         this.bookedTables = "";
-        console.log('✅ Réservation enregistrée :', reservation)
-        alert('Réservation créée avec succès !');
+        console.log('✅ Réservation enregistrée :', reservation);
+        this.goBack();
       },
       error: err => {
         console.log("ERROR : Couldn't create reservation : ", err);

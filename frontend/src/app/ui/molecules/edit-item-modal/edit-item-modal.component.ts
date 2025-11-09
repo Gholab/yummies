@@ -68,7 +68,9 @@ export class EditItemModalComponent {
       this.orderService.addMenuItem(itemForCart);
     }
     this.modalService.close(true);
-    this.itemAdded.emit(itemForCart);
+    if( this.group ){
+      this.itemAdded.emit(itemForCart);
+    }
   }
 
   get disableAddButton(): boolean {
