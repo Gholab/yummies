@@ -10,10 +10,9 @@ import { ReservationModule } from './modules/reservation.module';
 @Module({
   imports: [
     MongooseModule.forRoot("mongodb://mongo_db_reservation:27017/yummies"),
-    MongooseModule.forFeature([{ name: Reservation.name, schema: ReservationSchema }]),
     ReservationModule
   ],
-  controllers: [AppController, ReservationController],
-  providers: [AppService, ReservationService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule { }
