@@ -10,7 +10,7 @@ import { NgClass } from '@angular/common';
 })
 export class ButtonComponent {
   @Input() text: string = '';
-  @Input() size: 'fullwidth' | 'l' | 'm' | 's' = 'l';
+  @Input() size: 'fullwidth' | 'l' | 'm' | 's' | "xs" = 'l';
   @Input() color: 'primary' | 'secondary' = 'primary';
   @Input() icon: string | null = null;
   @Input() disabled : boolean = false;

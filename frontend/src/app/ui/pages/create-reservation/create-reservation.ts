@@ -8,6 +8,7 @@ import {InputComponent} from '../../atoms/input/input';
 import {map, Observable} from 'rxjs';
 import {MENU_SERVICE} from '../../../services/services.token';
 import {MenuService} from '../../../services/menu/menu.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-reservation',
@@ -31,7 +32,7 @@ export class CreateReservation {
 
   menuItemsList: MenuItem[] = [];
   constructor(private cdr: ChangeDetectorRef,
-              @Inject(MENU_SERVICE) private menuService: MenuService) {
+              @Inject(MENU_SERVICE) private menuService: MenuService, private router:Router) {
   }
 
   ngOnInit(): void{
@@ -117,6 +118,9 @@ export class CreateReservation {
 
   private populateMenuItemsList(): Observable<MenuItem[]> {
     return this.menuService.getMenuItems();
+  }
+  goBack(){
+    this.router.navigate(['/reservations']);
   }
 
 
