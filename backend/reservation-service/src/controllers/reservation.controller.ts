@@ -13,6 +13,15 @@ export class ReservationController {
         return response.status(HttpStatus.OK).json(await this.reservationService.findAll());
     }
 
+    @Get("/computed")
+    async computePriceAndGetReservations(@Res() response){
+        try{
+            let computedReservations = await this.reservationService.calculatePricesAndGetReservations();
+            return response.status(HttpStatus.OK).json(computedReservations);
+        } catch (e: any) {
+            return response.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ e });
+        }
+    }
 
     @Get("/:code")
     async getReservationByCode(@Res() response, @Param('code') code: number) {
@@ -55,6 +64,18 @@ export class ReservationController {
             let totalPrice = await this.reservationService.calculatePriceForReservation(code);
             return response.status(HttpStatus.OK).json({ totalPrice });
         } catch (e: any) {
+            return response.status(HttpStatus.NOT_FOUND).json({ e });
+        }
+    }
+
+
+
+    @Post("/:code/bill")
+    async payForReservation(@Res() response, @Param('code') code: number){
+        try{
+            await this.reservationService.markReservationAsPaid(code);
+            return response.status(HttpStatus.OK).json({});
+        }catch (e) {
             return response.status(HttpStatus.NOT_FOUND).json({ e });
         }
     }

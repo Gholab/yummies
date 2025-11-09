@@ -95,7 +95,12 @@ export class ReservationService {
     async calculatePriceForReservation(code: number){
         let res = await this.reservationModel.findOne({code: code}).exec();
         if (res === null){
-            throw new NoReservationFoundErrorDto(-1);
+            throw new NoReservationFoundErrorDto(code);
+        }
+        if(res.paiementInfo){ //don't modify if reservation is payed
+            if(res.paiementInfo.payed){
+                return res.paiementInfo.totalPrice;
+            }
         }
         // initialize paiementInfo 
         res.paiementInfo = {
@@ -121,5 +126,28 @@ export class ReservationService {
         res.paiementInfo.totalPrice = totalPrice;
         await res.save();
         return totalPrice;
+    }
+
+    async calculatePricesAndGetReservations(){
+        const reservations = await this.reservationModel.find().lean();
+        for(let reservation of reservations){
+            console.log("Computing Price for Reservation with code : "+ reservation.code);
+            await this.calculatePriceForReservation(reservation.code);
+        }
+        return this.reservationModel.find().lean();
+    }
+
+    async markReservationAsPaid(code: number) {
+        let res = await this.reservationModel.findOne({code: code}).exec();
+        if (res === null){
+            throw new NoReservationFoundErrorDto(code);
+        }
+        if(res.paiementInfo){
+            res.paiementInfo.payed = true;
+        }else{
+            throw new NoReservationFoundErrorDto(code)
+        }
+
+        await res.save();
     }
 }

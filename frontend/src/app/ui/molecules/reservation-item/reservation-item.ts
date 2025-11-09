@@ -5,10 +5,16 @@ import {TitleComponent} from '../../atoms/title/title.component';
 
 export interface Reservation {
   companyName: string;
-  reservationCode: string;
-  expectedGuests: number;
-  actualGuests: number;
-  menuPrice: number;
+  code: number;
+  customerEstimation: number;
+  paiementInfo: {
+    payed : boolean,
+    orderCount: number,
+    totalPrice: number
+  };
+  realPrice: number,
+  menuPrice: number,
+  tableNumbers: number[]
 }
 
 @Component({
@@ -22,10 +28,8 @@ export class ReservationItem{
   @Input() reservation!: Reservation;
   @Output() payReservation = new EventEmitter<Reservation>();
 
-  get totalPrice(): number {
-    return this.reservation.actualGuests * this.reservation.menuPrice;
-  }
   onPayClick() {
-    this.payReservation.emit(this.reservation);
+    if(!this.reservation.paiementInfo.payed)
+      this.payReservation.emit(this.reservation);
   }
 }
