@@ -38,11 +38,13 @@
     <app-tabs [tabs]="tabItems"></app-tabs>
   </div>
 
-  @if(!onlyView){
+  @if(!onlyView) {
+    @if(!group){
   <div class="how-many">
     <span>Nombre à ajouter: </span>
     <app-number-selector [min]="1" [(current)]="howMany" [max]="10"></app-number-selector>
   </div>
+    }
     @if(selected && group){
       <app-button text="Retirer du panier" (click)="deleteFromCart()" size="m"></app-button>
     }

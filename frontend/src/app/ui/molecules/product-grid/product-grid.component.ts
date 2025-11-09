@@ -34,13 +34,13 @@ export class ProductGridComponent {
 
     const isSelected = this.selectedItemIds.includes(item._id);
 
-    // 🔸 Si déjà sélectionné → on le retire
+    // Si déjà sélectionné → on le retire
     if (isSelected) {
       console.log("Déselection : ", item);
       this.selectedItemIds = this.selectedItemIds.filter(id => id !== item._id);
       this.orderService.removeMenuItem(item._id);
     }
-    // 🔸 Si nouveau clic → tentative d’ajout
+    // Si nouveau clic → tentative d’ajout
     else {
       // Si on n’est pas en mode group → reset la sélection
       if (this.type !== 'group') {
@@ -58,7 +58,7 @@ export class ProductGridComponent {
         this.selectedItemIds.push(item._id);
       }
 
-      // ✅ Ajout dans le panier
+      // Ajout dans le panier
       const cartItem: CartItem = {
         menuItem: item,
         howMany: this.computeItemDefaultHowMany(item)

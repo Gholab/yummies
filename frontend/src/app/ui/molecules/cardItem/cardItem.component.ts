@@ -41,7 +41,10 @@ export class CardItemComponent {
 
     });
     modalInstance.itemAdded.subscribe((cartItem: CartItem) => {
-      console.log("Event reçu depuis modal :", cartItem);
+      this.itemSelected.emit(this.item);
+    });
+
+    modalInstance.itemDeleted.subscribe((menuItem: MenuItem) => {
       this.itemSelected.emit(this.item);
     });
   }
