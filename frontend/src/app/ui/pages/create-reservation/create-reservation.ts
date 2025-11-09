@@ -8,6 +8,7 @@ import {InputComponent} from '../../atoms/input/input';
 import {map, Observable} from 'rxjs';
 import {MENU_SERVICE} from '../../../services/services.token';
 import {MenuService} from '../../../services/menu/menu.service';
+import {GroupService} from '../../../services/group.service';
 
 @Component({
   selector: 'app-create-reservation',
@@ -23,6 +24,7 @@ export class CreateReservation {
   reservationCode: string = '';
   expectedGuests: number | null = null;
   menuPrice: number | null = null;
+  bookedTables: string = "";
 
   // 🟦 Sélections de menu
   selectedEntrees: MenuItem[] = [];
@@ -31,7 +33,8 @@ export class CreateReservation {
 
   menuItemsList: MenuItem[] = [];
   constructor(private cdr: ChangeDetectorRef,
-              @Inject(MENU_SERVICE) private menuService: MenuService) {
+              @Inject(MENU_SERVICE) private menuService: MenuService,
+              private groupService: GroupService) {
   }
 
   ngOnInit(): void{
@@ -100,19 +103,46 @@ export class CreateReservation {
       alert('Veuillez remplir tous les champs et choisir au moins une entrée, un plat et un dessert.');
       return;
     }
+    let menu: {starters: string[], mains: string[], desserts: string[]} = {
+      starters: [],
+      mains: [],
+      desserts: []
+    }
+    for(let item of this.selectedEntrees){
+      menu.starters.push(item.shortName);
+    }
+    for(let item of this.selectedPlats){
+      menu.mains.push(item.shortName);
+    }
+    for(let item of this.selectedDesserts){
+      menu.desserts.push(item.shortName);
+    }
+
+    let tables: number[] = this.getBookedTables();
 
     const reservation = {
       companyName: this.companyName,
-      reservationCode: this.reservationCode,
-      expectedGuests: this.expectedGuests,
+      code: this.reservationCode,
+      customerEstimation: this.expectedGuests,
       menuPrice: this.menuPrice,
-      entrees: this.selectedEntrees,
-      plats: this.selectedPlats,
-      desserts: this.selectedDesserts,
+      tableNumbers: tables,
+      menu: menu
     };
 
-    console.log('✅ Réservation enregistrée :', reservation);
-    alert('Réservation créée avec succès !');
+    this.groupService.createReservation(reservation).subscribe({
+      next: (value) => {
+        this.companyName = ""
+        this.reservationCode= '';
+        this.expectedGuests = null;
+        this.menuPrice= null;
+        this.bookedTables = "";
+        console.log('✅ Réservation enregistrée :', reservation)
+        alert('Réservation créée avec succès !');
+      },
+      error: err => {
+        console.log("ERROR : Couldn't create reservation : ", err);
+      }
+    });
   }
 
   private populateMenuItemsList(): Observable<MenuItem[]> {
@@ -120,4 +150,7 @@ export class CreateReservation {
   }
 
 
+  private getBookedTables() {
+    return this.bookedTables.split(",").map(s => parseInt(s))
+  }
 }
