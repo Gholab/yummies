@@ -44,6 +44,11 @@ export class MenusController {
       return await this.reservationProxyService.getReservationByCode(params.reservationCode);
   }
 
+  @Get(":shortName")
+  async getMenuItemByShortName(@Param("shortName") shortName: string): Promise<MenuItem> {
+    return this.menusService.findByShortname(shortName);
+  }
+
   @ApiBody({ type: AddMenuItemDto })
   @Post()
   @ApiCreatedResponse({ description: 'The menu item has been successfully added.', type: MenuItem })

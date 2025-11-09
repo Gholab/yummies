@@ -28,60 +28,65 @@ export class StartupReservationService implements OnApplicationBootstrap {
         companyName: "Amadeus",
         code: 101,
         menu: {
-          starters: ['salade quinoa', 'soupe thai'],
-          mains: ['tagliatelles mer', 'gratin dauphinois'],
-          desserts: ['brownie', 'rasp and peaches'],
+          starters: ['salade quinoa', 'soupe thai', 'crab maki'],
+          mains: ['tagliatelles mer', 'gratin dauphinois', 'risotto'],
+          desserts: ['brownie', 'rasp and peaches', 'chocolate'],
         },
         tableNumbers: [5, 6],
         menuPrice: 25,
+        customerEstimation: 10
       });
 
       await this.createReservation({
         companyName: "Schneider Electric",
         code: 102,
         menu: {
-          starters: ['salade quinoa', 'soupe thai'],
-          mains: ['tagliatelles mer','poulet curry'],
-          desserts: ['lemon', 'strawberries'],
+          starters: ['soft-boiled egg', 'goat cheese', 'burrata'],
+          mains: ['tagliatelles mer','poulet curry', 'risotto'],
+          desserts: ['lemon', 'strawberries', 'chocolate'],
         },
         tableNumbers: [7, 8, 9],
         menuPrice: 26,
+        customerEstimation: 15
       });
 
       await this.createReservation({
         companyName: "SAP",
         code: 103,
         menu: {
-          starters: ['salade quinoa', 'soupe thai'],
-          mains: ['tarte poireaux', 'tagliatelles mer'],
-          desserts: ['lemon', 'strawberries'],
+          starters: ['soft-boiled egg', 'goat cheese', 'salmon'],
+          mains: ['tarte poireaux', 'tagliatelles mer', 'poulet curry'],
+          desserts: ['lemon', 'strawberries', 'brownie'],
         },
         tableNumbers: [8, 9],
         menuPrice: 20,
+        customerEstimation: 12
       });
 
       await this.createReservation({
         companyName: "Thales",
         code: 104,
         menu: {
-          starters: ['salade quinoa', 'soupe thai'],
-          mains: ['tarte poireaux', 'tagliatelles mer'],
-          desserts: ['lemon', 'chocolate'],
+          starters: ['salade quinoa', 'soupe thai', 'goat cheese'],
+          mains: ['tarte poireaux', 'tagliatelles mer', 'gratin dauphinois'],
+          desserts: ['lemon', 'chocolate', 'rasp and peaches'],
         },
         tableNumbers: [11, 12],
         menuPrice: 17,
+        customerEstimation: 15
       });
 
       await this.createReservation({
         companyName: "Avisto",
         code: 105,
         menu: {
-          starters: ['salade quinoa', 'soupe thai'],
-          mains: ['gratin dauphinois', 'poulet curry'],
-          desserts: ['brownie', 'chocolate'],
+          starters: ['salmon', 'soupe thai', 'soft-boiled egg'],
+          mains: ['gratin dauphinois', 'poulet curry', 'risotto'],
+          desserts: ['brownie', 'chocolate', 'strawberries'],
         },
         tableNumbers: [1, 2],
         menuPrice: 28,
+        customerEstimation: 20
       });
 
       console.log('[Reservation Service] Initial reservations populated successfully!');

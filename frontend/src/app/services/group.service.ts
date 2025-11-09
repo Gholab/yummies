@@ -41,4 +41,20 @@ export class GroupService {
   getGroupCode(){
     return this.groupCode;
   }
+
+  resetGroup(){
+    this.bookedTables = [];
+    this.groupCode = -1;
+    this.groupName = "";
+  }
+
+  createReservation(reservation: {
+    menuPrice: number | null;
+    code: string;
+    customerEstimation: number | null;
+    companyName: string;
+    menu: { starters: string[]; mains: string[]; desserts: string[] }
+  }) {
+    return this.http.post(`${this.baseUrl}`, reservation);
+  }
 }

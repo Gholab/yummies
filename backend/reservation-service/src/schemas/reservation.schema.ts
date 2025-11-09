@@ -1,5 +1,6 @@
 import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
 import {Document} from "mongoose"
+import { PaiementInfo, PaiementInfoSchema } from "./paiement-info.schema";
 
 
 export type ReservationDocument = Reservation & Document;
@@ -29,6 +30,15 @@ export class Reservation {
 
     @Prop()
     menuPrice: number;
+
+    @Prop({required:false})
+    realPrice?: number;
+
+    @Prop()
+    customerEstimation: number;
+
+    @Prop({ type: PaiementInfoSchema, required: false })
+    paiementInfo?: PaiementInfo;
 }
 
 

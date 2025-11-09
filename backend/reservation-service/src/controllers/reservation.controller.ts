@@ -30,11 +30,30 @@ export class ReservationController {
         return response.status(HttpStatus.CREATED).json(newRes);
     }
 
+    @Get("/:companyName")
+    async getReservationsByCompanyName(@Res() response, @Param('companyName') companyName: string) {
+        try {
+            let reservations = await this.reservationService.findByCompanyName(companyName);
+            return response.status(HttpStatus.OK).json({ reservations });
+        } catch (e: any) {
+            return response.status(HttpStatus.NOT_FOUND).json({ e });
+        }
+    }
+
     @Delete("/:id")
     async deleteReservation(@Res() response, @Param('id') id: string) {
         try {
             await this.reservationService.deleteReservation(id);
             return response.status(HttpStatus.OK).json({});
+        } catch (e: any) {
+            return response.status(HttpStatus.NOT_FOUND).json({ e });
+        }
+    }
+    @Get("/calculate/price/:code")
+    async calculatePriceForReservation(@Res() response, @Param('code') code: number) {
+        try {
+            let totalPrice = await this.reservationService.calculatePriceForReservation(code);
+            return response.status(HttpStatus.OK).json({ totalPrice });
         } catch (e: any) {
             return response.status(HttpStatus.NOT_FOUND).json({ e });
         }
