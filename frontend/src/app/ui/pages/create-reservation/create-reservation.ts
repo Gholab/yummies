@@ -8,6 +8,7 @@ import {InputComponent} from '../../atoms/input/input';
 import {map, Observable} from 'rxjs';
 import {MENU_SERVICE} from '../../../services/services.token';
 import {MenuService} from '../../../services/menu/menu.service';
+import {Router} from '@angular/router';
 import {GroupService} from '../../../services/group.service';
 
 @Component({
@@ -33,8 +34,10 @@ export class CreateReservation {
 
   menuItemsList: MenuItem[] = [];
   constructor(private cdr: ChangeDetectorRef,
-              @Inject(MENU_SERVICE) private menuService: MenuService,
+              @Inject(MENU_SERVICE) private menuService: MenuService, 
+              private router:Router
               private groupService: GroupService) {
+
   }
 
   ngOnInit(): void{
@@ -149,8 +152,13 @@ export class CreateReservation {
     return this.menuService.getMenuItems();
   }
 
+  private goBack(){
+    this.router.navigate(['/reservations']);
+  }
+
 
   private getBookedTables() {
     return this.bookedTables.split(",").map(s => parseInt(s))
   }
+  
 }

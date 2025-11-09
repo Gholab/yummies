@@ -22,6 +22,7 @@ export class CardItemComponent {
   @Input() inlineMode : boolean = false;
   @Input() isSelected: boolean = false;
   @Input() isGroupMode: boolean = false;
+  @Input() onlyView: boolean = false;
 
   @Output() itemSelected = new EventEmitter<MenuItem>();
 
@@ -32,8 +33,17 @@ export class CardItemComponent {
   onEdit(event: MouseEvent) {
     event.stopPropagation();
     event.preventDefault();
-    this.modalService.open(EditItemModalComponent, {
-      menuItem: this.item})
+    const { instance: modalInstance, closed } = this.modalService.open<EditItemModalComponent>(EditItemModalComponent, {
+      menuItem: this.item,
+      onlyView: this.onlyView,
+      selected: this.isSelected,
+      group: this.isGroupMode
+
+    });
+    modalInstance.itemAdded.subscribe((cartItem: CartItem) => {
+      console.log("Event reçu depuis modal :", cartItem);
+      this.itemSelected.emit(this.item);
+    });
   }
 
   addItemToCart() {

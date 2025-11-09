@@ -3,16 +3,19 @@
     <app-title text="Créer une Réservation" size="l" color="primary"></app-title>
   </div>
   <div class="create-reservation-content">
+    <app-button class="back-button" size="l" icon="assets/icons/back.svg" color="secondary" (click)="goBack()" ></app-button>
+
+    <app-title size="m" text="Déscription de l'entreprise" color="primary"/>
     <div class="form-section">
       <app-input
         label="Nom de l'entreprise"
-        placeholder="Ex : OpenAI France"
+        placeholder="Ex : Google"
         [(value)]="companyName">
       </app-input>
 
       <app-input
         label="Code de la réservation"
-        placeholder="Ex : RES-2025"
+        placeholder="Ex : 5467"
         [(value)]="reservationCode">
       </app-input>
 
@@ -45,7 +48,8 @@
         type="group"
         [maxSelectableItems]="3"
         [items]="starters"
-        (itemSelected)="toggleSelection($event)">
+        (itemSelected)="toggleSelection($event)"
+        [onlyViewItems]="true">
       </app-product-grid>
 
 
@@ -55,7 +59,8 @@
         type="group"
         [items]="mains"
         [maxSelectableItems]="3"
-        (itemSelected)="toggleSelection($event)">
+        (itemSelected)="toggleSelection($event)"
+        [onlyViewItems]="true">
       </app-product-grid>
 
       <app-product-grid
@@ -64,7 +69,8 @@
         type="group"
         [items]="desserts"
         [maxSelectableItems]="3"
-        (itemSelected)="toggleSelection($event)">
+        (itemSelected)="toggleSelection($event)"
+        [onlyViewItems]="true">
       </app-product-grid>
 
     </div>

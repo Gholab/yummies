@@ -43,7 +43,7 @@ export class NumpadComponent {
     if( Number(this.inputValue) < 0 || Number(this.inputValue) > 50){
       this.modalService.open(ErrorMessage, {
         text: "Veuillez entrer un numéro de bipper valide !",
-      }).then(r => {this.inputValue = '';});
+      }).closed.then(r => {this.inputValue = '';});
       return
     }
     let numValue = parseInt(this.inputValue, 10);

@@ -76,6 +76,11 @@
     }
 }
 
+.xsmall-button{
+  width:300px;
+  height: 100px;
+  font-size: $paragraph-size-medium;
+}
 .primary-button{
     background-color: $background-color-accent;
     color: $text-color-accent;

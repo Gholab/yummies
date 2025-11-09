@@ -9,6 +9,7 @@
         [item]="item"
         [isSelected]="selectedItemIds.includes(item._id)"
         [isGroupMode]="type === 'group'"
+        [onlyView]="onlyViewItems"
         (itemSelected)="onItemSelected($event)">
       </card-item>
 

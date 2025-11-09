@@ -20,6 +20,7 @@ export class ProductGridComponent {
   @Input() items: ReadonlyArray<MenuItem> = [];
   @Input() subtitle: string = '';
   @Input() maxSelectableItems = 1; // par défaut, une seule sélection
+  @Input() onlyViewItems = false;
 
   @Output() itemSelected = new EventEmitter<MenuItem>();
 

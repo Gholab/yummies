@@ -37,6 +37,8 @@ export class ModalComponent implements OnDestroy {
 
     this.onCloseCallback = onClose;
     this.closable = closable;
+
+    return this.componentRef.instance;
   }
 
   closeClick(result?: any){
