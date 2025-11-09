@@ -19,6 +19,7 @@ import {LandingPageComponent} from './ui/pages/landing-page-component/landing-pa
 import {Endpage} from './ui/pages/endpage/endpage';
 import {GroupCodeModalComponent} from './ui/molecules/group-code-modal/group-code-modal.component';
 import {ChooseTypeComponent} from './ui/pages/choose-type/choose-type.component';
+import {BookedTablesComponent} from './ui/molecules/booked-tables-component/booked-tables.component';
 
 @Component({
   selector: 'app-root',
@@ -31,7 +32,7 @@ import {ChooseTypeComponent} from './ui/pages/choose-type/choose-type.component'
             PaymentOptionComponent, PaymentModalComponent,
             PriceDisplayComponent,LandingPageComponent,
             Endpage, GroupCodeModalComponent,
-            ChooseTypeComponent],
+            ChooseTypeComponent, BookedTablesComponent],
   templateUrl: './app.html',
 })
 export class App implements OnInit {
