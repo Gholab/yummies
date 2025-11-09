@@ -1,4 +1,4 @@
-import {Component, Inject, Input, TemplateRef, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, Output, TemplateRef, ViewChild} from '@angular/core';
 import {MenuItem} from '../../../models/menu-item.model';
 import {ButtonComponent} from '../../atoms/button/button.component';
 import {TabItem, TabsComponent} from '../../atoms/tabs/tabs.component';
@@ -19,8 +19,14 @@ import {CartItem} from '../../../models/cart-item-model';
 export class EditItemModalComponent {
   @Input() menuItem! : MenuItem;
   @Input() onlyView : boolean = false;
+  @Input() selected : boolean = false;
+  @Input() group : boolean = false;
+  @Output() itemAdded = new EventEmitter<CartItem>();
+
+
   @ViewChild("ingredients", { static: true }) ingredientsTab!: TemplateRef<unknown>;
   @ViewChild("allergenes", { static: true }) allergeneTab!: TemplateRef<unknown>;
+
   tabItems: TabItem[] = [];
   ingredientStatus:any = {};
   howMany: number = 1;
@@ -59,7 +65,12 @@ export class EditItemModalComponent {
 
     this.orderService.addMenuItem(itemForCart);
     this.modalService.close(true);
+    this.itemAdded.emit(itemForCart);
   }
 
+
+  deleteFromCart(){
+    console.log("todo");
+  }
   protected readonly Object = Object;
 }
