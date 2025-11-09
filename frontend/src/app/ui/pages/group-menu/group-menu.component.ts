@@ -193,7 +193,7 @@ export class GroupMenuComponent implements OnInit{
         this.extra_desserts = items.extraDesserts;
       },
       error: (err: any) => {
-        console.log("Error fetching group menuItems");
+        console.log("Error fetching group menuItems", err);
       }
     });
   }
