@@ -20,6 +20,7 @@ import {Endpage} from './ui/pages/endpage/endpage';
 import {GroupCodeModalComponent} from './ui/molecules/group-code-modal/group-code-modal.component';
 import {ChooseTypeComponent} from './ui/pages/choose-type/choose-type.component';
 import {BookedTablesComponent} from './ui/molecules/booked-tables-component/booked-tables.component';
+import {ReservationPaymentModal} from './ui/molecules/reservation-payment-modal/reservation-payment-modal';
 
 @Component({
   selector: 'app-root',
@@ -32,7 +33,7 @@ import {BookedTablesComponent} from './ui/molecules/booked-tables-component/book
             PaymentOptionComponent, PaymentModalComponent,
             PriceDisplayComponent,LandingPageComponent,
             Endpage, GroupCodeModalComponent,
-            ChooseTypeComponent, BookedTablesComponent],
+            ChooseTypeComponent, BookedTablesComponent, ReservationPaymentModal],
   templateUrl: './app.html',
 })
 export class App implements OnInit {
