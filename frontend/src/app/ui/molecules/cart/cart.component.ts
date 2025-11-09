@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, Inject} from '@angular/core';
-import { AsyncPipe } from '@angular/common';
+import {AsyncPipe, NgIf} from '@angular/common';
 
 import {TitleComponent} from '../../atoms/title/title.component';
 import {ButtonComponent} from '../../atoms/button/button.component';
@@ -19,7 +19,7 @@ const IMG = 'https://cdn.pixabay.com/photo/2022/04/11/08/52/iced-tea-7125271_960
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TitleComponent, ButtonComponent, CartItemComponent, AsyncPipe]
+  imports: [TitleComponent, ButtonComponent, CartItemComponent, AsyncPipe, NgIf]
 })
 
 
@@ -28,19 +28,18 @@ export class CartComponent {
   open = false
 
   cartItems: CartItem[] = [];
+  cart$: Observable<CartItem[]>;
 
   constructor(@Inject(ORDER_SERVICE) private orderService: OrderService,
               private router : Router) {
     this.orderService.cart$.subscribe(items => this.cartItems = items);
+    this.cart$ = this.orderService.cart$;
   }
 
-  /*
+  getTotalItemsInCart(items: CartItem[]): number {
+    return items.reduce((total, item) => total + Math.trunc(item.howMany), 0);
+  }
 
-  constructor(private router: Router, @Inject(ORDER_SERVICE) private orderService: OrderService) {}
-  ngOnInit() {
-
-    this.cartItems = this.orderService.getCart();
-  }*/
   get total() {
     return this.orderService.getTotalOrderPrice();
   }
@@ -66,7 +65,4 @@ export class CartComponent {
     }
   }
 
-  getTotalItemsInCart() {
-    return this.orderService.getTotalItemsCount();
-  }
 }

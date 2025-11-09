@@ -38,12 +38,14 @@ export abstract class OrderService {
     for(let cartItem of this.cart){
       if(cartItem.menuItem._id === item.menuItem._id && (cartItem.howMany - Math.trunc(cartItem.howMany) ) === (item.howMany-Math.trunc(item.howMany)) ){
         cartItem.howMany = this.addKeepingDecimals(cartItem.howMany, Math.trunc(item.howMany));
+        this.notifyCartChange();
         console.log("locally incremented already present item: ", this.cart)
         return of();
       }
     }
     this.cart.push(item);
     this._cart$.next(this.cart);
+    this.notifyCartChange();
     console.log(`[FRONTEND] OrderService: Menu item added locally: ${item.menuItem._id}`, this.cart);
     return of();
   }
@@ -60,12 +62,12 @@ export abstract class OrderService {
     }
     if (Math.trunc(this.cart[index].howMany) === 1) {
       const [removedItem] = this.cart.splice(index, 1);
-      this._cart$.next(this.cart);
+      this.notifyCartChange();
       console.log(`[FRONTEND] OrderService: Menu item removed locally: ${menuItemId}`, this.cart);
       return true;
     } else {
       this.cart[index].howMany = this.subtractKeepingDecimals(this.cart[index].howMany, 1);
-      this._cart$.next(this.cart);
+      this.notifyCartChange();
       return true;
     }
   }

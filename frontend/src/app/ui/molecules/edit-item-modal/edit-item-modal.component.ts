@@ -21,8 +21,10 @@ export class EditItemModalComponent {
   @Input() onlyView : boolean = false;
   @Input() selected : boolean = false;
   @Input() group : boolean = false;
+  @Input() maxSelectableItems: number = 1;
+  @Input() currentSelectedCount: number = 0;
   @Output() itemAdded = new EventEmitter<CartItem>();
-
+  @Output() itemDeleted = new EventEmitter<MenuItem>();
 
   @ViewChild("ingredients", { static: true }) ingredientsTab!: TemplateRef<unknown>;
   @ViewChild("allergenes", { static: true }) allergeneTab!: TemplateRef<unknown>;
@@ -62,15 +64,20 @@ export class EditItemModalComponent {
       menuItem: this.menuItem,
       howMany: parseFloat(rest),
     };
-
-    this.orderService.addMenuItem(itemForCart);
+    if( !this.group ){
+      this.orderService.addMenuItem(itemForCart);
+    }
     this.modalService.close(true);
     this.itemAdded.emit(itemForCart);
   }
 
+  get disableAddButton(): boolean {
+    return this.group && !this.selected && this.currentSelectedCount >= this.maxSelectableItems;
+  }
 
   deleteFromCart(){
-    console.log("todo");
+    this.modalService.close(true);
+    this.itemDeleted.emit(this.menuItem);
   }
   protected readonly Object = Object;
 }

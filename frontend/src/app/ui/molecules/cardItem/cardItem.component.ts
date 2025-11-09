@@ -23,6 +23,8 @@ export class CardItemComponent {
   @Input() isSelected: boolean = false;
   @Input() isGroupMode: boolean = false;
   @Input() onlyView: boolean = false;
+  @Input() maxSelectableItems = 1;
+  @Input() currentSelectedCount = 0;
 
   @Output() itemSelected = new EventEmitter<MenuItem>();
 
@@ -37,11 +39,16 @@ export class CardItemComponent {
       menuItem: this.item,
       onlyView: this.onlyView,
       selected: this.isSelected,
-      group: this.isGroupMode
+      group: this.isGroupMode,
+      maxSelectableItems: this.maxSelectableItems,
+      currentSelectedCount: this.currentSelectedCount,
 
     });
     modalInstance.itemAdded.subscribe((cartItem: CartItem) => {
-      console.log("Event reçu depuis modal :", cartItem);
+      this.itemSelected.emit(this.item);
+    });
+
+    modalInstance.itemDeleted.subscribe((menuItem: MenuItem) => {
       this.itemSelected.emit(this.item);
     });
   }
