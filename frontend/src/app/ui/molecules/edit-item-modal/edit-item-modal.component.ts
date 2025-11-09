@@ -21,6 +21,8 @@ export class EditItemModalComponent {
   @Input() onlyView : boolean = false;
   @Input() selected : boolean = false;
   @Input() group : boolean = false;
+  @Input() maxSelectableItems: number = 1;
+  @Input() currentSelectedCount: number = 0;
   @Output() itemAdded = new EventEmitter<CartItem>();
   @Output() itemDeleted = new EventEmitter<MenuItem>();
 
@@ -69,6 +71,9 @@ export class EditItemModalComponent {
     this.itemAdded.emit(itemForCart);
   }
 
+  get disableAddButton(): boolean {
+    return this.group && !this.selected && this.currentSelectedCount >= this.maxSelectableItems;
+  }
 
   deleteFromCart(){
     this.modalService.close(true);

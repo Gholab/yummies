@@ -10,6 +10,8 @@
         [isSelected]="selectedItemIds.includes(item._id)"
         [isGroupMode]="type === 'group'"
         [onlyView]="onlyViewItems"
+        [maxSelectableItems]="maxSelectableItems"
+        [currentSelectedCount]="selectedItemIds.length"
         (itemSelected)="onItemSelected($event)">
       </card-item>
 

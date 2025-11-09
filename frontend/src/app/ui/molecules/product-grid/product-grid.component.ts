@@ -29,6 +29,10 @@ export class ProductGridComponent {
   constructor(@Inject(ORDER_SERVICE) private orderService: OrderService) {}
   trackById = (_: number, item: MenuItem) => item?._id ?? _;
 
+  get currentSelectedCount(): number {
+    return this.selectedItemIds.length;
+  }
+
   onItemSelected(item: MenuItem) {
     console.log("Item selected !!!! : ", item);
 

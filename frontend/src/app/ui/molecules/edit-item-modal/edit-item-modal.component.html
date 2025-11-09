@@ -49,7 +49,12 @@
       <app-button text="Retirer du panier" (click)="deleteFromCart()" size="m"></app-button>
     }
     @else{
-    <app-button text="Ajouter au panier" (click)="onAddToCart()" size="m"></app-button>
+      <app-button
+        text="Ajouter au panier"
+        (click)="onAddToCart()"
+        size="m"
+        [disabled]="disableAddButton">
+      </app-button>
     }
   }
 </div>
