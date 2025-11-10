@@ -83,4 +83,16 @@ export class TableOrdersController {
       console.log("POST REQUEST : bill table order " + getTableOrderParams.tableOrderId)
     return this.tableOrdersService.billOrder(getTableOrderParams.tableOrderId);
   }
+
+  @ApiParam({ name: 'reservationCode', type: Number })
+  @ApiOkResponse({ description: 'Total number of table orders for this reservation code', type: Number })
+  @ApiNotFoundResponse({ description: 'No table orders found for this reservation code' })
+  @Get('/reservation/:reservationCode/ordersCount')
+  async getTotalOrdersForReservation(@Param('reservationCode') reservationCode: number): Promise<{ totalOrders: number }> {
+    console.log("GET REQUEST : total orders for reservation " + reservationCode);
+    const totalOrders = await this.tableOrdersService.getTotalOrdersForReservation(reservationCode);
+    console.log("RESPONSE : total orders for reservation " + reservationCode + " is " + totalOrders);
+    return { totalOrders };
+  }
+
 }

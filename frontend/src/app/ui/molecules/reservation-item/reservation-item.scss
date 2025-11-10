@@ -1,0 +1,67 @@
+@use '../../../../styles.scss' as *;
+
+.reservation-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $background-color-primary;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  padding: 20px 30px;
+  margin: 30px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  }
+}
+
+.reservation-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  font-size: $paragraph-size-small;
+  font-family: $text-font;
+}
+
+.reservation-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .company {
+    font-size: $paragraph-size-large;
+    font-weight: 600;
+    color: $text-color-primary;
+    margin: 0;
+  }
+
+  .code {
+    color: #64748b;
+  }
+}
+
+.reservation-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 10px;
+
+  p {
+    margin: 0;
+    color: #475569;
+
+    strong {
+      color: #1e293b;
+    }
+  }
+}
+
+.reservation-action {
+  margin-left: 30px;
+  flex-shrink: 0;
+}

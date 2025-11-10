@@ -1,0 +1,15 @@
+<div class="reservation-list-title-container">
+  <app-title text="Liste des reservations" size="m" color="primary"></app-title>
+</div>
+
+<div class="reservation-list-content">
+  <app-button icon="assets/icons/add.svg" (click)="addReservation()" class="add-reservation" text="Ajouter une reservation" color="secondary" size="s"></app-button>
+  @for (r of reservations; track r.code) {
+    <app-reservation-item
+      [reservation]="r"
+      (payReservation)="onPayReservation($event)">
+    </app-reservation-item>
+  } @empty {
+    <p class="empty">Aucune réservation enregistrée.</p>
+  }
+</div>

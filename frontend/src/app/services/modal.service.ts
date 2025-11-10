@@ -8,19 +8,27 @@ export class ModalService {
 
   constructor(private appRef: ApplicationRef, private injector: Injector) {}
 
-  open<T>(component: Type<T>, inputs?: Partial<T>, closable: boolean= true): Promise<any> {
-    return new Promise(resolve => {
+  open<T>(component: Type<T>, inputs?: Partial<T>, closable: boolean = true): {
+    instance: T,
+    closed: Promise<any>
+  } {
+    let componentInstance!: T;
+
+    const closed = new Promise(resolve => {
       if (!this.modalRef) {
         this.modalRef = createComponent(ModalComponent, { environmentInjector: this.appRef.injector });
         this.appRef.attachView(this.modalRef.hostView);
         document.body.appendChild(this.modalRef.location.nativeElement);
       }
 
-      this.modalRef.instance.open(component, inputs, (result?: any) => {
-        resolve(void 0);
+      componentInstance = this.modalRef.instance.open(component, inputs, (result?: any) => {
+        resolve(result);
       }, closable);
     });
+
+    return { instance: componentInstance, closed };
   }
+
 
   close(result?: any) {
     if (this.modalRef) {

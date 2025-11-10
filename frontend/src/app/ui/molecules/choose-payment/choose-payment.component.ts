@@ -10,6 +10,7 @@ import {PaymentModalComponent} from '../payment-modal/payment-modal.component';
 import {
   ChooseNumberOfPartsEqualDivisionComponent
 } from '../choose-number-of-parts-equal-division/choose-number-of-parts-equal-division.component';
+import {GroupService} from '../../../services/group.service';
 
 @Component({
   selector: 'app-choose-payment',
@@ -23,7 +24,8 @@ export class ChoosePaymentComponent {
   constructor(private router: Router,
               @Inject(ORDER_SERVICE) private orderService: OrderService,
               private paymentService : PaymentService,
-              private modalService : ModalService) {
+              private modalService : ModalService,
+              private groupService : GroupService) {
   }
   @Output() nextStep = new EventEmitter<void>();
 
@@ -62,5 +64,9 @@ export class ChoosePaymentComponent {
     }
 
     return totalItemsCount;
+  }
+
+  get isNotGroupOrder(){
+    return this.groupService.getGroupName() === "";
   }
 }

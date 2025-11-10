@@ -71,7 +71,7 @@ export class PaymentService {
       paymentType: this.getPaymentType(),
       currentPaymentStep: this.currentPaymentStep,
       totalPaymentSteps: this.totalPaymentSteps
-    }, false);
+    }, false).closed;
   }
 
   waitForPayment(){

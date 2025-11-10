@@ -1,0 +1,80 @@
+<div class="create-reservation-container">
+  <div class="title-container">
+    <app-title text="Créer une Réservation" size="l" color="primary"></app-title>
+  </div>
+  <div class="create-reservation-content">
+    <app-button class="back-button" size="l" icon="assets/icons/back.svg" color="secondary" (click)="goBack()" ></app-button>
+
+    <app-title size="m" text="Déscription de l'entreprise" color="primary"/>
+    <div class="form-section">
+      <app-input
+        label="Nom de l'entreprise"
+        placeholder="Ex : Google"
+        [(value)]="companyName">
+      </app-input>
+
+      <app-input
+        label="Code de la réservation"
+        placeholder="Ex : 5467"
+        [(value)]="reservationCode">
+      </app-input>
+
+      <app-input
+        label="Tables réservées (séparées par une virgule)"
+        placeholder="Ex : 10,11,12"
+        [(value)]="bookedTables">
+      </app-input>
+
+      <app-input
+        label="Nombre de personnes attendues"
+        placeholder="Ex : 25"
+        type="number"
+        [(value)]="expectedGuests">
+      </app-input>
+
+      <app-input
+        label="Prix du menu (€)"
+        placeholder="Ex : 35"
+        type="number"
+        [(value)]="menuPrice">
+      </app-input>
+
+    </div>
+
+    <div class="menu-selection">
+      <app-product-grid
+        title="Entrées"
+        subtitle="Choisissez jusqu'à 3 entrées"
+        type="group"
+        [maxSelectableItems]="3"
+        [items]="starters"
+        (itemSelected)="toggleSelection($event)"
+        [onlyViewItems]="true">
+      </app-product-grid>
+
+
+      <app-product-grid
+        title="Plats"
+        subtitle="Choisissez jusqu'à 3 plats"
+        type="group"
+        [items]="mains"
+        [maxSelectableItems]="3"
+        (itemSelected)="toggleSelection($event)"
+        [onlyViewItems]="true">
+      </app-product-grid>
+
+      <app-product-grid
+        title="Desserts"
+        subtitle="Choisissez jusqu'à 3 desserts"
+        type="group"
+        [items]="desserts"
+        [maxSelectableItems]="3"
+        (itemSelected)="toggleSelection($event)"
+        [onlyViewItems]="true">
+      </app-product-grid>
+
+    </div>
+
+    <app-button size="m" color="primary" text="Enregistrer la reservation" (click)="saveReservation()" ></app-button>
+  </div>
+</div>

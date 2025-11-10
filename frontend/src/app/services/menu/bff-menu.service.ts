@@ -21,4 +21,8 @@ export class BffMenuService extends MenuService {
   getMenuItemById(id: string): Observable<MenuItem | undefined> {
     return this.http.get<MenuItem>(`${this.baseUrl}/${id}`);
   }
+
+  getGroupMenuItems(): Observable<any> {
+    return this.http.get<any>("feur");
+  }
 }

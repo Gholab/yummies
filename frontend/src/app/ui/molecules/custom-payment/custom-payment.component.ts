@@ -34,7 +34,11 @@ export class CustomPayment implements OnInit{
               private paymentService: PaymentService){}
 
   ngOnInit() {
-    this.totalOrder = JSON.parse(JSON.stringify(this.orderService.getCart()));
+    this.totalOrder = JSON.parse(JSON.stringify(this.orderService.getCart().filter(product => !this.isCartItemPaidByCompany(product))));
+  }
+
+  isCartItemPaidByCompany(cartItem: CartItem) {
+    return cartItem.menuItem.price < 0.001;//not strictly equal to 0 because of floating points errors
   }
 
   onSelectionChange(e: { index: number; quantity: number }) {

@@ -1,9 +1,20 @@
 <div class="scroll" role="region" aria-label="Liste de produits">
-  <app-title size="s" [text]="title"></app-title>
-
+  <app-title size="m" [text]="title"></app-title>
+  @if (subtitle!=''){
+    <app-title size="s" [text]="subtitle"></app-title>
+  }
   <div class="grid">
     @for (item of items; track item._id) {
-      <card-item [item]="item"></card-item>
+      <card-item
+        [item]="item"
+        [isSelected]="selectedItemIds.includes(item._id)"
+        [isGroupMode]="type === 'group'"
+        [onlyView]="onlyViewItems"
+        [maxSelectableItems]="maxSelectableItems"
+        [currentSelectedCount]="selectedItemIds.length"
+        (itemSelected)="onItemSelected($event)">
+      </card-item>
+
     }
   </div>
 </div>

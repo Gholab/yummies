@@ -44,6 +44,12 @@ export class TableOrdersService {
     return foundItem;
   }
 
+  async getTotalOrdersForReservation(reservationCode: number): Promise<number> {
+    const orderCount = await this.tableOrderModel.countDocuments({ customersCount: reservationCode }).exec();
+    console.log(`SERVICE : total orders for reservation ${reservationCode} is ${orderCount}`);
+    return orderCount;
+  }
+
   async startOrdering(startOrderingDto: StartOrderingDto): Promise<TableOrder> {
     const table: Table = await this.tablesService.takeTable(startOrderingDto.tableNumber);
 

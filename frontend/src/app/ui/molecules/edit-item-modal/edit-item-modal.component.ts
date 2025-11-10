@@ -1,4 +1,4 @@
-import {Component, Inject, Input, TemplateRef, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, Output, TemplateRef, ViewChild} from '@angular/core';
 import {MenuItem} from '../../../models/menu-item.model';
 import {ButtonComponent} from '../../atoms/button/button.component';
 import {TabItem, TabsComponent} from '../../atoms/tabs/tabs.component';
@@ -13,12 +13,22 @@ import {CartItem} from '../../../models/cart-item-model';
   selector: 'app-edit-item-modal',
   imports: [ButtonComponent, TabsComponent, NumberSelectorComponent, TitleComponent],
   templateUrl: './edit-item-modal.component.html',
+  standalone: true,
   styleUrl: './edit-item-modal.component.scss'
 })
 export class EditItemModalComponent {
   @Input() menuItem! : MenuItem;
+  @Input() onlyView : boolean = false;
+  @Input() selected : boolean = false;
+  @Input() group : boolean = false;
+  @Input() maxSelectableItems: number = 1;
+  @Input() currentSelectedCount: number = 0;
+  @Output() itemAdded = new EventEmitter<CartItem>();
+  @Output() itemDeleted = new EventEmitter<MenuItem>();
+
   @ViewChild("ingredients", { static: true }) ingredientsTab!: TemplateRef<unknown>;
   @ViewChild("allergenes", { static: true }) allergeneTab!: TemplateRef<unknown>;
+
   tabItems: TabItem[] = [];
   ingredientStatus:any = {};
   howMany: number = 1;
@@ -54,10 +64,22 @@ export class EditItemModalComponent {
       menuItem: this.menuItem,
       howMany: parseFloat(rest),
     };
-
-    this.orderService.addMenuItem(itemForCart);
+    if( !this.group ){
+      this.orderService.addMenuItem(itemForCart);
+    }
     this.modalService.close(true);
+    if( this.group ){
+      this.itemAdded.emit(itemForCart);
+    }
   }
 
+  get disableAddButton(): boolean {
+    return this.group && !this.selected && this.currentSelectedCount >= this.maxSelectableItems;
+  }
+
+  deleteFromCart(){
+    this.modalService.close(true);
+    this.itemDeleted.emit(this.menuItem);
+  }
   protected readonly Object = Object;
 }

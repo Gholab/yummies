@@ -1,0 +1,55 @@
+@use '../../../../styles.scss' as *;
+
+$title-height: 250px;
+
+.title-container{
+  background-color: $background-color-primary;
+  width: 100vw;
+  height: $title-height;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #64748b;
+  margin-bottom: 300px;
+  position: fixed;
+  z-index: 10;
+}
+
+.create-reservation-content {
+  padding-top: $title-height+50px;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  color: $text-color-primary;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  gap: 16px;
+  margin-bottom: 40px;
+
+}
+
+.menu-selection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+  margin-bottom: 40px;
+}
+
+app-button {
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+.back-button{
+  position: absolute;
+  left: 30px;
+  z-index: 1;
+}

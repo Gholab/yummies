@@ -27,6 +27,16 @@ export class MenusService {
     return foundItem;
   }
 
+  async findByShortname(menuItemShortname: string): Promise<MenuItem> {
+      const foundItem = await this.menuItemModel.findOne({ shortName: menuItemShortname }).lean();
+
+      if (foundItem === null) {
+          throw new MenuItemIdNotFoundException(menuItemShortname);
+      }
+
+      return foundItem;
+  }
+
   async create(addMenuItemDto: AddMenuItemDto): Promise<MenuItem> {
     const alreadyExists = await this.menuItemModel.find({ shortName: addMenuItemDto.shortName });
     if (alreadyExists.length > 0) {

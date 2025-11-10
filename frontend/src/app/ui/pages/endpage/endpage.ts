@@ -4,10 +4,11 @@ import {OrderService} from '../../../services/order/order.service';
 import {resolve} from '@angular/compiler-cli';
 import {Router} from '@angular/router';
 import {TitleComponent} from '../../atoms/title/title.component';
+import {BookedTablesComponent} from '../../molecules/booked-tables-component/booked-tables.component';
 
 @Component({
   selector: 'app-endpage',
-  imports: [TitleComponent],
+  imports: [TitleComponent, BookedTablesComponent],
   templateUrl: './endpage.html',
   styleUrl: './endpage.scss'
 })

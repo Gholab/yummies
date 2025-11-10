@@ -1,9 +1,10 @@
-  import {MenuService} from './menu.service';
+import {MenuService} from './menu.service';
   import {Injectable} from '@angular/core';
   import {MenuItem} from '../../models/menu-item.model';
   import {HttpClient} from '@angular/common/http';
   import {UnparsedMenuItem} from '../../models/unparsed/unparsed-menu-item.model';
   import {map, Observable} from 'rxjs';
+  import {GroupService} from '../group.service';
 
   @Injectable({
     providedIn: "root"
@@ -11,7 +12,8 @@
   export class PurefrontMenuService extends MenuService {
     private baseUrl= "http://localhost:9500/menu";
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient,
+                private groupService: GroupService) {
       super();
     }
 
@@ -49,5 +51,25 @@
         ingredients: Array.isArray(parsedFullName.ingredients) ? parsedFullName.ingredients : [],
         allergenes: Array.isArray(parsedFullName.allergenes) ? parsedFullName.allergenes : []
       };
+    }
+
+    getGroupMenuItems(): Observable<any> {
+      return this.http.get<{
+        groupStarters: UnparsedMenuItem[],
+        extraStarters: UnparsedMenuItem[],
+        groupMains: UnparsedMenuItem[],
+        extraMains: UnparsedMenuItem[],
+        groupDesserts: UnparsedMenuItem[],
+        extraDesserts: UnparsedMenuItem[],
+      }>(`${this.baseUrl}/menus/reservations/${this.groupService.getGroupCode()}`).pipe(
+        map(response => ({
+          groupStarters: response.groupStarters.map(item => this.parseMenuItem(item)),
+          extraStarters: response.extraStarters.map(item => this.parseMenuItem(item)),
+          groupMains: response.groupMains.map(item => this.parseMenuItem(item)),
+          extraMains: response.extraMains.map(item => this.parseMenuItem(item)),
+          groupDesserts: response.groupDesserts.map(item => this.parseMenuItem(item)),
+          extraDesserts: response.extraDesserts.map(item => this.parseMenuItem(item))
+        }))
+      );
     }
   }

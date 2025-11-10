@@ -33,7 +33,7 @@ export class PurefrontOrderService extends OrderService {
     console.log("[FRONTEND, PUREFRONT] OrderService: Start sending tableOrder to backend");
     return this.http.post(`${this.baseUrl}/tableOrders`, {
       tableNumber: this.bipperNumber,
-      customersCount: 1
+      customersCount: this.customerCount
     }).pipe(
       concatMap((res: any) => {
         const tableOrderId = res._id;
